@@ -1,19 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Redux basic example</title>
+    <title>Counter vanilla example</title>
 </head>
 <body>
 <div>
-    <p>
+    <h1>
         Clicked:
-        <span id="value">0</span>
+        <span id="times">0</span>
         times
-        <button id="increment">+</button>
-        <button id="decrement">-</button>
-        <button id="incrementIfOdd">Increment if odd</button>
-        <button id="incrementAsync">Increment async</button>
-    </p>
+    </h1>
+    <div>
+        <p>
+            <button id="increase">+</button>
+            <button id="decrease">-</button>
+        </p>
+        <p>
+            <button id="increaseIfOdd">Increase if odd</button>
+            <button id="increaseAsync">Increase 1s later</button>
+        </p>
+    </div>
 </div>
 <script src="/__build__/shared.js"></script>
 <script src="/__build__/01.counter-vanilla.js"></script>
