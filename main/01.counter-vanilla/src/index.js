@@ -1,5 +1,7 @@
 import {createStore} from 'redux'
 
+import '../../global.css'
+
 class App {
   constructor() {
     this.nodes = {}
