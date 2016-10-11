@@ -1,22 +1,23 @@
 import React from 'react'
+
 import FilterLink from '../containers/FilterLink'
 
 const Footer = () => (
-  <p>
-    Show:
-    {" "}
-    <FilterLink filter="SHOW_ALL">
-      All
-    </FilterLink>
-    {", "}
-    <FilterLink filter="SHOW_ACTIVE">
-      Active
-    </FilterLink>
-    {", "}
-    <FilterLink filter="SHOW_COMPLETED">
-      Completed
-    </FilterLink>
-  </p>
+  <div>
+    <h3>Show</h3>
+
+    <div className="all">
+      <FilterLink filter="SHOW_ALL">All</FilterLink>
+    </div>
+
+    <div className="active">
+      <FilterLink filter="SHOW_ACTIVE">Active</FilterLink>
+    </div>
+
+    <div className="completed">
+      <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
+    </div>
+  </div>
 )
 
 export default Footer

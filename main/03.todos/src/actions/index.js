@@ -1,16 +1,20 @@
-let nextTodoId = 0
-export const addTodo = (text) => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
+let ID = 0
+
+// 增加事项动作
+export const add = (text) => ({
+  type: 'ADD',
+  id: ID++,
   text
 })
 
-export const setVisibilityFilter = (filter) => ({
-  type: 'SET_VISIBILITY_FILTER',
+// 筛选事项动作
+export const filter = (filter) => ({
+  type: 'FILTER',
   filter
 })
 
-export const toggleTodo = (id) => ({
-  type: 'TOGGLE_TODO',
+// 转换待办/完成状态动作
+export const toggle = (id) => ({
+  type: 'TOGGLE',
   id
 })

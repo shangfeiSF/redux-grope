@@ -1,24 +1,24 @@
 import * as actions from './index'
 
-describe('todo actions', () => {
-  it('addTodo should create ADD_TODO action', () => {
-    expect(actions.addTodo('Use Redux')).toEqual({
-      type: 'ADD_TODO',
+describe('Actions', () => {
+  it('add should create ADD action', () => {
+    expect(actions.add('Use Redux')).toEqual({
+      type: 'ADD',
       id: 0,
       text: 'Use Redux'
     })
   })
 
-  it('setVisibilityFilter should create SET_VISIBILITY_FILTER action', () => {
-    expect(actions.setVisibilityFilter('active')).toEqual({
-      type: 'SET_VISIBILITY_FILTER',
+  it('filter should create FILTER action', () => {
+    expect(actions.filter('active')).toEqual({
+      type: 'FILTER',
       filter: 'active'
     })
   })
 
-  it('toggleTodo should create TOGGLE_TODO action', () => {
-    expect(actions.toggleTodo(1)).toEqual({
-      type: 'TOGGLE_TODO',
+  it('toggle should create TOGGLE action', () => {
+    expect(actions.toggle(1)).toEqual({
+      type: 'TOGGLE',
       id: 1
     })
   })
