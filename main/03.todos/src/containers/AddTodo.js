@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+/* 容器组件中使用Redux必然会出现dispatch和action */
 import {add} from '../actions'
 
 let Add = ({dispatch}) => {
