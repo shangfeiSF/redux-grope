@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
-/* 容器组件FilterLink中调用展示组件Link */
-import Link from '../components/Link'
-/* 容器组件中使用Redux必然会出现dispatch和action */
+
+import Filter from '../components/Filter'
+
 import {filter} from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -14,9 +14,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 })
 
-const FilterLink = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Link)
-
-export default FilterLink
+)(Filter)

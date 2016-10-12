@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
-class Todo extends Component {
+class Filter extends Component {
   constructor(props, context) {
     super(props, context)
 
@@ -8,8 +8,8 @@ class Todo extends Component {
   }
 
   static propTypes = {
-    text: PropTypes.string.isRequired,
-    completed: PropTypes.bool.isRequired,
+    active: PropTypes.bool.isRequired,
+    children: PropTypes.node.isRequired,
     onClick: PropTypes.func.isRequired
   }
 
@@ -19,13 +19,15 @@ class Todo extends Component {
   }
 
   render() {
-    let {completed, text} = this.props
-    let style = {textDecoration: completed ? 'line-through' : 'none'}
-
-    return (
-      <li style={style} onClick={this.handlerOnClick}>{text}</li>
+    let {active, children} = this.props
+    let block = active ? (
+      <span>{children}</span>
+    ) : (
+      <a href="#" onClick={this.handlerOnClick}>{children}</a>
     )
+
+    return block
   }
 }
 
-export default Todo
+export default Filter
