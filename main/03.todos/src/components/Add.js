@@ -21,6 +21,11 @@ class Add extends Component {
       return true
     }
     else {
+      /*
+       * 容器组件和展示组件的配合方式-1：
+       * 容器组件传递action创建方法，展示组件生成输入，展示组件调用action创建方法
+       * 展示组件Add将用户输入值作为输入传递给action创建方法（命名为onSubmit）
+       * */
       onSubmit(input.value)
       input.value = ''
     }
