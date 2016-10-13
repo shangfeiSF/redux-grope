@@ -32,7 +32,7 @@ class ItemList extends Component {
             <Item
               key={item.id}
               {...item}
-              onClick={() => onItemClick(item.id)}
+              onClick={onItemClick}
             />
           )}
         </ul>

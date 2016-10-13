@@ -8,6 +8,7 @@ class Item extends Component {
   }
 
   static propTypes = {
+    id: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired
@@ -15,7 +16,9 @@ class Item extends Component {
 
   handlerOnClick(e) {
     e.preventDefault()
-    this.props.onClick()
+    let {id, onClick} = this.props
+    
+    onClick(id)
   }
 
   render() {
