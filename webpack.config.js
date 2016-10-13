@@ -12,7 +12,9 @@ var makeEntry = function () {
     .filter(function (dir) {
       return dir === '01.counter-vanilla' ||
         dir === '02.counter' ||
-        dir === '03.todos'
+        dir === '03.todos' ||
+        dir === '04.todos-with-undo' ||
+        dir === 'test'
     })
     .reduce(function (entry, dir) {
       var isDirectory = fs.statSync(path.join(mainDir, dir)).isDirectory()
