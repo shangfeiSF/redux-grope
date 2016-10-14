@@ -1,6 +1,6 @@
 import undoable from 'redux-undo'
 
-const addAndToggle = undoable((state = [], action) => {
+export default undoable((state = [], action) => {
   switch (action.type) {
     case 'ADD':
       return [
@@ -27,5 +27,3 @@ const addAndToggle = undoable((state = [], action) => {
       return state
   }
 })
-
-export default addAndToggle

@@ -29,7 +29,8 @@ const filterHandler = (addAndToggle, filter) => {
 // 纯函数声明哪些全局state字段是组件需要通过props获取的
 // 而且可以综合若干字段进行处理
 const mapStateToProps = (state) => ({
-  items: filterHandler(state.addAndToggle, state.filter)
+  // redux-undo 
+  items: filterHandler(state.addAndToggle.present, state.filter)
 })
 
 // 纯函数声明哪些action创建函数是组件需要通过props获取的，并分配props中指定的key上
