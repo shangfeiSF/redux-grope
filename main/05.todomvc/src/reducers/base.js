@@ -50,7 +50,7 @@ export default (state = initialState, action) => {
       }))
 
     case ActionTypes.CLEAR_COMPLETED:
-      return state.filter(item => items.completed === false)
+      return state.filter(item => item.completed === false)
 
     default:
       return state

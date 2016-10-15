@@ -3,7 +3,7 @@ import {render} from 'react-dom'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 
-import App from './containers/App'
+import AppContainer from './containers/AppContainer'
 import reducers from './reducers'
 
 import 'todomvc-app-css/index.css'
@@ -13,7 +13,7 @@ const store = createStore(reducers)
 const root = document.getElementById('example')
 var content = (
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>
 )
 
