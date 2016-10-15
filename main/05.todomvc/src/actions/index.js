@@ -1,8 +1,30 @@
-import * as types from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes'
 
-export const addTodo = text => ({ type: types.ADD_TODO, text })
-export const deleteTodo = id => ({ type: types.DELETE_TODO, id })
-export const editTodo = (id, text) => ({ type: types.EDIT_TODO, id, text })
-export const completeTodo = id => ({ type: types.COMPLETE_TODO, id })
-export const completeAll = () => ({ type: types.COMPLETE_ALL })
-export const clearCompleted = () => ({ type: types.CLEAR_COMPLETED })
+export const addActionCreater = text => ({
+  type: ActionTypes.ADD,
+  text
+})
+
+export const deleteActionCreater = id => ({
+  type: ActionTypes.DELETE,
+  id
+})
+
+export const editActionCreater = (id, text) => ({
+  type: ActionTypes.EDIT,
+  id,
+  text
+})
+
+export const completeActionCreater = id => ({
+  type: ActionTypes.COMPLETE,
+  id
+})
+
+export const completeAllActionCreater = () => ({
+  type: ActionTypes.COMPLETE_ALL
+})
+
+export const clearCompletedActionCreater = () => ({
+  type: ActionTypes.CLEAR_COMPLETED
+})

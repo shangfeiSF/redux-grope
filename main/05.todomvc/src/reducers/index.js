@@ -1,8 +1,6 @@
-import { combineReducers } from 'redux'
-import todos from './todos'
+import {combineReducers} from 'redux'
+import base from './base'
 
-const rootReducer = combineReducers({
-  todos
+export default combineReducers({
+  todos: base
 })
-
-export default rootReducer

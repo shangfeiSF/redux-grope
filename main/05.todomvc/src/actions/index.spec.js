@@ -1,45 +1,68 @@
-import * as types from '../constants/ActionTypes'
-import * as actions from './index'
+import * as ActionTypes from '../constants/ActionTypes'
+import * as ActionCreaters from './index'
 
-describe('todo actions', () => {
-  it('addTodo should create ADD_TODO action', () => {
-    expect(actions.addTodo('Use Redux')).toEqual({
-      type: types.ADD_TODO,
-      text: 'Use Redux'
-    })
+describe('ActionCreaters', () => {
+  it('addActionCreater should create ADD action', () => {
+    let text = 'Use Redux'
+    let expectValue = {
+      type: ActionTypes.ADD,
+      text: text
+    }
+
+    expect(ActionCreaters.addActionCreater(text))
+      .toEqual(expectValue)
   })
 
-  it('deleteTodo should create DELETE_TODO action', () => {
-    expect(actions.deleteTodo(1)).toEqual({
-      type: types.DELETE_TODO,
-      id: 1
-    })
+  it('deleteActionCreater should create DELETE action', () => {
+    let id = 1
+    let expectValue = {
+      type: ActionTypes.DELETE,
+      id: id
+    }
+
+    expect(ActionCreaters.deleteActionCreater(id))
+      .toEqual(expectValue)
   })
 
-  it('editTodo should create EDIT_TODO action', () => {
-    expect(actions.editTodo(1, 'Use Redux everywhere')).toEqual({
-      type: types.EDIT_TODO,
-      id: 1,
-      text: 'Use Redux everywhere'
-    })
+  it('editActionCreater should create EDIT action', () => {
+    let id = 1
+    let newText = 'Use Redux everywhere'
+    let expectValue = {
+      type: ActionTypes.EDIT,
+      id: id,
+      text: newText
+    }
+
+    expect(ActionCreaters.editActionCreater(id, newText))
+      .toEqual(expectValue)
   })
 
-  it('completeTodo should create COMPLETE_TODO action', () => {
-    expect(actions.completeTodo(1)).toEqual({
-      type: types.COMPLETE_TODO,
-      id: 1
-    })
+  it('completeActionCreater should create COMPLETE action', () => {
+    let id = 1
+    let expectValue = {
+      type: ActionTypes.COMPLETE,
+      id: id
+    }
+
+    expect(ActionCreaters.completeActionCreater(id))
+      .toEqual(expectValue)
   })
 
-  it('completeAll should create COMPLETE_ALL action', () => {
-    expect(actions.completeAll()).toEqual({
-      type: types.COMPLETE_ALL
-    })
+  it('completeAllActionCreater should create COMPLETE_ALL action', () => {
+    let expectValue = {
+      type: ActionTypes.COMPLETE_ALL
+    }
+
+    expect(ActionCreaters.completeAllActionCreater())
+      .toEqual(expectValue)
   })
 
-  it('clearCompleted should create CLEAR_COMPLETED action', () => {
-    expect(actions.clearCompleted()).toEqual({
-      type: types.CLEAR_COMPLETED
-    })
+  it('clearCompletedActionCreater should create CLEAR_COMPLETED action', () => {
+    let expectValue = {
+      type: ActionTypes.CLEAR_COMPLETED
+    }
+
+    expect(ActionCreaters.clearCompletedActionCreater())
+      .toEqual(expectValue)
   })
 })
