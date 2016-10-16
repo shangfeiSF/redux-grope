@@ -4,12 +4,6 @@ import classnames from 'classnames'
 import TextInput from './TextInput'
 
 class Item extends Component {
-  constructor(props, context) {
-    super(props, context)
-
-    this.handlerOnSave = this.handlerOnSave.bind(this)
-  }
-
   static propTypes = {
     todo: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired

@@ -2,10 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import classnames from 'classnames'
 
 class TextInput extends Component {
-  constructor(props, context) {
-    super(props, context)
-  }
-
   static propTypes = {
     model: PropTypes.string,
     onSave: PropTypes.func.isRequired,

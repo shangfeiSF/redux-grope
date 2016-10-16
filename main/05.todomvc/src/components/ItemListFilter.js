@@ -11,10 +11,6 @@ const FILTER_TITLES = {
 }
 
 class ItemListFilter extends Component {
-  constructor(props, context) {
-    super(props, context)
-  }
-
   static propTypes = {
     completedCount: PropTypes.number.isRequired,
     activeCount: PropTypes.number.isRequired,
@@ -29,7 +25,7 @@ class ItemListFilter extends Component {
     return (
       <span className="todo-count">
         <strong>{activeCount || 'No '}</strong>
-        {activeCount === 1 ? 'item' : 'items'} left
+        {activeCount === 1 ? ' item' : ' items'} left
       </span>
     )
   }
@@ -75,6 +71,10 @@ class ItemListFilter extends Component {
       FilterTypes.SHOW_ACTIVE,
       FilterTypes.SHOW_COMPLETED
     ]
+
+    let filterArray = Array.from(FilterTypes)
+    console.log(filterArray)
+    console.log(filters)
 
     return (
       <footer className="footer">

@@ -4,10 +4,6 @@ import Header from './Header'
 import ItemList from './ItemList'
 
 class App extends Component {
-  constructor(props, context) {
-    super(props, context)
-  }
-
   static propTypes = {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired

@@ -2,17 +2,11 @@ import React, {PropTypes, Component} from 'react'
 import TextInput from './TextInput'
 
 class Header extends Component {
-  constructor(props, context) {
-    super(props, context)
-
-    this.handlerOnSave = this.handlerOnSave.bind(this)
-  }
-
   static propTypes = {
     add: PropTypes.func.isRequired
   }
 
-  handlerOnSave(text) {
+  handlerOnSave = (text) => {
     if (text.length !== 0) {
       this.props.add(text)
     }
