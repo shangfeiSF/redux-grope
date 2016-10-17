@@ -1,15 +1,19 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
-import Header from './Header'
-import TodoTextInput from './TodoTextInput'
+
+import Header from '../Header'
+import TextInput from '../TextInput'
 
 const setup = () => {
   const props = {
-    addTodo: jest.fn()
+    add: jest.fn()
   }
 
   const renderer = TestUtils.createRenderer()
-  renderer.render(<Header {...props} />)
+  renderer.render(
+    <Header {...props} />
+  )
+
   const output = renderer.getRenderOutput()
 
   return {
@@ -22,7 +26,7 @@ const setup = () => {
 describe('components', () => {
   describe('Header', () => {
     it('should render correctly', () => {
-      const { output } = setup()
+      const {output} = setup()
 
       expect(output.type).toBe('header')
       expect(output.props.className).toBe('header')
@@ -30,20 +34,23 @@ describe('components', () => {
       const [ h1, input ] = output.props.children
 
       expect(h1.type).toBe('h1')
-      expect(h1.props.children).toBe('todos')
+      expect(h1.props.children).toBe('Todos App')
 
-      expect(input.type).toBe(TodoTextInput)
-      expect(input.props.newTodo).toBe(true)
+      expect(input.type).toBe(TextInput)
+      expect(input.props.model).toBe('add')
       expect(input.props.placeholder).toBe('What needs to be done?')
     })
 
-    it('should call addTodo if length of text is greater than 0', () => {
-      const { output, props } = setup()
+    it('should call add if length of text is greater than 0', () => {
+      const {output, props} = setup()
+
       const input = output.props.children[1]
+
       input.props.onSave('')
-      expect(props.addTodo).not.toBeCalled()
+      expect(props.add).not.toBeCalled()
+
       input.props.onSave('Use Redux')
-      expect(props.addTodo).toBeCalled()
+      expect(props.add).toBeCalled()
     })
   })
 })

@@ -72,10 +72,6 @@ class ItemListFilter extends Component {
       FilterTypes.SHOW_COMPLETED
     ]
 
-    let filterArray = Array.from(FilterTypes)
-    console.log(filterArray)
-    console.log(filters)
-
     return (
       <footer className="footer">
         {this.renderCount()}
