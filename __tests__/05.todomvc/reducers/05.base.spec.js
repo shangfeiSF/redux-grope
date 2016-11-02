@@ -1,5 +1,5 @@
-import base from './base'
-import * as ActionTypes from '../constants/ActionTypes'
+import base from '../../../main/05.todomvc/src/reducers/base'
+import * as ActionTypes from '../../../main/05.todomvc/src/constants/ActionTypes'
 
 describe('base reducer', () => {
   it('Initial state', () => {
@@ -8,7 +8,7 @@ describe('base reducer', () => {
       {}
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -18,7 +18,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('ADD', () => {
@@ -30,7 +30,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -40,7 +40,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('ADD again', () => {
@@ -58,7 +58,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -73,7 +73,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('DELETE', () => {
@@ -96,7 +96,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -106,7 +106,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('EDIT', () => {
@@ -130,7 +130,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -145,7 +145,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('COMPLETE', () => {
@@ -168,7 +168,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -183,7 +183,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('COMPLETE_ALL when there exists uncompleted item', () => {
@@ -205,7 +205,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -220,7 +220,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('COMPLETE_ALL when all items are completed', () => {
@@ -242,7 +242,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -257,7 +257,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('CLEAR_COMPLETED', () => {
@@ -279,7 +279,7 @@ describe('base reducer', () => {
       }
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 0,
@@ -289,7 +289,7 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(base(...params)).toEqual(...expectValue)
+    expect(base(...params)).toEqual(...expectedValue)
   })
 
   it('should not generate duplicate ids after CLEAR_COMPLETED', () => {
@@ -318,7 +318,7 @@ describe('base reducer', () => {
       }])
     ]
 
-    let expectValue = [
+    let expectedValue = [
       [
         {
           id: 1,
@@ -333,6 +333,6 @@ describe('base reducer', () => {
       ]
     ]
 
-    expect(...params).toEqual(...expectValue)
+    expect(...params).toEqual(...expectedValue)
   })
 })

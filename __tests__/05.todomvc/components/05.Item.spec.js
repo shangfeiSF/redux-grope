@@ -1,8 +1,8 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Item from '../Item'
-import TextInput from '../TextInput'
+import Item from '../../../main/05.todomvc/src/components/Item'
+import TextInput from '../../../main/05.todomvc/src/components/TextInput'
 
 const setup = (editing = false) => {
   const props = {
@@ -52,7 +52,7 @@ describe('components', () => {
       expect(div.type).toBe('div')
       expect(div.props.className).toBe('view')
 
-      const [ input, label, button ] = div.props.children
+      const [input, label, button] = div.props.children
 
       expect(input.type).toBe('input')
       expect(input.props.checked).toBe(false)
@@ -104,7 +104,7 @@ describe('components', () => {
 
       expect(input.type).toBe(TextInput)
       expect(input.props.text).toBe('Use Redux')
-      expect(input.props.editing).toBe(true)
+      expect(input.props.model).toBe('edit')
     })
 
     it('TextInput onSave should call editTodo', () => {
@@ -127,7 +127,7 @@ describe('components', () => {
       const {output, renderer} = setup(true)
 
       output.props.children.props.onSave('Use Redux')
-      
+
       const updated = renderer.getRenderOutput()
 
       expect(updated.type).toBe('li')
