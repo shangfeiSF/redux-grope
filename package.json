@@ -1,6 +1,9 @@
 {
   "name": "redux-grope",
   "version": "1.0.0",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
@@ -37,6 +40,8 @@
     "deep-freeze": "0.0.1",
     "enzyme": "^2.4.1",
     "express-urlrewrite": "^1.2.0",
+    "jest": "^16.0.2",
+    "jest-cli": "^16.0.2",
     "nopt": "^3.0.6",
     "react-addons-test-utils": "^15.3.0",
     "react-hot-loader": "^3.0.0-beta.5",
