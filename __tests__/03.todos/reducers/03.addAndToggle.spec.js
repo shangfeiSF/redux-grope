@@ -1,4 +1,4 @@
-import addAndToggle from '../modules/addAndToggle'
+import addAndToggle from '../../../main/03.todos/src/reducers/modules/addAndToggle'
 
 describe('addAndToggle reducer', () => {
   it('should handle initial state', () => {
@@ -6,12 +6,12 @@ describe('addAndToggle reducer', () => {
       undefined,
       {}
     ]
+
     let expectValue = [
       []
     ]
 
-    expect(addAndToggle(...params))
-      .toEqual(...expectValue)
+    expect(addAndToggle(...params)).toEqual(...expectValue)
   })
 
   it('should handle first ADD', () => {
@@ -19,114 +19,114 @@ describe('addAndToggle reducer', () => {
       [],
       {
         type: 'ADD',
+        id: 0,
         text: 'Run the tests',
-        id: 0
       }
     ]
+
     let expectValue = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         }
       ]
     ]
 
-    expect(addAndToggle(...params))
-      .toEqual(...expectValue)
+    expect(addAndToggle(...params)).toEqual(...expectValue)
   })
 
   it('should handle second ADD', () => {
     let params = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         }
       ],
       {
         type: 'ADD',
-        text: 'Use Redux',
-        id: 1
+        id: 1,
+        text: 'Use Redux'
       }
     ]
+
     let expectValue = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         },
         {
+          id: 1,
           text: 'Use Redux',
-          completed: false,
-          id: 1
+          completed: false
         }
       ]
     ]
 
-    expect(addAndToggle(...params))
-      .toEqual(...expectValue)
+    expect(addAndToggle(...params)).toEqual(...expectValue)
   })
 
   it('should handle third ADD', () => {
     let params = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         },
         {
+          id: 1,
           text: 'Use Redux',
-          completed: false,
-          id: 1
+          completed: false
         }
       ],
       {
         type: 'ADD',
-        text: 'Fix the tests',
-        id: 2
+        id: 2,
+        text: 'Fix the tests'
       }
     ]
+
     let expectValue = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         },
         {
+          id: 1,
           text: 'Use Redux',
-          completed: false,
-          id: 1
+          completed: false
         },
         {
+          id: 2,
           text: 'Fix the tests',
-          completed: false,
-          id: 2
+          completed: false
         }
       ]
     ]
 
-    expect(addAndToggle(...params))
-      .toEqual(...expectValue)
+    expect(addAndToggle(...params)).toEqual(...expectValue)
   })
 
   it('should handle TOGGLE', () => {
     let params = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         },
         {
+          id: 1,
           text: 'Use Redux',
-          completed: false,
-          id: 1
+          completed: false
         }
       ],
       {
@@ -134,22 +134,22 @@ describe('addAndToggle reducer', () => {
         id: 1
       }
     ]
+
     let expectValue = [
       [
         {
+          id: 0,
           text: 'Run the tests',
-          completed: false,
-          id: 0
+          completed: false
         },
         {
+          id: 1,
           text: 'Use Redux',
-          completed: true,
-          id: 1
+          completed: true
         }
       ]
     ]
 
-    expect(addAndToggle(...params))
-      .toEqual(...expectValue)
+    expect(addAndToggle(...params)).toEqual(...expectValue)
   })
 })

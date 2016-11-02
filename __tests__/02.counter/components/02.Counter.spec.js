@@ -7,9 +7,7 @@ const setup = (value = 0) => {
     handlerOnIncrease: jest.fn(),
     handlerOnDecrease: jest.fn()
   }
-  const component = shallow(
-    <Counter value={value} {...actions} />
-  )
+  const component = shallow(<Counter value={value} {...actions} />)
 
   return {
     component: component,
