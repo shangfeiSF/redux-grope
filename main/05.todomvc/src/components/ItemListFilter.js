@@ -24,7 +24,7 @@ class ItemListFilter extends Component {
 
     return (
       <span className="todo-count">
-        <strong>{activeCount || 'No '}</strong>
+        <strong>{activeCount || 'No'}</strong>
         {activeCount === 1 ? ' item' : ' items'} left
       </span>
     )
