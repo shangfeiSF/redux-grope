@@ -2,7 +2,7 @@
   "name": "redux-grope",
   "version": "1.0.0",
   "scripts": {
-    "test": "jest"
+    "test": "node node_modules/jest/bin/jest.js --config config.jest.json"
   },
   "dependencies": {
     "react": "^15.3.0",
