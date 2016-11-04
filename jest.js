@@ -15,13 +15,38 @@ var options = nopt({
 
 var jestConfigFile = path.join(__dirname, 'config.jest.json')
 
-fs.readFileAsync(jestConfigFile, {encoding: 'utf-8'})
-  .then(function (data) {
-    var data = JSON.parse(data)
+fs.statAsync(jestConfigFile)
+  .then(
+    function () {
+      return fs.readFileAsync(jestConfigFile, {encoding: 'utf-8'})
+        .then(function (data) {
+          return {
+            existed: true,
+            data: JSON.parse(data)
+          }
+        })
+    },
+    function () {
+      return fs.openAsync(jestConfigFile, 'w')
+        .then(function (fd) {
+          return {
+            existed: false,
+            fd: fd
+          }
+        })
+    }
+  )
+  .then(function (spec) {
+    var testRegex = options.path.length ? options.path.replace(/\./g, '\.') + '$' : '(/tests/.*|\\.(test|spec))\\.(js|jsx)$'
 
-    data.testRegex = options.path.length ? options.path.replace(/\./g, '\.') + '$' : '(/tests/.*|\\.(test|spec))\\.(js|jsx)$'
+    if (spec.existed) {
+      spec.data.testRegex = testRegex
 
-    data = JSON.stringify(data, null, 2)
-
-    return fs.writeFileAsync(jestConfigFile, data, {encoding: 'utf-8'})
+      return fs.writeFileAsync(jestConfigFile, JSON.stringify(spec.data, null, 2), {encoding: 'utf-8'})
+    }
+    else {
+      return fs.writeAsync(spec.fd, JSON.stringify({
+        testRegex: testRegex
+      }, null, 2))
+    }
   })

@@ -1,3 +1,3 @@
 {
-  "testRegex": ".\\tests\\05.todomvc\\src\\reducers\\modules\\base.spec.js$"
+  "testRegex": ".\\tests\\05.todomvc\\src\\components\\Item.spec.js$"
 }
