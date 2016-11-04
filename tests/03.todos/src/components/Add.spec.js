@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Add from '../../../main/03.todos/src/components/Add'
+import Add from '../../../../main/03.todos/src/components/Add'
 
 const setup = () => {
   const props = {

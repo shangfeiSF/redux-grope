@@ -1,4 +1,4 @@
-import * as actions from '../../../main/03.todos/src/actions/index'
+import * as actions from '../../../../main/03.todos/src/actions/index'
 
 describe('Actions', () => {
   it('add should create `ADD` action', () => {

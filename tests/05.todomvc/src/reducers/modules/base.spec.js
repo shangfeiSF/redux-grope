@@ -1,5 +1,5 @@
-import base from '../../../main/05.todomvc/src/reducers/base'
-import * as ActionTypes from '../../../main/05.todomvc/src/constants/ActionTypes'
+import base from '../../../../../main/05.todomvc/src/reducers/modules/base'
+import * as ActionTypes from '../../../../../main/05.todomvc/src/constants/ActionTypes'
 
 describe('base reducer', () => {
   it('Initial state', () => {

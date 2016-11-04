@@ -1,8 +1,8 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Header from '../../../main/05.todomvc/src/components/Header'
-import TextInput from '../../../main/05.todomvc/src/components/TextInput'
+import Header from '../../../../main/05.todomvc/src/components/Header'
+import TextInput from '../../../../main/05.todomvc/src/components/TextInput'
 
 const setup = () => {
   const props = {

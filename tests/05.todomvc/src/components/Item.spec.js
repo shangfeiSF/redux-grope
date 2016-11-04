@@ -1,8 +1,8 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import Item from '../../../main/05.todomvc/src/components/Item'
-import TextInput from '../../../main/05.todomvc/src/components/TextInput'
+import Item from '../../../../main/05.todomvc/src/components/Item'
+import TextInput from '../../../../main/05.todomvc/src/components/TextInput'
 
 const setup = (editing = false) => {
   const props = {

@@ -19,7 +19,7 @@ fs.readFileAsync(jestConfigFile, {encoding: 'utf-8'})
   .then(function (data) {
     var data = JSON.parse(data)
 
-    data.testRegex = options.path.length ? options.path.replace(/\./g, '\.') + '$' : '(/__tests__/.*|\\.(test|spec))\\.(js|jsx)$'
+    data.testRegex = options.path.length ? options.path.replace(/\./g, '\.') + '$' : '(/tests/.*|\\.(test|spec))\\.(js|jsx)$'
 
     data = JSON.stringify(data, null, 2)
 

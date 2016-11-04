@@ -1,5 +1,5 @@
-import * as ActionTypes from '../../../main/05.todomvc/src/constants/ActionTypes'
-import * as ActionCreaters from '../../../main/05.todomvc/src/actions/index'
+import * as ActionTypes from '../../../../main/05.todomvc/src/constants/ActionTypes'
+import * as ActionCreaters from '../../../../main/05.todomvc/src/actions/index'
 
 describe('ActionCreaters', () => {
   it('addActionCreater should create `ADD` action', () => {

@@ -1,11 +1,11 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-import ItemList from '../../../main/05.todomvc/src/components/ItemList'
-import Item from '../../../main/05.todomvc/src/components/Item'
-import ItemListFilter from '../../../main/05.todomvc/src/components/ItemListFilter'
+import ItemList from '../../../../main/05.todomvc/src/components/ItemList'
+import Item from '../../../../main/05.todomvc/src/components/Item'
+import ItemListFilter from '../../../../main/05.todomvc/src/components/ItemListFilter'
 
-import {SHOW_ALL, SHOW_COMPLETED} from '../../../main/05.todomvc/src/constants/FilterTypes'
+import {SHOW_ALL, SHOW_COMPLETED} from '../../../../main/05.todomvc/src/constants/FilterTypes'
 
 const setup = propOverrides => {
   const props = Object.assign({

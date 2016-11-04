@@ -1,4 +1,4 @@
-import counter from '../../../main/02.counter/src/reducers/index'
+import counter from '../../../../main/02.counter/src/reducers/index'
 
 describe('reducers', () => {
   describe('counter', () => {
