@@ -16,7 +16,7 @@ var options = nopt({
   'b': ['--bail'],
   'b1': ['--bail', 'true'],
   'v': ['--verbose'],
-  'v1': ['--verbose', 'true'],
+  'v0': ['--verbose', 'false'],
   'p': ['--path'],
   'r': ['--regexp']
 }, process.argv, 2)
@@ -59,7 +59,7 @@ fs.statAsync(jestConfigFile)
     var json = {
       testRegex: testRegex,
       bail: options.bail === undefined ? false : options.bail,
-      verbose: options.verbose === undefined ? false : options.verbose
+      verbose: options.verbose === undefined ? true : options.verbose
     }
 
     if (spec.existed) {

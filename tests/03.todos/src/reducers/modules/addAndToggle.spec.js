@@ -1,4 +1,4 @@
-import addAndToggle from '../../../main/03.todos/src/reducers/modules/addAndToggle'
+import addAndToggle from '../../../../../main/03.todos/src/reducers/modules/addAndToggle'
 
 describe('addAndToggle reducer', () => {
   it('should handle initial state', () => {
