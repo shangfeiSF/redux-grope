@@ -1,15 +1,21 @@
-import React, { PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
-const ProductsList = ({ title, children }) => (
-  <div>
-    <h3>{title}</h3>
-    <div>{children}</div>
-  </div>
-)
+class ProductsList extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    title: PropTypes.string.isRequired
+  }
 
-ProductsList.propTypes = {
-  children: PropTypes.node,
-  title: PropTypes.string.isRequired
+  render() {
+    let {title, children} = this.props
+
+    return (
+      <div>
+        <h1>{title}</h1>
+        <div>{children}</div>
+      </div>
+    )
+  }
 }
 
 export default ProductsList

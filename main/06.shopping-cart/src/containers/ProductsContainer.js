@@ -1,29 +1,43 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { addToCart } from '../actions'
-import { getVisibleProducts } from '../reducers/products'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+
+import {addToCart} from '../actions'
+import {getVisibleProducts} from '../reducers/modules/products'
+
 import ProductItem from '../components/ProductItem'
 import ProductsList from '../components/ProductsList'
 
-const ProductsContainer = ({ products, addToCart }) => (
-  <ProductsList title="Products">
-    {products.map(product =>
-      <ProductItem
-        key={product.id}
-        product={product}
-        onAddToCartClicked={() => addToCart(product.id)} />
-    )}
-  </ProductsList>
-)
+class ProductsContainer extends Component {
+  static propTypes = {
+    products: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        inventory: PropTypes.number.isRequired
+      })
+    ).isRequired,
 
-ProductsContainer.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    inventory: PropTypes.number.isRequired
-  })).isRequired,
-  addToCart: PropTypes.func.isRequired
+    addToCart: PropTypes.func.isRequired
+  }
+
+  render() {
+    let {products, addToCart} = this.props
+
+    return (
+      <ProductsList title="Products">
+        {
+          products.map(product =>
+            <ProductItem
+              key={product.id}
+              product={product}
+              onAddToCartClicked={() => addToCart(product.id)}
+            />
+          )
+        }
+      </ProductsList>
+    )
+  }
 }
 
 const mapStateToProps = state => ({
@@ -32,5 +46,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addToCart }
+  {addToCart}
 )(ProductsContainer)

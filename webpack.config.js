@@ -14,7 +14,8 @@ var makeEntry = function () {
         dir === '02.counter' ||
         dir === '03.todos' ||
         dir === '04.todos-with-undo' ||
-        dir === '05.todomvc'
+        dir === '05.todomvc' ||
+        dir === '06.shopping-cart'
     })
     .reduce(function (entry, dir) {
       var isDirectory = fs.statSync(path.join(mainDir, dir)).isDirectory()
@@ -53,6 +54,10 @@ module.exports = {
       {
         test: /\.less/,
         loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.json/,
+        loader: 'json-loader'
       },
       {
         test: /\.js$/,
