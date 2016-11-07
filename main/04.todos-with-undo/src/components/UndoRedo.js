@@ -16,11 +16,11 @@ class UndoRedo extends Component {
   }
 
   handlerOnUndoClick() {
-    this.props.onUndo()
+    this.props.canUndo && this.props.onUndo()
   }
 
   handlerOnRedoClick() {
-    this.props.onRedo()
+    this.props.canRedo && this.props.onRedo()
   }
 
   render() {
