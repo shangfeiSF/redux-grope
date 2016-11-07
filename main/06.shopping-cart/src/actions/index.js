@@ -1,25 +1,32 @@
 import shop from '../api/shop'
 import * as types from '../constants/ActionTypes'
 
-const receiveProducts = products => ({
-  type: types.RECEIVE_PRODUCTS,
-  products: products
-})
+const creaters = {
+  receiveProducts: products => ({
+    type: types.RECEIVE_PRODUCTS,
+    products: products
+  }),
 
-const addToCartUnsafe = productId => ({
-  type: types.ADD_TO_CART,
-  productId
-})
+  addToCartUnsafe: productId => ({
+    type: types.ADD_TO_CART,
+    productId
+  })
+}
+
+/*
+ * (1) An thunk-type action creater that returns a function to perform asynchronous dispatch
+ * (2) An thgunk-type action creater that returns a function to perform conditional dispatch
+ * */
 
 export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {
-    dispatch(receiveProducts(products))
+    dispatch(creaters.receiveProducts(products))
   })
 }
 
 export const addToCart = productId => (dispatch, getState) => {
   if (getState().products.byId[productId].inventory > 0) {
-    dispatch(addToCartUnsafe(productId))
+    dispatch(creaters.addToCartUnsafe(productId))
   }
 }
 
