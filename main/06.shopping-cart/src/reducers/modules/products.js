@@ -2,38 +2,44 @@ import {combineReducers} from 'redux'
 
 import * as types from '../../constants/ActionTypes'
 
-const products = (state, action) => {
-  switch (action.type) {
-    case types.ADD_TO_CART:
-      return {
-        ...state,
-        inventory: state.inventory - 1
-      }
+const update = {
+  product: (state, action) => {
+    switch (action.type) {
+      case types.ADD_TO_CART:
+        return {
+          ...state,
+          inventory: state.inventory - 1
+        }
 
-    default:
-      return state
+      default:
+        return state
+    }
   }
 }
 
-const byId = (state = {}, action) => {
+const details = (state = {}, action) => {
   switch (action.type) {
     case types.RECEIVE_PRODUCTS:
       return {
         ...state,
-        ...action.products.reduce((obj, product) => {
-          obj[product.id] = product
-          return obj
-        }, {})
+        ...action.products.reduce(
+          (map, product) => {
+            map[product.id] = product
+            return map
+          },
+          {}
+        )
+      }
+
+    case types.ADD_TO_CART:
+      const {productId} = action
+
+      return {
+        ...state,
+        [productId]: update.product(state[productId], action)
       }
 
     default:
-      const {productId} = action
-      if (productId) {
-        return {
-          ...state,
-          [productId]: products(state[productId], action)
-        }
-      }
       return state
   }
 }
@@ -48,11 +54,11 @@ const visibleIds = (state = [], action) => {
   }
 }
 
-export const getProduct = (state, id) => state.byId[id]
+export const getProduct = (state, id) => state.details[id]
 
 export const getVisibleProducts = state => state.visibleIds.map(id => getProduct(state, id))
 
 export default combineReducers({
-  byId,
+  details,
   visibleIds
 })

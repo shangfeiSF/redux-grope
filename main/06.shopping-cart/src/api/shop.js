@@ -1,19 +1,18 @@
-const TIMEOUT = 100
-
-import  * as _products from './products.json'
+import  * as products from './products.json'
 
 const shop = {
-  getProducts: (cb, timeout) => setTimeout(() => {
-    console.warn(JSON.stringify(_products))
+  getProducts: (callback) => setTimeout(() => {
+    callback(products.default)
+  },  1000),
 
-    cb(_products.default)
-  }, timeout || TIMEOUT),
-
-  buyProducts: (payload, cb, timeout) => setTimeout(() => {
-    console.warn(JSON.stringify(payload))
-
-    cb(payload)
-  }, timeout || TIMEOUT)
+  buyProducts: (manifest, callback) => setTimeout(() => {
+    let random = Math.random() > 0.5
+    let response = {
+      status: random ? 200 : 500,
+      msg: random? 'Buy Success' : 'Server error'
+    }
+    callback(response)
+  },  1000)
 }
 
 export default shop

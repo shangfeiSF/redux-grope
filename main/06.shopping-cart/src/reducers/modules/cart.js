@@ -5,36 +5,36 @@ const initialState = {
   quantityById: {}
 }
 
-const addedIds = (state = initialState.addedIds, action) => {
-  switch (action.type) {
-    case types.ADD_TO_CART:
-      if (state.indexOf(action.productId) !== -1) {
+const update = {
+  addedIds: (state = initialState.addedIds, action) => {
+    switch (action.type) {
+      case types.ADD_TO_CART:
+        return state.indexOf(action.productId) !== -1 ? state : [...state, action.productId]
+
+      default:
         return state
-      }
-      return [...state, action.productId]
+    }
+  },
 
-    default:
-      return state
-  }
-}
+  quantityById: (state = initialState.quantityById, action) => {
+    switch (action.type) {
+      case types.ADD_TO_CART:
+        const {productId} = action
 
-const quantityById = (state = initialState.quantityById, action) => {
-  switch (action.type) {
-    case types.ADD_TO_CART:
-      const {productId} = action
-      return {
-        ...state,
-        [productId]: (state[productId] || 0) + 1
-      }
+        return {
+          ...state,
+          [productId]: (state[productId] || 0) + 1
+        }
 
-    default:
-      return state
+      default:
+        return state
+    }
   }
 }
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
-    case types.CHECKOUT_REQUEST:
+    case types.CHECKOUT_SUCCESS:
       return initialState
 
     case types.CHECKOUT_FAILURE:
@@ -42,8 +42,8 @@ const cart = (state = initialState, action) => {
 
     default:
       return {
-        addedIds: addedIds(state.addedIds, action),
-        quantityById: quantityById(state.quantityById, action)
+        addedIds: update.addedIds(state.addedIds, action),
+        quantityById: update.quantityById(state.quantityById, action)
       }
   }
 }

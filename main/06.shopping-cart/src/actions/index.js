@@ -1,46 +1,30 @@
 import shop from '../api/shop'
-import * as types from '../constants/ActionTypes'
+import * as syncActions  from './syncActions'
 
-const creaters = {
-  receiveProducts: products => ({
-    type: types.RECEIVE_PRODUCTS,
-    products: products
-  }),
-
-  addToCartUnsafe: productId => ({
-    type: types.ADD_TO_CART,
-    productId
-  })
-}
-
-/*
- * (1) An thunk-type action creater that returns a function to perform asynchronous dispatch
- * (2) An thgunk-type action creater that returns a function to perform conditional dispatch
- * */
-
+// getAllProducts that returns a function to perform asynchronous dispatch
 export const getAllProducts = () => dispatch => {
   shop.getProducts(products => {
-    dispatch(creaters.receiveProducts(products))
+    dispatch(syncActions.receiveProducts(products))
   })
 }
 
+// addToCart that returns a function to perform conditional dispatch
 export const addToCart = productId => (dispatch, getState) => {
-  if (getState().products.byId[productId].inventory > 0) {
-    dispatch(creaters.addToCartUnsafe(productId))
-  }
+  getState().products.details[productId].inventory > 0 && dispatch(syncActions.addToCart(productId))
 }
 
-export const checkout = products => (dispatch, getState) => {
+// checkout that returns a function to perform conditional and asynchronous dispatch
+export const checkout = manifest => (dispatch, getState) => {
   const {cart} = getState()
 
-  dispatch({
-    type: types.CHECKOUT_REQUEST
-  })
+  dispatch(syncActions.checkRequest())
 
-  shop.buyProducts(products, () => {
-    dispatch({
-      type: types.CHECKOUT_SUCCESS,
-      cart
-    })
+  shop.buyProducts(manifest, (response) => {
+
+    if (response.status == 200) {
+      dispatch(syncActions.checkSuccess(cart, response.msg))
+    } else {
+      dispatch(syncActions.checkFailure(cart, response.msg))
+    }
   })
 }
