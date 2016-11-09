@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import Product from './Product'
+import ProductInfo from './ProductInfo'
 
 class ProductItem extends Component {
   static propTypes = {
@@ -9,28 +9,24 @@ class ProductItem extends Component {
       inventory: PropTypes.number.isRequired
     }).isRequired,
 
-    onAddToCartClicked: PropTypes.func.isRequired
+    addToCart: PropTypes.func.isRequired
+  }
+
+  handlerOnClick = () => {
+    let {product, addToCart} = this.props
+    addToCart(product.id)
   }
 
   render() {
-    let {product, onAddToCartClicked} = this.props
-
-    let style = {
-      marginBottom: 10
-    }
+    let {product} = this.props
+    let inventory = product.inventory > 0
 
     return (
-      <ul style={style}>
-        <Product
-          title={product.title}
-          price={product.price}
-        />
+      <ul style={{marginBottom: 10}}>
+        <ProductInfo key={product.id} product={product}/>
 
-        <button
-          onClick={onAddToCartClicked}
-          disabled={product.inventory > 0 ? '' : 'disabled'}
-        >
-          {product.inventory > 0 ? 'Add to cart now' : 'Sold Out'}
+        <button onClick={this.handlerOnClick} disabled={inventory ? '' : 'disabled'}>
+          {inventory ? 'Add to cart now' : 'Sold Out'}
         </button>
       </ul>
     )

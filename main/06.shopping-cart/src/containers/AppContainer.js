@@ -1,11 +1,11 @@
 import React from 'react'
 
-import ProductsContainer from './ProductsContainer'
+import ProductsListContainer from './ProductsListContainer'
 import CartContainer from './CartContainer'
 
 export default () => (
   <div>
-    <ProductsContainer />
+    <ProductsListContainer />
     <CartContainer />
   </div>
 )
