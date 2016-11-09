@@ -54,9 +54,11 @@ const visibleIds = (state = [], action) => {
   }
 }
 
-export const getProduct = (state, id) => state.details[id]
+export const APIs = {
+  get_productDetail: (state, id) => state.details[id],
 
-export const getVisibleProducts = state => state.visibleIds.map(id => getProduct(state, id))
+  get_visibleProducts: state => state.visibleIds.map(id => APIs.get_productDetail(state, id))
+}
 
 export default combineReducers({
   details,

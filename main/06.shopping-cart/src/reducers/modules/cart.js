@@ -48,8 +48,10 @@ const cart = (state = initialState, action) => {
   }
 }
 
-export const getQuantity = (state, productId) => state.quantityById[productId] || 0
+export const APIs = {
+  get_addedIds: state => state.addedIds,
 
-export const getAddedIds = state => state.addedIds
+  get_quantity: (state, productId) => state.quantityById[productId] || 0
+}
 
 export default cart
