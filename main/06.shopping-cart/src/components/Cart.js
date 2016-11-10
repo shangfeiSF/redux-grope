@@ -18,8 +18,8 @@ class Cart extends Component {
   }
 
   handlerOnClick = () => {
-    let {products, checkout} = this.props
-    checkout(products)
+    let {shoppingList, checkout} = this.props
+    checkout(shoppingList)
   }
 
   render() {

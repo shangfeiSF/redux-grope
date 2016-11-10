@@ -3,35 +3,29 @@ import * as types from '../../../../main/06.shopping-cart/src/constants/ActionTy
 import * as actions from '../../../../main/06.shopping-cart/src/actions/index'
 
 describe('Actions', () => {
-  it('getAllProducts should return all products', () => {
+  it('getAllProducts should return all products', async() => {
     let expectedValue = {
       type: types.RECEIVE_PRODUCTS,
-      products: products
+      products: products.default
     }
 
-    var receivedValue = {}
-    let dispatch = action => {
-      console.log(action)
-      receivedValue = action
-    }
+    let dispatch = action => action
 
     let thunk = actions.getAllProducts()
-    thunk(dispatch)
+    let receivedValue = await thunk(dispatch)
 
     expect(receivedValue).toEqual(expectedValue)
   })
 
-  it('addToCart should success when inventory > 0', () => {
+  it('addToCart should success when inventory > 0', async() => {
     let productId = 3
+
     let expectedValue = {
       type: types.ADD_TO_CART,
       productId
     }
 
-    var receivedValue = {}
-    let dispatch = action => {
-      receivedValue = action
-    }
+    let dispatch = action => action
     let getState = () => ({
       products: {
         details: {
@@ -43,19 +37,17 @@ describe('Actions', () => {
     })
 
     let thunk = actions.addToCart(productId)
-    thunk(dispatch, getState)
+    let receivedValue = await thunk(dispatch, getState)
 
     expect(receivedValue).toEqual(expectedValue)
   })
 
-  it('addToCart should fail when inventory = 0', () => {
+  it('addToCart should fail when inventory = 0', async() => {
     let productId = 3
-    let expectedValue = {}
 
-    var receivedValue = {}
-    let dispatch = action => {
-      receivedValue = action
-    }
+    let expectedValue = false
+
+    let dispatch = action => action
     let getState = () => ({
       products: {
         details: {
@@ -67,36 +59,42 @@ describe('Actions', () => {
     })
 
     let thunk = actions.addToCart(productId)
-    thunk(dispatch, getState)
+    let receivedValue = await thunk(dispatch, getState)
 
     expect(receivedValue).toEqual(expectedValue)
   })
 
-  // it('checkout should success or fail with correct response', () => {
-  //   let manifest = {
-  //     info: 'This is manifest'
-  //   }
-  //   let cart = {
-  //     info: 'This is cart'
-  //   }
-  //
-  //   let expectedValueWhenSuccess = {
-  //     type: types.CHECKOUT_SUCCESS,
-  //     cart: cart,
-  //     msg: 'Buy Success'
-  //   }
-  //   let expectedValueWhenFail = {
-  //     type: types.CHECKOUT_FAILURE,
-  //     cart: cart,
-  //     msg: 'Server error'
-  //   }
-  //
-  //   let thunk = actions.checkout(manifest)
-  //
-  //   let dispatch = action => action
-  //   let getState = () => cart
-  //
-  //   expect(thunk(dispatch, getState))
-  //     .toEqual(expectedValueWhenSuccess)
-  // })
+  it('checkout should success or fail with correct response', async() => {
+    let manifest = {
+      info: 'This is manifest'
+    }
+    let cart = {
+      info: 'This is cart'
+    }
+
+    let expectedValueWhenSuccess = {
+      type: types.CHECKOUT_SUCCESS,
+      cart: cart,
+      msg: 'Buy Success'
+    }
+    let expectedValueWhenFail = {
+      type: types.CHECKOUT_FAILURE,
+      cart: cart,
+      msg: 'Server error'
+    }
+
+    let dispatch = action => action
+    let getState = () => ({
+      cart
+    })
+
+    let thunk = actions.checkout(manifest)
+    let receivedValue = await thunk(dispatch, getState)
+
+    try {
+      expect(receivedValue).toEqual(expectedValueWhenSuccess)
+    } catch (e) {
+      expect(receivedValue).toEqual(expectedValueWhenFail)
+    }
+  })
 })
