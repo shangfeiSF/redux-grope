@@ -1,73 +1,94 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import Cart from './Cart'
-import Product from './Product'
+import TestUtils from 'react-addons-test-utils'
 
-const setup = (total, products = []) => {
-  const actions = {
-    onCheckoutClicked: jest.fn()
-  }
+import Cart from '../../../../main/06.shopping-cart/src/components/Cart'
+import ProductInfo from '../../../../main/06.shopping-cart/src/components/ProductInfo'
 
-  const component = shallow(
-    <Cart products={products} total={total} {...actions} />
+const setup = propOverrides => {
+  const props = Object.assign({
+    shoppingList: [
+      {
+        id: 1,
+        title: 'Product 1',
+        price: 10.46,
+        quantity: 2,
+        inventory: 0
+      },
+      {
+        id: 2,
+        title: 'Product 2',
+        price: 15.00,
+        quantity: 5,
+        inventory: 0
+      }
+    ],
+
+    total: '95.92',
+
+    checkout: jest.fn()
+  }, propOverrides)
+
+  const renderer = TestUtils.createRenderer()
+  renderer.render(
+    <Cart {...props} />
   )
 
+  const output = renderer.getRenderOutput()
+
   return {
-    component: component,
-    actions: actions,
-    button: component.find('button'),
-    products: component.find(Product),
-    em: component.find('em'),
-    p: component.find('p')
+    props: props,
+    output: output,
+    renderer: renderer
   }
 }
 
 describe('Cart component', () => {
-  it('should display total', () => {
-    const { p } = setup('76')
-    expect(p.text()).toMatch(/^Total: \$76/)
-  })
+  it('should display correctly when shoppingList is not empty', () => {
+    const {output, props} = setup()
 
-  it('should display add some products message', () => {
-    const { em } = setup()
-    expect(em.text()).toMatch(/^Please add some products to cart/)
-  })
+    expect(output.type).toBe('div')
 
-  it('should disable button', () => {
-    const { button } = setup()
-    expect(button.prop('disabled')).toEqual('disabled')
-  })
+    const [h1, ul, p, button] = output.props.children
 
-  describe('when given product', () => {
-    const product = [
-      {
-        id: 1,
-        title: 'Product 1',
-        price: 9.99,
-        quantity: 1
-      }
-    ]
+    expect(h1.type).toBe('h1')
+    expect(h1.props.children).toBe('Your Cart')
 
-    it('should render products', () => {
-      const { products } = setup('9.99', product)
-      const props = {
-        title: product[0].title,
-        price: product[0].price,
-        quantity: product[0].quantity
-      }
-
-      expect(products.at(0).props()).toEqual(props)
+    expect(ul.type).toBe('ul')
+    expect(ul.props.children.length).toBe(props.shoppingList.length)
+    ul.props.children.forEach((node, index) => {
+      expect(node.type).toBe(ProductInfo)
+      expect(node.props.product).toBe(props.shoppingList[index])
     })
 
-    it('should not disable button', () => {
-      const { button } = setup('9.99', product)
-      expect(button.prop('disabled')).toEqual('')
+    expect(p.type).toBe('p')
+    expect(p.props.children).toEqual(['Total: $', props.total])
+
+    expect(button.type).toBe('button')
+    expect(button.props.disabled).toBe('')
+    expect(button.props.children).toBe('Checkout')
+  })
+
+  it('should disable Checkout-button and show tips when shoppingList is empty', () => {
+    const {output} = setup({
+      shoppingList: []
     })
 
-    it('should call action on button click', () => {
-      const { button, actions } = setup('9.99', product)
-      button.simulate('click')
-      expect(actions.onCheckoutClicked).toBeCalled()
-    })
+    const [, ul, , button] = output.props.children
+
+    expect(ul.props.children.type).toBe('em')
+    expect(ul.props.children.props.children).toBe('Please add some products to cart.')
+
+    expect(button.props.disabled).toBe('disabled')
+  })
+
+  it('should call checkout on Checkout-button click', () => {
+    const {output, props} = setup()
+
+    const [, , , button] = output.props.children
+
+    expect(button.props.disabled).toBe('')
+
+    button.props.onClick()
+    expect(props.checkout).toBeCalledWith(props.shoppingList)
   })
 })

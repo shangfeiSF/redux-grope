@@ -31,7 +31,7 @@ describe('components', () => {
       expect(output.type).toBe('header')
       expect(output.props.className).toBe('header')
 
-      const [ h1, input ] = output.props.children
+      const [h1, input] = output.props.children
 
       expect(h1.type).toBe('h1')
       expect(h1.props.children).toBe('Todos App')

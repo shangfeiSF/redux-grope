@@ -7,19 +7,39 @@ var Promise = require('bluebird')
 
 Promise.promisifyAll(fs)
 
-var options = nopt({
+var knowns = {
   'bail': Boolean,
   'verbose': Boolean,
   'path': String,
-  'regexp': String
-}, {
-  'b': ['--bail'],
-  'b1': ['--bail', 'true'],
-  'v': ['--verbose'],
-  'v0': ['--verbose', 'false'],
-  'p': ['--path'],
-  'r': ['--regexp']
-}, process.argv, 2)
+  'regexp': String,
+  'index': String
+}
+var shorts = (function () {
+  var testsDir = path.join(process.cwd(), 'tests')
+
+  var shorts = {
+    'b': ['--bail'],
+    'b1': ['--bail', 'true'],
+    'v': ['--verbose'],
+    'v0': ['--verbose', 'false'],
+    'p': ['--path'],
+    'r': ['--regexp'],
+    'i': ['--index']
+  }
+
+  fs.readdirSync(testsDir).forEach(function (dir) {
+    var state = fs.statSync(path.join(testsDir, dir))
+    if (state.isDirectory()) {
+      var index = dir.split('\.').shift()
+      var cmd = 'i' + index
+      shorts[cmd] = ['--index']
+      shorts[cmd].push(index)
+    }
+  })
+
+  return shorts
+})()
+var options = nopt(knowns, shorts, process.argv, 2)
 
 var jestConfigFile = path.join(__dirname, 'config.jest.json')
 
@@ -54,6 +74,9 @@ fs.statAsync(jestConfigFile)
     }
     else if (options.regexp && options.regexp.length) {
       testRegex = options.regexp
+    }
+    else if (options.index && options.index.length) {
+      testRegex = 'tests/' + options.index + '.*/src/.*/.*'
     }
 
     var json = {

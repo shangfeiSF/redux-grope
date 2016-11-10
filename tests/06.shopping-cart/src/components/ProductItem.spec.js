@@ -1,70 +1,80 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import Product from './Product'
-import ProductItem from './ProductItem'
+import TestUtils from 'react-addons-test-utils'
 
-const setup = product => {
-  const actions = {
-    onAddToCartClicked: jest.fn()
-  }
+import ProductItem from '../../../../main/06.shopping-cart/src/components/ProductItem'
+import ProductInfo from '../../../../main/06.shopping-cart/src/components/ProductInfo'
 
-  const component = shallow(
-    <ProductItem product={product} {...actions} />
+const setup = propOverrides => {
+  const props = Object.assign({
+    product: {
+      id: 1,
+      title: 'Product 1',
+      price: 10.46,
+      inventory: 2
+    },
+
+    addToCart: jest.fn()
+  }, propOverrides)
+
+  const renderer = TestUtils.createRenderer()
+  renderer.render(
+    <ProductItem {...props} />
   )
 
+  const output = renderer.getRenderOutput()
+
   return {
-    component: component,
-    actions: actions,
-    button: component.find('button'),
-    product: component.find(Product)
+    props: props,
+    output: output,
+    renderer: renderer
   }
 }
 
-let productProps
-
 describe('ProductItem component', () => {
-  beforeEach(() => {
-    productProps = {
-      title: 'Product 1',
-      price: 9.99,
-      inventory: 6
-    }
-  })
+  describe('when product inventory greater than 0', () => {
+    it('should render product', () => {
+      const {output, props} = setup()
 
-  it('should render product', () => {
-    const { product } = setup(productProps)
-    expect(product.props()).toEqual({ title: 'Product 1', price: 9.99 })
-  })
+      expect(output.type).toBe('ul')
+      expect(output.props.style).toEqual({'marginBottom': 10})
 
-  it('should render Add To Cart message', () => {
-    const { button } = setup(productProps)
-    expect(button.text()).toMatch(/^Add to cart/)
-  })
+      const [info, button] = output.props.children
 
-  it('should not disable button', () => {
-    const { button } = setup(productProps)
-    expect(button.prop('disabled')).toEqual('')
-  })
+      expect(info.type).toBe(ProductInfo)
+      expect(info.props.product).toBe(props.product)
 
-  it('should call action on button click', () => {
-    const { button, actions } = setup(productProps)
-    button.simulate('click')
-    expect(actions.onAddToCartClicked).toBeCalled()
+      expect(button.type).toBe('button')
+      expect(button.props.disabled).toBe('')
+      expect(button.props.children).toBe('Add to cart now')
+    })
+
+    it('should call addToCart on button click', () => {
+      const {output, props} = setup()
+
+      const [, button] = output.props.children
+
+      expect(button.props.disabled).toBe('')
+
+      button.props.onClick()
+      expect(props.addToCart).toBeCalledWith(props.product.id)
+    })
   })
 
   describe('when product inventory is 0', () => {
-    beforeEach(() => {
-      productProps.inventory = 0
-    })
+    it('should render Sold Out message and button disabled', () => {
+      const {output} = setup({
+        product: {
+          id: 1,
+          title: 'Product 1',
+          price: 10.46,
+          inventory: 0
+        }
+      })
 
-    it('should render Sold Out message', () => {
-      const { button } = setup(productProps)
-      expect(button.text()).toMatch(/^Sold Out/)
-    })
+      const [, button] = output.props.children
 
-    it('should disable button', () => {
-      const { button } = setup(productProps)
-      expect(button.prop('disabled')).toEqual('disabled')
+      expect(button.props.disabled).toBe('disabled')
+      expect(button.props.children).toBe('Sold Out')
     })
   })
 })
