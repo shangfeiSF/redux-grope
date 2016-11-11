@@ -7,7 +7,7 @@ import  App from '../components/App'
 
 function mapStateToProps(state) {
   return {
-    ...state[0],
+    ...state[state.rootId],
     tree: state
   }
 }

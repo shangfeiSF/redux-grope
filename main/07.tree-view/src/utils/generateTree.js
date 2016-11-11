@@ -1,12 +1,18 @@
 export default function generateTree(configOverrides) {
   let config = Object.assign({
+    rootId: 0,
     total: 10,
     dilution: 2,
     limit: 10
   }, configOverrides)
 
+  if (config.rootId >= config.total) {
+    config.rootId = config.total - 1
+  }
+
   let tree = {
     length: config.total,
+    rootId: config.rootId,
     0: {
       id: 0,
       counter: 0,

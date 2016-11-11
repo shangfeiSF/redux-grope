@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 
 class Node extends Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
     tree: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   }
@@ -46,6 +45,13 @@ class Node extends Component {
   render() {
     const {id, tree, parentId} = this.props
 
+    if (id === undefined) {
+      return (
+        <h1>no Tree to view</h1>
+        
+      )
+    }
+
     let childIds = tree[id].childIds
     let counter = tree[id].counter
 
@@ -56,6 +62,7 @@ class Node extends Component {
       color: '#a5a5a5'
     }
 
+    let foldButton = (<a href="#" onClick={this.incrementClick} style={aStyle}></a>)
     let incrementButton = (<a href="#" onClick={this.incrementClick} style={{textDecoration: 'none'}}>({counter})</a>)
     let removeButton = typeof parentId === undefined ? null : (
       <a href="#" onClick={this.removeChildClick} style={aStyle}>×</a>
@@ -67,6 +74,7 @@ class Node extends Component {
     return (
       <div className="node">
         <div className="info" style={{paddingTop: '10, 0'}}>
+          {foldButton}
           <strong>{id}</strong> --- {incrementButton}
           {addButton}
           {removeButton}

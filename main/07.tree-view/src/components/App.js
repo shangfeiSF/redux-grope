@@ -4,7 +4,6 @@ import Node from './Node'
 
 class App extends Component {
   static propTypes = {
-    id: PropTypes.number.isRequired,
     tree: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
   }

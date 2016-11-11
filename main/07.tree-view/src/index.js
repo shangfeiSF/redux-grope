@@ -16,7 +16,8 @@ const middleware = [thunk]
 process.env.NODE_ENV !== 'production' && middleware.push(createLogger())
 
 const tree = generateTree({
-  total: 20,
+  rootId: 0,
+  total: 50,
   dilution: 3,
   limit: 5
 })
@@ -26,7 +27,7 @@ const store = createStore(reducers, tree, applyMiddleware(...middleware))
 const root = document.getElementById('example')
 var content = (
   <Provider store={store}>
-    <AppContainer id={0}/>
+    <AppContainer/>
   </Provider>
 )
 
