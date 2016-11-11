@@ -1,33 +1,28 @@
-export const INCREMENT = 'INCREMENT'
-export const CREATE_NODE = 'CREATE_NODE'
-export const DELETE_NODE = 'DELETE_NODE'
-export const ADD_CHILD = 'ADD_CHILD'
-export const REMOVE_CHILD = 'REMOVE_CHILD'
+import * as ActionTypes from '../constants/ActionTypes'
 
-export const increment = (nodeId) => ({
-  type: INCREMENT,
-  nodeId
+export const increment = (id) => ({
+  type: ActionTypes.INCREMENT,
+  id
 })
 
-let nextId = 0
-export const createNode = () => ({
-  type: CREATE_NODE,
-  nodeId: `new_${nextId++}`
+export const createNode = (sum) => ({
+  type: ActionTypes.CREATE_NODE,
+  id: sum
 })
 
-export const deleteNode = (nodeId) => ({
-  type: DELETE_NODE,
-  nodeId
+export const deleteNode = (id) => ({
+  type: ActionTypes.DELETE_NODE,
+  id
 })
 
-export const addChild = (nodeId, childId) => ({
-  type: ADD_CHILD,
-  nodeId,
+export const addChild = (id, childId) => ({
+  type: ActionTypes.ADD_CHILD,
+  id,
   childId
 })
 
-export const removeChild = (nodeId, childId) => ({
-  type: REMOVE_CHILD,
-  nodeId,
+export const removeChild = (id, childId) => ({
+  type: ActionTypes.REMOVE_CHILD,
+  id,
   childId
 })

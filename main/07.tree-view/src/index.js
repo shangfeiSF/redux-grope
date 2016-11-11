@@ -1,17 +1,33 @@
 import React from 'react'
-import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import reducer from './reducers'
-import generateTree from './generateTree'
-import Node from './containers/Node'
+import {render} from 'react-dom'
 
-const tree = generateTree()
-const store = createStore(reducer, tree)
+import {createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux'
 
-render(
+import AppContainer from './containers/AppContainer'
+import reducers from './reducers'
+
+import thunk from 'redux-thunk'
+import createLogger from 'redux-logger'
+
+import generateTree from './utils/generateTree'
+
+const middleware = [thunk]
+process.env.NODE_ENV !== 'production' && middleware.push(createLogger())
+
+const tree = generateTree({
+  total: 20,
+  dilution: 3,
+  limit: 5
+})
+
+const store = createStore(reducers, tree, applyMiddleware(...middleware))
+
+const root = document.getElementById('example')
+var content = (
   <Provider store={store}>
-    <Node id={0} />
-  </Provider>,
-  document.getElementById('root')
+    <AppContainer id={0}/>
+  </Provider>
 )
+
+render(content, root)

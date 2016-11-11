@@ -1,65 +1,80 @@
-import { INCREMENT, ADD_CHILD, REMOVE_CHILD, CREATE_NODE, DELETE_NODE } from '../actions'
+import * as actions from '../constants/ActionTypes'
 
-const childIds = (state, action) => {
-  switch (action.type) {
-    case ADD_CHILD:
-      return [ ...state, action.childId ]
-    case REMOVE_CHILD:
-      return state.filter(id => id !== action.childId)
-    default:
-      return state
+const update = {
+  node: (nodeState, action) => {
+    switch (action.type) {
+      case actions.INCREMENT:
+        return {
+          ...nodeState,
+          counter: nodeState.counter + 1
+        }
+
+      case actions.CREATE_NODE:
+        return {
+          id: action.id,
+          counter: 0,
+          childIds: []
+        }
+
+      case actions.ADD_CHILD:
+      case actions.REMOVE_CHILD:
+        return {
+          ...nodeState,
+          childIds: update.childIds(nodeState.childIds, action)
+        }
+
+      default:
+        return nodeState
+    }
+  },
+
+  childIds: (childIdsState, action) => {
+    switch (action.type) {
+      case actions.ADD_CHILD:
+        return [...childIdsState, action.childId]
+
+      case actions.REMOVE_CHILD:
+        return childIdsState.filter(id => id !== action.childId)
+
+      default:
+        return childIdsState
+    }
   }
 }
 
-const node = (state, action) => {
-  switch (action.type) {
-    case CREATE_NODE:
-      return {
-        id: action.nodeId,
-        counter: 0,
-        childIds: []
-      }
-    case INCREMENT:
-      return {
-        ...state,
-        counter: state.counter + 1
-      }
-    case ADD_CHILD:
-    case REMOVE_CHILD:
-      return {
-        ...state,
-        childIds: childIds(state.childIds, action)
-      }
-    default:
-      return state
+const remove = {
+  descendantIds: (state, id) => (
+    state[id].childIds.reduce((collection, childId) => (
+      [...collection, childId, ...remove.descendantIds(state, childId)]
+    ), [])
+  ),
+
+  nodes: (state, ids) => {
+    state = {...state}
+    ids.forEach(id => delete state[id])
+    return {
+      ...state,
+      length: state.length - ids.length
+    }
   }
-}
-
-const getAllDescendantIds = (state, nodeId) => (
-  state[nodeId].childIds.reduce((acc, childId) => (
-    [ ...acc, childId, ...getAllDescendantIds(state, childId) ]
-  ), [])
-)
-
-const deleteMany = (state, ids) => {
-  state = { ...state }
-  ids.forEach(id => delete state[id])
-  return state
 }
 
 export default (state = {}, action) => {
-  const { nodeId } = action
-  if (typeof nodeId === 'undefined') {
+  const {id} = action
+
+  if (id === undefined) {
     return state
   }
 
-  if (action.type === DELETE_NODE) {
-    const descendantIds = getAllDescendantIds(state, nodeId)
-    return deleteMany(state, [ nodeId, ...descendantIds ])
+  if (action.type === actions.DELETE_NODE) {
+    let removedIds = [id, ...remove.descendantIds(state, id)]
+
+    return remove.nodes(state, removedIds)
   }
 
   return {
     ...state,
-    [nodeId]: node(state[nodeId], action)
+    length: action.type === actions.CREATE_NODE ? state.length + 1 : state.length,
+    [id]: update.node(state[id], action)
   }
 }
