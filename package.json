@@ -6,16 +6,8 @@
     "test": "node node_modules/jest/bin/jest.js --config config.jest.json",
     "jest-all": "node jest.js -r tests/.*/src/.*/.* -v0 | npm test",
     "jest-all-v": "node jest.js -r tests/.*/src/.*/.* | npm test",
-    "jest-02": "node jest.js -i02 -v0 | npm test",
-    "jest-02-v": "node jest.js -i02 | npm test",
-    "jest-03": "node jest.js -i03 -v0 | npm test",
-    "jest-03-v": "node jest.js -i03 | npm test",
-    "jest-04": "node jest.js -i04 -v0 | npm test",
-    "jest-04-v": "node jest.js -i04 | npm test",
-    "jest-05": "node jest.js -i05 -v0 | npm test",
-    "jest-05-v": "node jest.js -i05 | npm test",
-    "jest-06": "node jest.js -i06 -v0 | npm test",
-    "jest-06-v": "node jest.js -i06 | npm test"
+    "jest-i": "node jest.js -v0 -i",
+    "jest-v-i": "node jest.js -i"
   },
   "dependencies": {
     "react": "^15.3.0",
