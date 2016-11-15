@@ -12,6 +12,13 @@ export const generateTree = (configOverrides) => {
   }
 }
 
+export const rebuildTree = (rootId) => {
+  return {
+    type: ActionTypes.REBUILD_TREE,
+    id: rootId
+  }
+}
+
 export const increment = (id) => ({
   type: ActionTypes.INCREMENT,
   id

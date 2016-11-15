@@ -39,6 +39,22 @@ const update = {
       default:
         return childIdsState
     }
+  },
+
+  tree: (state) => {
+    let sortedKeys = Object.keys(state).filter((key) => {
+      return parseInt(key) == parseInt(key)
+    }).sort((a, b) => {
+      return parseInt(a) - parseInt(b)
+    })
+
+    let MAP = {}
+    let rootId = 0
+    sortedKeys.forEach((key) => {
+      MAP[key] = rootId++
+    })
+
+    // TODO 2016-11-15
   }
 }
 
@@ -70,6 +86,10 @@ export default (state = {}, action) => {
     return {
       ...action.tree
     }
+  }
+
+  if (action.type === actions.REBUILD_TREE) {
+    return update.tree(state)
   }
 
   if (action.type === actions.DELETE_NODE) {

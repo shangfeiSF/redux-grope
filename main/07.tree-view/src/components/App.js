@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 
 import Node from './Node'
+import Rebuild from './Rebuild'
 
 class App extends Component {
   static propTypes = {
@@ -12,7 +13,10 @@ class App extends Component {
     const {id, tree, actions} = this.props
 
     return (
-      <Node id={id} tree={tree} actions={actions}></Node>
+      <div>
+        <Node id={id} tree={tree} actions={actions}></Node>
+        <Rebuild rootId={tree.rootId} actions={actions}></Rebuild>
+      </div>
     )
   }
 }

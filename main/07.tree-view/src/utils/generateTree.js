@@ -6,30 +6,28 @@ export default function generateTree(configOverrides) {
     limit: 10
   }, configOverrides)
 
-  if (config.rootId >= config.total) {
-    config.rootId = config.total - 1
-  }
-
   let tree = {
     length: config.total,
     rootId: config.rootId,
-    0: {
-      id: 0,
+    [config.rootId]: {
+      id: config.rootId,
       counter: 0,
       childIds: []
     }
   }
 
   for (let index = 1; index < config.total; index++) {
-    tree[index] = {
-      id: index,
+    let id = config.rootId + index
+
+    tree[id] = {
+      id: id,
       counter: Math.floor(Math.random() * config.limit),
       childIds: []
     }
 
-    let parentId = Math.floor(Math.pow(Math.random(), config.dilution) * index)
+    let parentId = Math.floor(config.rootId + Math.pow(Math.random(), config.dilution) * index)
 
-    tree[parentId].childIds.push(index)
+    tree[parentId].childIds.push(id)
   }
 
   return tree

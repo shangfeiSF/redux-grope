@@ -19,7 +19,7 @@ class Node extends Component {
     const {actions} = this.props
 
     let configOverrides = {
-      rootId: 0,
+      rootId: parseInt(this.refs.rootId.value),
       total: parseInt(this.refs.total.value),
       dilution: parseInt(this.refs.dilution.value),
       limit: parseInt(this.refs.limit.value),
@@ -87,24 +87,34 @@ class Node extends Component {
       <div>
         <h1>There is no Tree to view</h1>
         <h4>Please set up the tree config used to draw the tree.</h4>
+
         <table>
           <tbody>
           <tr>
-            <td>total</td>
+            <td>rootId</td>
             <td>
-              <input type="number" ref="total" onChange={function(){}}/>
+              <input type="number" ref="rootId"/>
             </td>
           </tr>
+
+          <tr>
+            <td>total</td>
+            <td>
+              <input type="number" ref="total"/>
+            </td>
+          </tr>
+
           <tr>
             <td>dilution</td>
             <td>
-              <input type="number" ref="dilution" onChange={function(){}}/>
+              <input type="number" ref="dilution"/>
             </td>
           </tr>
+
           <tr>
             <td>limit</td>
             <td>
-              <input type="number" ref="limit" onChange={function(){}}/>
+              <input type="number" ref="limit"/>
             </td>
           </tr>
           </tbody>
@@ -116,40 +126,47 @@ class Node extends Component {
   }
 
   render() {
-    const {id, tree, parentId} = this.props
-
-    if (id === undefined) {
+    if (this.props.id === undefined) {
       return this.renderGenerateArea()
     }
 
+    const {id, tree, parentId} = this.props
     let childIds = tree[id].childIds
     let counter = tree[id].counter
 
-    let childNodes = childIds.map(this.renderChildNode)
-
+    // css Style
     let aStyle = {
       marginLeft: 10,
       textAlign: 'center',
       textDecoration: 'none',
       color: '#a5a5a5'
     }
-    let color = (this.state.show && childNodes.length) ? '#a5a5a5' : '#000'
-    let cursor = childNodes.length ? 'pointer' : 'default'
+    let foldStyle = {
+      color: (this.state.show && childIds.length) ? '#a5a5a5' : '#000',
+      cursor: childIds.length ? 'pointer' : 'default'
+    }
+    let ulStyle = {
+      margin: 0,
+      listStyle: 'none',
+      display: this.state.show ? 'block' : 'none'
+    }
 
+    // DOM
+    let idArea = (<strong onClick={this.foldClick} style={foldStyle}>{id}</strong>)
     let incrementButton = (<a href="#" onClick={this.incrementClick} style={{textDecoration: 'none'}}>({counter})</a>)
-    let removeButton = typeof parentId === undefined ? null : (
-      <a href="#" onClick={this.removeChildClick} style={aStyle}>×</a>
-    )
     let addButton = (<a href="#" onClick={this.addChildClick} style={aStyle}>+</a>)
+    let removeButton = typeof parentId !== undefined ? (
+      <a href="#" onClick={this.removeChildClick} style={aStyle}>×</a>) : null
+    let childNodes = childIds.map(this.renderChildNode)
 
     return (
       <div className="node">
         <div className="info" style={{paddingTop: '10, 0'}}>
-          <strong onClick={this.foldClick} style={{color: color, cursor: cursor}}>{id}</strong> --- {incrementButton}
+          {idArea} --- {incrementButton}
           {addButton}
           {removeButton}
         </div>
-        <ul className="childNode" style={{margin: 0, listStyle: 'none', display: this.state.show ? 'block' : 'none'}}>
+        <ul className="childNode" style={ulStyle}>
           {childNodes}
         </ul>
       </div>
