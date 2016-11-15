@@ -17,9 +17,9 @@ export const increment = (id) => ({
   id
 })
 
-export const createNode = (sum) => ({
+export const createNode = (maxId) => ({
   type: ActionTypes.CREATE_NODE,
-  id: sum
+  id: maxId + 1
 })
 
 export const deleteNode = (id) => ({
