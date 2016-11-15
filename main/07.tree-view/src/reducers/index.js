@@ -66,8 +66,13 @@ export default (state = {}, action) => {
     return state
   }
 
+  if (action.type === actions.GENERATE_TREE) {
+    return {
+      ...action.tree
+    }
+  }
+
   if (action.type === actions.DELETE_NODE) {
-    debugger
     let removedIds = [id, ...remove.descendantIds(state, id)]
 
     return remove.nodes(state, removedIds)

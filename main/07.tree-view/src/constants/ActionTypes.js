@@ -1,3 +1,4 @@
+export const GENERATE_TREE = 'GENERATE_TREE'
 export const INCREMENT = 'INCREMENT'
 export const CREATE_NODE = 'CREATE_NODE'
 export const DELETE_NODE = 'DELETE_NODE'

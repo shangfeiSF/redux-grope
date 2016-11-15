@@ -1,9 +1,25 @@
 import React, {Component, PropTypes} from 'react'
 
+
 class Node extends Component {
   static propTypes = {
     tree: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired
+  }
+
+  generateTree = e => {
+    e.preventDefault()
+
+    const {actions} = this.props
+
+    let configOverrides = {
+      rootId: 0,
+      total: parseInt(this.refs.total.value),
+      dilution: parseInt(this.refs.dilution.value),
+      limit: parseInt(this.refs.limit.value),
+    }
+
+    actions.generateTree(configOverrides)
   }
 
   incrementClick = e => {
@@ -14,7 +30,7 @@ class Node extends Component {
     actions.increment(id)
   }
 
-  addChildClick = (e) => {
+  addChildClick = e => {
     e.preventDefault()
 
     const {actions, id, tree} = this.props
@@ -23,7 +39,7 @@ class Node extends Component {
     actions.addChild(id, childId)
   }
 
-  removeChildClick = (e) => {
+  removeChildClick = e => {
     e.preventDefault()
 
     const {actions, parentId, id} = this.props
@@ -47,8 +63,34 @@ class Node extends Component {
 
     if (id === undefined) {
       return (
-        <h1>no Tree to view</h1>
-        
+        <div>
+          <h1>There is no Tree to view</h1>
+          <h4>Please set up the tree config used to draw the tree.</h4>
+          <table>
+            <tbody>
+            <tr>
+              <td>total</td>
+              <td>
+                <input type="number" ref="total" onChange={function(){}}/>
+              </td>
+            </tr>
+            <tr>
+              <td>dilution</td>
+              <td>
+                <input type="number" ref="dilution" onChange={function(){}}/>
+              </td>
+            </tr>
+            <tr>
+              <td>limit</td>
+              <td>
+                <input type="number" ref="limit" onChange={function(){}}/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <br/>
+          <button onClick={this.generateTree}>Generate Tree</button>
+        </div>
       )
     }
 

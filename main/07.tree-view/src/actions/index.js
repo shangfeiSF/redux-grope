@@ -1,5 +1,17 @@
 import * as ActionTypes from '../constants/ActionTypes'
 
+import utils_generateTree from '../utils/generateTree'
+
+export const generateTree = (configOverrides) => {
+  let tree = utils_generateTree(configOverrides)
+
+  return {
+    type: ActionTypes.GENERATE_TREE,
+    tree: tree,
+    id: tree.rootId
+  }
+}
+
 export const increment = (id) => ({
   type: ActionTypes.INCREMENT,
   id
