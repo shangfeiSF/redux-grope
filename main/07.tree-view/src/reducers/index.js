@@ -42,19 +42,35 @@ const update = {
   },
 
   tree: (state) => {
-    let sortedKeys = Object.keys(state).filter((key) => {
-      return parseInt(key) == parseInt(key)
-    }).sort((a, b) => {
-      return parseInt(a) - parseInt(b)
-    })
+    let sortedKeys = Object.keys(state)
+      .filter(key => {
+        return parseInt(key) == parseInt(key)
+      })
+      .sort((a, b) => {
+        return parseInt(a) - parseInt(b)
+      })
 
     let MAP = {}
     let rootId = 0
-    sortedKeys.forEach((key) => {
+    let newState = {
+      rootId: rootId,
+      length: sortedKeys.length
+    }
+    sortedKeys.forEach(key => {
       MAP[key] = rootId++
     })
 
-    // TODO 2016-11-15
+    sortedKeys.forEach((key) => {
+      let newChildIds = state[key].childIds.length ? state[key].childIds.map(id => MAP[id]) : []
+
+      newState[MAP[key]] = {
+        id: MAP[key],
+        counter: state[key].counter,
+        childIds: newChildIds
+      }
+    })
+
+    return newState
   }
 }
 
