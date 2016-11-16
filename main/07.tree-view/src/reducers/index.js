@@ -1,5 +1,23 @@
 import * as actions from '../constants/ActionTypes'
 
+const autoRebuild = (state) => {
+  let sortedKeys = Object.keys(state)
+    .filter(key => {
+      return parseInt(key) == parseInt(key)
+    })
+    .sort((a, b) => {
+      return parseInt(a) - parseInt(b)
+    })
+
+  let maxId = parseInt(sortedKeys.pop())
+
+  if (maxId > 20) {
+    return update.tree(state)
+  } else {
+    return state
+  }
+}
+
 const update = {
   node: (nodeState, action) => {
     switch (action.type) {
@@ -110,13 +128,12 @@ export default (state = {}, action) => {
 
   if (action.type === actions.DELETE_NODE) {
     let removedIds = [id, ...remove.descendantIds(state, id)]
-
-    return remove.nodes(state, removedIds)
+    return autoRebuild(remove.nodes(state, removedIds))
   }
 
-  return {
+  return autoRebuild({
     ...state,
     length: action.type === actions.CREATE_NODE ? state.length + 1 : state.length,
     [id]: update.node(state[id], action)
-  }
+  })
 }
