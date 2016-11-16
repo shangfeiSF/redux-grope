@@ -11,7 +11,7 @@ const autoRebuild = (state) => {
 
   let maxId = parseInt(sortedKeys.pop())
 
-  if (maxId > 20) {
+  if (maxId > state.threshold) {
     return update.tree(state)
   } else {
     return state
@@ -72,7 +72,8 @@ const update = {
     let rootId = 0
     let newState = {
       rootId: rootId,
-      length: sortedKeys.length
+      length: sortedKeys.length,
+      threshold: state.threshold
     }
     sortedKeys.forEach(key => {
       MAP[key] = rootId++
@@ -116,24 +117,30 @@ export default (state = {}, action) => {
     return state
   }
 
-  if (action.type === actions.GENERATE_TREE) {
-    return {
-      ...action.tree
-    }
-  }
+  switch (action.type) {
+    case actions.GENERATE_TREE:
+      return {
+        ...action.tree
+      }
 
-  if (action.type === actions.REBUILD_TREE) {
-    return update.tree(state)
-  }
+    case actions.REBUILD_TREE:
+      return update.tree(state)
 
-  if (action.type === actions.DELETE_NODE) {
-    let removedIds = [id, ...remove.descendantIds(state, id)]
-    return autoRebuild(remove.nodes(state, removedIds))
-  }
+    case actions.DELETE_NODE:
+      let removedIds = [id, ...remove.descendantIds(state, id)]
+      return autoRebuild(remove.nodes(state, removedIds))
 
-  return autoRebuild({
-    ...state,
-    length: action.type === actions.CREATE_NODE ? state.length + 1 : state.length,
-    [id]: update.node(state[id], action)
-  })
+    case actions.ADD_CHILD:
+      return autoRebuild({
+        ...state,
+        [id]: update.node(state[id], action)
+      })
+
+    default:
+      return {
+        ...state,
+        length: action.type === actions.CREATE_NODE ? state.length + 1 : state.length,
+        [id]: update.node(state[id], action)
+      }
+  }
 }

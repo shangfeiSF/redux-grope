@@ -19,7 +19,8 @@ const tree = generateTree({
   rootId: 0,
   total: 50,
   dilution: 3,
-  limit: 5
+  limit: 5,
+  threshold: 20
 })
 
 const store = createStore(reducers, tree, applyMiddleware(...middleware))

@@ -19,10 +19,11 @@ class Node extends Component {
     const {actions} = this.props
 
     let configOverrides = {
-      rootId: parseInt(this.refs.rootId.value),
-      total: parseInt(this.refs.total.value),
-      dilution: parseInt(this.refs.dilution.value),
-      limit: parseInt(this.refs.limit.value),
+      rootId: parseInt(this.refs.rootId.value) || 0,
+      total: parseInt(this.refs.total.value) || 2,
+      dilution: parseInt(this.refs.dilution.value) || 1,
+      limit: parseInt(this.refs.limit.value) || 1,
+      threshold: parseInt(this.refs.threshold.value) || 10
     }
 
     actions.generateTree(configOverrides)
@@ -117,10 +118,18 @@ class Node extends Component {
               <input type="number" ref="limit"/>
             </td>
           </tr>
+
+          <tr>
+            <td>threshold</td>
+            <td>
+              <input type="number" ref="threshold"/>
+            </td>
+          </tr>
           </tbody>
         </table>
-        <br/>
-        <button onClick={this.generateTreeClick}>Generate Tree</button>
+        <p>
+          <button onClick={this.generateTreeClick}>Generate Tree</button>
+        </p>
       </div>
     )
   }

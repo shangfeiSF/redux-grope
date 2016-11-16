@@ -16,10 +16,9 @@ class Rebuild extends Component {
 
   render() {
     return (
-      <div>
-        <br/>
-        <button onClick={this.rebuildClick}>rebuild tree</button>
-      </div>
+      <p>
+        <button onClick={this.rebuildClick}>Rebuild Tree</button>
+      </p>
     )
   }
 }
