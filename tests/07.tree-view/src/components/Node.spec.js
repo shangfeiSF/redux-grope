@@ -1,4 +1,5 @@
 import React from 'react'
+import {shallow} from 'enzyme'
 import TestUtils from 'react-addons-test-utils'
 
 import generateTree from '../../../../main/07.tree-view/src/utils/generateTree'
@@ -89,8 +90,8 @@ describe('Node component', () => {
     expect(p.props.children.props.children).toBe('Generate Tree')
   })
 
-  it('should display correctly', () => {
-    const {output} = setup(0)
+  it('should display correctly when id = 0', () => {
+    const {output, props} = setup(0)
 
     expect(output.type).toBe('div')
     expect(output.props.className).toBe('node')
@@ -105,17 +106,54 @@ describe('Node component', () => {
     expect(ul.props.className).toBe('childNode')
     expect(ul.props.style).toEqual({"margin": 0, "listStyle": "none", "display": "block"})
 
-    // TODO　2016-11-17
+    const [idArea, text, incrementButton, addButton, removeButton] = div.props.children
+
+    expect(idArea.type).toBe('strong')
+    expect(idArea.props.children).toEqual(props.id)
+
+    expect(text).toEqual(' --- ')
+
+    expect(incrementButton.type).toBe('a')
+    expect(incrementButton.props.children).toEqual(['(', props.tree[props.id].counter, ')'])
+
+    expect(addButton.type).toBe('a')
+    expect(addButton.props.children).toEqual('+')
+
+    expect(removeButton.type).toBe('a')
+    expect(removeButton.props.children).toEqual('x')
+
+    const childNodes = ul.props.children
+
+    expect(childNodes.length).toEqual(props.tree[props.id].childIds.length)
+
+    childNodes.forEach(child => {
+      let node = child.props.children
+
+      expect(child.type).toBe('li')
+      expect(node.type).toBe(Node)
+
+      expect(node.props.tree).toEqual(props.tree)
+      expect(node.props.actions).toEqual(props.actions)
+      expect(node.props.parentId).toEqual(props.id)
+    })
   })
 
-  /*  it('should call increment on button click', () => {
-   const {button, actions} = setup(1, 23, [])
-   button.simulate('click')
+  it('should change the state.show when click idArea', () => {
+    const {props} = setup(0)
 
-   expect(actions.increment).toBeCalledWith(1)
-   })
+    const output = shallow(<Node {...props}></Node>)
+    expect(output.state().show).toEqual(true)
 
-   it('should not render remove link', () => {
+    const idArea = output.find('strong')
+
+/*    idArea.props.onClick({
+      preventDefault: jest.fn()
+    })
+
+    expect(output.state).toBe(false)*/
+  })
+
+  /*  it('should not render remove link', () => {
    const {removeLink} = setup(1, 23, [])
    expect(removeLink.length).toEqual(0)
    })

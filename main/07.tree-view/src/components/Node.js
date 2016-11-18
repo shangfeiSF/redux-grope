@@ -165,7 +165,7 @@ class Node extends Component {
     let incrementButton = (<a href="#" onClick={this.incrementClick} style={{textDecoration: 'none'}}>({counter})</a>)
     let addButton = (<a href="#" onClick={this.addChildClick} style={aStyle}>+</a>)
     let removeButton = typeof parentId !== undefined ? (
-      <a href="#" onClick={this.removeChildClick} style={aStyle}>×</a>) : null
+      <a href="#" onClick={this.removeChildClick} style={aStyle}>x</a>) : null
     let childNodes = childIds.map(this.renderChildNode)
 
     return (
