@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <div>
         <Node id={id} tree={tree} actions={actions}></Node>
-        <Rebuild rootId={tree.rootId} actions={actions}></Rebuild>
+        <Rebuild tree={tree} actions={actions}></Rebuild>
       </div>
     )
   }
