@@ -1,4 +1,5 @@
 import React from 'react'
+import {mount} from 'enzyme'
 import TestUtils from 'react-addons-test-utils'
 
 import Add from '../../../../main/04.todos-with-undo/src/components/Add'
@@ -41,8 +42,19 @@ describe('components', () => {
       expect(button.props.children).toBe('Add')
     })
 
-    it('should call onSubmit when click button if the length of text inputed in input greater than 0', () => {
-      // TODO: need to simulate input onchange
+    it('should call onSubmit when submit the form if the length of text inputed greater than 0', () => {
+      const {props} = setup()
+
+      const output = mount(<Add {...props}></Add>)
+
+      output.node.refs.addInput.value = 'Test to add a todo'
+
+      output.find('form').simulate('submit', {
+        preventDefault: jest.fn()
+      })
+
+      expect(props.onSubmit).toBeCalledWith('Test to add a todo')
+      expect(output.node.refs.addInput.value).toBe('')
     })
   })
 })

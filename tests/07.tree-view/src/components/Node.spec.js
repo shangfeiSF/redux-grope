@@ -1,5 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
+import {mount} from 'enzyme'
 import TestUtils from 'react-addons-test-utils'
 
 import generateTree from '../../../../main/07.tree-view/src/utils/generateTree'
@@ -144,57 +145,121 @@ describe('Node component', () => {
     const output = shallow(<Node {...props}></Node>)
     expect(output.state().show).toEqual(true)
 
-    const idArea = output.find('strong')
+    output.find('strong').simulate('click', {
+      preventDefault: jest.fn()
+    })
+    expect(output.state().show).toEqual(false)
+  })
 
-/*    idArea.props.onClick({
+  it('should call actions.increment when click incrementButton of node#0', () => {
+    const rootId = 0
+    const {output, props} = setup(rootId)
+
+    const [div] = output.props.children
+    const [, , incrementButton] = div.props.children
+
+    incrementButton.props.onClick({
       preventDefault: jest.fn()
     })
 
-    expect(output.state).toBe(false)*/
+    expect(props.actions.increment).toBeCalledWith(rootId)
   })
 
-  /*  it('should not render remove link', () => {
-   const {removeLink} = setup(1, 23, [])
-   expect(removeLink.length).toEqual(0)
-   })
+  it('should call actions.createNode and  actions.addChild when click addButton of node#0', () => {
+    const rootId = 0
+    const {output, props} = setup(rootId)
 
-   it('should call createNode action on Add child click', () => {
-   const {addLink, actions, eventArgs} = setup(2, 1, [])
-   actions.createNode.mockReturnValue({nodeId: 3})
-   addLink.simulate('click', eventArgs)
+    const [div] = output.props.children
+    const [, , , addButton] = div.props.children
 
-   expect(actions.createNode).toBeCalled()
-   })
+    let maxId = props.tree.length - 1
+    let childId = maxId + 1
 
-   it('should call addChild action on Add child click', () => {
-   const {addLink, actions, eventArgs} = setup(2, 1, [])
-   actions.createNode.mockReturnValue({nodeId: 3})
+    props.actions.createNode = jest.fn(() => ({
+      id: 10
+    }))
 
-   addLink.simulate('click', eventArgs)
+    addButton.props.onClick({
+      preventDefault: jest.fn()
+    })
 
-   expect(actions.addChild).toBeCalledWith(2, 3)
-   })
+    expect(props.actions.createNode).toBeCalledWith(maxId)
+    expect(props.actions.addChild).toBeCalledWith(rootId, childId)
+  })
 
-   describe('when given childIds', () => {
-   it('should render child nodes', () => {
-   const {childNodes} = setup(1, 23, [2, 3])
-   expect(childNodes.length).toEqual(2)
-   })
-   })
+  it('should call actions.removeChild and actions.deleteNode when click addButton of node#0', () => {
+    const rootId = 0
+    const {output, props} = setup(rootId)
 
-   describe('when given parentId', () => {
-   it('should call removeChild action on remove link click', () => {
-   const {removeLink, actions, eventArgs} = setup(2, 1, [], 1)
-   removeLink.simulate('click', eventArgs)
+    const [div] = output.props.children
+    const [, , , , removeButton] = div.props.children
 
-   expect(actions.removeChild).toBeCalledWith(1, 2)
-   })
+    removeButton.props.onClick({
+      preventDefault: jest.fn()
+    })
 
-   it('should call deleteNode action on remove link click', () => {
-   const {removeLink, actions, eventArgs} = setup(2, 1, [], 1)
-   removeLink.simulate('click', eventArgs)
+    expect(props.actions.removeChild).toBeCalledWith(undefined, rootId)
+    expect(props.actions.deleteNode).toBeCalledWith(rootId)
+  })
 
-   expect(actions.deleteNode).toBeCalledWith(2)
-   })
-   })*/
+  it('should call actions.removeChild and actions.deleteNode when click addButton of node#1', () => {
+    const rootId = 0
+    const currentId = 1
+    const {props, renderer} = setup(rootId)
+
+    const node1 = renderer.render(
+      <Node id={currentId} tree={props.tree} actions={props.actions} parentId={rootId}/>
+    )
+    const [div] = node1.props.children
+    const [, , , , removeButton] = div.props.children
+
+    removeButton.props.onClick({
+      preventDefault: jest.fn()
+    })
+
+    expect(props.actions.removeChild).toBeCalledWith(rootId, currentId)
+    expect(props.actions.deleteNode).toBeCalledWith(currentId)
+  })
+
+  it('should call actions.generateTree when click generateTreeButton with default input', () => {
+    const {props} = setup()
+
+    const output = mount(<Node {...props}></Node>)
+
+    output.find('button').simulate('click', {
+      preventDefault: jest.fn()
+    })
+
+    expect(props.actions.generateTree).toBeCalledWith({
+      rootId: 0,
+      total: 2,
+      dilution: 1,
+      limit: 1,
+      threshold: 10
+    })
+  })
+
+  it('should call actions.generateTree when click generateTreeButton with user input', () => {
+    const {props} = setup()
+
+    const output = mount(<Node {...props}></Node>)
+
+    const configOverrides = {
+      rootId: 10,
+      total: 20,
+      dilution: 5,
+      limit: 4,
+      threshold: 15
+    }
+
+    Object.keys(output.node.refs).forEach(key => {
+      output.node.refs[key].value = configOverrides[key]
+    })
+
+    output.find('button').simulate('click', {
+      preventDefault: jest.fn()
+    })
+
+    expect(props.actions.generateTree).toBeCalledWith(configOverrides)
+  })
 })
