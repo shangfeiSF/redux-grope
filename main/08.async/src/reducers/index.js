@@ -1,12 +1,10 @@
-import { combineReducers } from 'redux'
-import {
-  SELECT_REDDIT, INVALIDATE_REDDIT,
-  REQUEST_POSTS, RECEIVE_POSTS
-} from '../actions'
+import {combineReducers} from 'redux'
+
+import * as ActionTypes from '../constants/ActionTypes'
 
 const selectedReddit = (state = 'reactjs', action) => {
   switch (action.type) {
-    case SELECT_REDDIT:
+    case ActionTypes.SELECT_REDDIT:
       return action.reddit
     default:
       return state
@@ -19,18 +17,18 @@ const posts = (state = {
   items: []
 }, action) => {
   switch (action.type) {
-    case INVALIDATE_REDDIT:
+    case ActionTypes.INVALIDATE_REDDIT:
       return {
         ...state,
         didInvalidate: true
       }
-    case REQUEST_POSTS:
+    case ActionTypes.REQUEST_POSTS:
       return {
         ...state,
         isFetching: true,
         didInvalidate: false
       }
-    case RECEIVE_POSTS:
+    case ActionTypes.RECEIVE_POSTS:
       return {
         ...state,
         isFetching: false,
@@ -43,11 +41,11 @@ const posts = (state = {
   }
 }
 
-const postsByReddit = (state = { }, action) => {
+const postsByReddit = (state = {}, action) => {
   switch (action.type) {
-    case INVALIDATE_REDDIT:
-    case RECEIVE_POSTS:
-    case REQUEST_POSTS:
+    case ActionTypes.INVALIDATE_REDDIT:
+    case ActionTypes.RECEIVE_POSTS:
+    case ActionTypes.REQUEST_POSTS:
       return {
         ...state,
         [action.reddit]: posts(state[action.reddit], action)

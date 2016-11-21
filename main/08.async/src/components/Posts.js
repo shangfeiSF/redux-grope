@@ -1,10 +1,12 @@
-import React, { PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 
 const Posts = ({posts}) => (
   <ul>
-    {posts.map((post, i) =>
-      <li key={i}>{post.title}</li>
-    )}
+    {
+      posts.map((post, i) =>
+        <li key={i}>{post.title}</li>
+      )
+    }
   </ul>
 )
 
