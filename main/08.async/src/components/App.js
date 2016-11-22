@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 
+import Themes from '../constants/Themes'
+
 import * as syncActions from '../actions/syncActions'
 import * as asyncActions from '../actions/asyncActions'
 
@@ -7,6 +9,14 @@ import Picker from '../components/Picker'
 import List from '../components/List'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      themes: Themes
+    }
+  }
+
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
 
@@ -25,15 +35,34 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.selected !== this.props.selected) {
-      const {dispatch, selected} = nextProps
+    const {dispatch, selected} = nextProps
 
+    let themes = this.state.themes
+
+    if (themes.indexOf(selected) < 0) {
+      this.setState({
+        themes: [...themes, selected]
+      })
+    }
+
+    if (nextProps.selected !== this.props.selected) {
       dispatch(asyncActions.fetchIfNeed(selected))
     }
   }
 
   handlerOnChange = theme => {
     const {dispatch} = this.props
+
+    this.refs.appointedTheme.value = ''
+
+    dispatch(syncActions.select(theme))
+  }
+
+  handlerAppointedTheme = (e) => {
+    e.preventDefault()
+
+    const {dispatch} = this.props
+    const theme = this.refs.appointedTheme.value
 
     dispatch(syncActions.select(theme))
   }
@@ -67,7 +96,12 @@ class App extends Component {
 
     return (
       <div>
-        <Picker current={selected} options={[ 'facebook', 'javascript' ]} onChange={this.handlerOnChange}/>
+        <Picker current={selected} options={this.state.themes} onChange={this.handlerOnChange}/>
+
+        <p>
+          <input type="text" ref="appointedTheme"/>
+          <button onClick={this.handlerAppointedTheme} style={{marginLeft: 10}}>Fetch</button>
+        </p>
 
         <p>{lastUpdatedNode} {refreshNode}</p>
 

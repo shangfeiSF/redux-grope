@@ -11,7 +11,7 @@ class List extends Component {
     return (
       <ul>
         {
-          contexts.map((context, i) => <li key={i}>{context.title}</li>)
+          contexts.map((context, i) => <li key={i} style={{fontSize: 20}}>{context.title}</li>)
         }
       </ul>
     )

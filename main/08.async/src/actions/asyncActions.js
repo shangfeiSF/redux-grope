@@ -5,17 +5,17 @@ const SUFFIX = '.json'
 
 const UTILS = {
   _need: (state, theme) => {
-    const posts = state.details[theme]
+    const detail = state.details[theme]
 
-    if (!posts) {
-      return true
+    let need = false
+
+    if (detail) {
+      need = detail.isFetching ? false : detail.refresh
+    } else {
+      need = true
     }
 
-    if (posts.isFetching) {
-      return false
-    }
-
-    return posts.refresh
+    return need
   },
 
   // ES6 fetch based on Promise
@@ -24,7 +24,7 @@ const UTILS = {
 
     return fetch(REDDIT_PATH + theme + SUFFIX)
       .then(response => response.json())
-      .then(contexts => dispatch(syncAcitons.receive(theme, contexts)))
+      .then(json => dispatch(syncAcitons.receive(theme, json)))
   }
 }
 

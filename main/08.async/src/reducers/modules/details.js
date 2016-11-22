@@ -8,18 +8,18 @@ const initial = {
 }
 
 const UTILS = {
-  _parse: (state = initial, action) => {
+  _parse: (themeDetail = initial, action) => {
     switch (action.type) {
       case ActionTypes.REQUEST:
         return {
-          ...state,
+          ...themeDetail,
           isFetching: true,
           refresh: false
         }
 
       case ActionTypes.RECEIVE:
         return {
-          ...state,
+          ...themeDetail,
           contexts: action.contexts,
           lastUpdated: action.lastUpdated,
           isFetching: false,
@@ -28,12 +28,12 @@ const UTILS = {
 
       case ActionTypes.REFRESH:
         return {
-          ...state,
+          ...themeDetail,
           refresh: true
         }
 
       default:
-        return state
+        return themeDetail
     }
   }
 }

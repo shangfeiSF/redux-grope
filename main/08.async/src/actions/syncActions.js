@@ -10,10 +10,10 @@ export const request = theme => ({
   theme
 })
 
-export const receive = (theme, contexts) => ({
+export const receive = (theme, json) => ({
   type: ActionTypes.RECEIVE,
   theme,
-  contexts: contexts.data.children.map(child => child.data),
+  contexts: json.data.children.map(child => child.data),
   lastUpdated: new Date().toJSON()
 })
 
