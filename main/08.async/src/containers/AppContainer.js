@@ -3,18 +3,21 @@ import {connect} from 'react-redux'
 import  App from '../components/App'
 
 const mapStateToProps = state => {
-  const {selectedReddit, postsByReddit} = state
+  const {selected, details} = state
 
-  const {isFetching, lastUpdated, items:posts} = postsByReddit[selectedReddit] || {
+  const {contexts, lastUpdated, isFetching, refresh} = details[selected] || {
+    contexts: [],
+    lastUpdated: '',
     isFetching: true,
-    items: []
+    refresh: false
   }
 
   return {
-    selectedReddit,
-    isFetching,
+    selected,
+    contexts,
     lastUpdated,
-    posts
+    isFetching,
+    refresh
   }
 }
 

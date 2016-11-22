@@ -1,4 +1,4 @@
-export const REQUEST_POSTS = 'REQUEST_POSTS'
-export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-export const SELECT_REDDIT = 'SELECT_REDDIT'
-export const INVALIDATE_REDDIT = 'INVALIDATE_REDDIT'
+export const SELECT = 'SELECT'
+export const REQUEST = 'REQUEST'
+export const RECEIVE = 'RECEIVE'
+export const REFRESH = 'REFRESH'

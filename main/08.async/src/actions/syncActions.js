@@ -1,23 +1,23 @@
 import * as ActionTypes from '../constants/ActionTypes'
 
-export const selectReddit = reddit => ({
-  type: ActionTypes.SELECT_REDDIT,
-  reddit
+export const select = theme => ({
+  type: ActionTypes.SELECT,
+  theme
 })
 
-export const invalidateReddit = reddit => ({
-  type: ActionTypes.INVALIDATE_REDDIT,
-  reddit
+export const request = theme => ({
+  type: ActionTypes.REQUEST,
+  theme
 })
 
-export const requestPosts = reddit => ({
-  type: ActionTypes.REQUEST_POSTS,
-  reddit
+export const receive = (theme, contexts) => ({
+  type: ActionTypes.RECEIVE,
+  theme,
+  contexts: contexts.data.children.map(child => child.data),
+  lastUpdated: new Date().toJSON()
 })
 
-export const receivePosts = (reddit, json) => ({
-  type: ActionTypes.RECEIVE_POSTS,
-  reddit,
-  posts: json.data.children.map(child => child.data),
-  receivedAt: Date.now()
+export const refresh = theme => ({
+  type: ActionTypes.REFRESH,
+  theme
 })
