@@ -5,6 +5,11 @@ export const select = theme => ({
   theme
 })
 
+export const add = theme => ({
+  type: ActionTypes.ADD,
+  theme
+})
+
 export const request = theme => ({
   type: ActionTypes.REQUEST,
   theme

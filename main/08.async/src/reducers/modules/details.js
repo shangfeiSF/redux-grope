@@ -4,7 +4,7 @@ const initial = {
   contexts: [],
   lastUpdated: '',
   isFetching: false,
-  refresh: false
+  isRefresh: false
 }
 
 const UTILS = {
@@ -14,7 +14,7 @@ const UTILS = {
         return {
           ...themeDetail,
           isFetching: true,
-          refresh: false
+          isRefresh: false
         }
 
       case ActionTypes.RECEIVE:
@@ -23,13 +23,13 @@ const UTILS = {
           contexts: action.contexts,
           lastUpdated: action.lastUpdated,
           isFetching: false,
-          refresh: false
+          isRefresh: false
         }
 
       case ActionTypes.REFRESH:
         return {
           ...themeDetail,
-          refresh: true
+          isRefresh: true
         }
 
       default:

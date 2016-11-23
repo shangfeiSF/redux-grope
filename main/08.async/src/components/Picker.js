@@ -2,33 +2,64 @@ import React, {Component, PropTypes} from 'react'
 
 class Picker extends Component {
   static propTypes = {
-    current: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf(
+    themes: PropTypes.arrayOf(
       PropTypes.string.isRequired
     ).isRequired,
-    onChange: PropTypes.func.isRequired
+    selected: PropTypes.string.isRequired,
+
+    asyncActions: PropTypes.object.isRequired,
+    syncActions: PropTypes.object.isRequired
   }
 
-  handlerOnChange = (e) => {
-    this.props.onChange(e.target.value)
+  componentWillReceiveProps(nextProps) {
+    const {themes, selected, asyncActions, syncActions} = nextProps
+
+    if (themes.indexOf(selected) < 0) {
+      syncActions.add(selected)
+    }
+
+    if (nextProps.selected !== this.props.selected) {
+      asyncActions.fetchIfNeed(selected)
+    }
+  }
+
+  handlerOnChange = e => {
+    this.refs.appointedTheme.value = ''
+
+    this.props.syncActions.select(e.target.value)
+  }
+
+  handlerOnClick = e => {
+    e.preventDefault()
+
+    const theme = this.refs.appointedTheme.value
+
+    if (theme.length) {
+      this.props.syncActions.select(theme)
+    }
   }
 
   render() {
-    const {current, options} = this.props
+    const {selected, themes} = this.props
 
     return (
       <div>
-        <h1>{current}</h1>
+        <h1>{selected}</h1>
 
-        <select onChange={this.handlerOnChange} value={current}>
+        <select onChange={this.handlerOnChange} value={selected}>
           {
-            options.map(option =>
-              <option value={option} key={option}>
-                {option}
+            themes.map(theme =>
+              <option value={theme} key={theme}>
+                {theme}
               </option>
             )
           }
         </select>
+
+        <p>
+          <input type="text" ref="appointedTheme"/>
+          <button onClick={this.handlerOnClick} style={{marginLeft: 10}}>Fetch</button>
+        </p>
       </div>
     )
   }

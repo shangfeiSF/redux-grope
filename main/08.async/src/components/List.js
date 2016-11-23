@@ -2,19 +2,26 @@ import React, {Component, PropTypes} from 'react'
 
 class List extends Component {
   static propTypes = {
+    isFetching: PropTypes.bool.isRequired,
     contexts: PropTypes.array.isRequired
   }
 
   render() {
-    const {contexts} = this.props
+    const {isFetching, contexts} = this.props
 
-    return (
-      <ul>
-        {
-          contexts.map((context, i) => <li key={i} style={{fontSize: 20}}>{context.title}</li>)
-        }
-      </ul>
-    )
+    let listNode = contexts.length === 0 ?
+      (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>) :
+      (
+        <div style={{opacity: isFetching ? 0.3 : 1}}>
+          <ul>
+            {
+              contexts.map((context, index) => <li key={index} style={{fontSize: 20}}>{context.title}</li>)
+            }
+          </ul>
+        </div>
+      )
+
+    return listNode
   }
 }
 

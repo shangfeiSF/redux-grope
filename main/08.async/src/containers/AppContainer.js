@@ -1,24 +1,39 @@
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+
+import * as asyncActions from '../actions/asyncActions'
+import * as syncActions from '../actions/syncActions'
 
 import  App from '../components/App'
 
 const mapStateToProps = state => {
-  const {selected, details} = state
+  const {details, selected, themes} = state
 
-  const {contexts, lastUpdated, isFetching, refresh} = details[selected] || {
+  const {contexts, lastUpdated, isFetching, isRefresh} = details[selected] || {
     contexts: [],
     lastUpdated: '',
     isFetching: true,
-    refresh: false
+    isRefresh: false
   }
 
   return {
+    themes,
     selected,
+
     contexts,
     lastUpdated,
     isFetching,
-    refresh
+    isRefresh
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => ({
+  asyncActions: bindActionCreators(asyncActions, dispatch),
+
+  syncActions: bindActionCreators(syncActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

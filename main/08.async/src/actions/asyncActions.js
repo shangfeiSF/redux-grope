@@ -10,7 +10,7 @@ const UTILS = {
     let need = false
 
     if (detail) {
-      need = detail.isFetching ? false : detail.refresh
+      need = detail.isFetching ? false : detail.isRefresh
     } else {
       need = true
     }

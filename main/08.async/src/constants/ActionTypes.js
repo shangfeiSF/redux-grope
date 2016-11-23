@@ -1,4 +1,5 @@
 export const SELECT = 'SELECT'
+export const ADD = 'ADD'
 export const REQUEST = 'REQUEST'
 export const RECEIVE = 'RECEIVE'
 export const REFRESH = 'REFRESH'
