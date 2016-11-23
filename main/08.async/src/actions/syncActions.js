@@ -18,7 +18,7 @@ export const request = theme => ({
 export const receive = (theme, json) => ({
   type: ActionTypes.RECEIVE,
   theme,
-  contexts: json.data.children.map(child => child.data),
+  contexts: json.data.children.map(child => child.data).sort((prev, next) => Math.random() > 0.5 ? 1 : -1),
   lastUpdated: new Date().toJSON()
 })
 

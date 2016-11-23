@@ -42,7 +42,7 @@ class App extends Component {
         />
 
         <List
-          isFetching={isFetching} contexts={contexts}
+          selected={selected} isFetching={isFetching} contexts={contexts}
         />
       </div>
     )
