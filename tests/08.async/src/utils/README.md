@@ -1,0 +1,1 @@
+This utils can not test because the `fetch`  is an API depend to the brower.
