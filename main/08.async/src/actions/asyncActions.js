@@ -1,32 +1,4 @@
-import * as syncAcitons from './syncActions'
-
-const REDDIT_PATH = 'https://www.reddit.com/r/'
-const SUFFIX = '.json'
-
-const UTILS = {
-  _need: (state, theme) => {
-    const detail = state.details[theme]
-
-    let need = false
-
-    if (detail) {
-      need = detail.isFetching ? false : detail.isRefresh
-    } else {
-      need = true
-    }
-
-    return need
-  },
-
-  // ES6 fetch based on Promise
-  _fetch: theme => dispatch => {
-    dispatch(syncAcitons.request(theme))
-
-    return fetch(REDDIT_PATH + theme + SUFFIX)
-      .then(response => response.json())
-      .then(json => dispatch(syncAcitons.receive(theme, json)))
-  }
-}
+import  * as UTILS from '../utils/index'
 
 export const fetchIfNeed = theme => (dispatch, getState) => {
   if (UTILS._need(getState(), theme)) {
