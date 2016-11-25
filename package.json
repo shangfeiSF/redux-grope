@@ -4,8 +4,8 @@
   "scripts": {
     "start": "node server.js -h",
     "test": "node node_modules/jest/bin/jest.js --config config.jest.json",
-    "jest-all": "node jest.js -r tests/.*/src/.*/.* -v0 | npm test",
-    "jest-all-v": "node jest.js -r tests/.*/src/.*/.* | npm test",
+    "jest-all": "node jest.js -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
+    "jest-all-v": "node jest.js -r tests/.*/src/.*/.*.spec.js | npm test",
     "jest-i": "node jest.js -v0 -i",
     "jest-v-i": "node jest.js -i"
   },

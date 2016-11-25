@@ -67,7 +67,7 @@ fs.statAsync(jestConfigFile)
     }
   )
   .then(function (spec) {
-    var testRegex = '(/tests/.*|\\.(test|spec))\\.(js|jsx)$'
+    var testRegex = 'tests/.*/src/.*/.*.spec.js$'
 
     if (options.path && options.path.length) {
       testRegex = options.path.replace(/\./g, '\.') + '$'
@@ -76,7 +76,7 @@ fs.statAsync(jestConfigFile)
       testRegex = options.regexp
     }
     else if (options.index && options.index.length) {
-      testRegex = 'tests/' + options.index + '.*/src/.*/.*'
+      testRegex = 'tests/' + (options.index.length == 1 ? ('0' + options.index) : options.index ) + '.*/src/.*/.*\.spec\.js$'
     }
 
     var json = {
