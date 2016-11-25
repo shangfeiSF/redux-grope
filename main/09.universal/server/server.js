@@ -10,19 +10,19 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackConfig from '../webpack.config'
 
 import React from 'react'
-import { renderToString } from 'react-dom/server'
-import { Provider } from 'react-redux'
+import {renderToString} from 'react-dom/server'
+import {Provider} from 'react-redux'
 
 import configureStore from '../common/store/configureStore'
 import App from '../common/containers/App'
-import { fetchCounter } from '../common/api/counter'
+import {fetchCounter} from '../common/api/counter'
 
 const app = new Express()
 const port = 3000
 
 // Use this middleware to set up hot module reloading via webpack.
 const compiler = webpack(webpackConfig)
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }))
+app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}))
 app.use(webpackHotMiddleware(compiler))
 
 // This is fired every time the server side receives a request
@@ -36,7 +36,7 @@ function handleRender(req, res) {
     const counter = parseInt(params.counter, 10) || apiResult || 0
 
     // Compile an initial state
-    const preloadedState = { counter }
+    const preloadedState = {counter}
 
     // Create a new Redux store instance
     const store = configureStore(preloadedState)
@@ -78,6 +78,6 @@ app.listen(port, (error) => {
   if (error) {
     console.error(error)
   } else {
-    console.info(`==> 🌎  Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`)
+    console.info(`Listening on port ${port}. Open up http://localhost:${port}/ in your browser.`)
   }
 })

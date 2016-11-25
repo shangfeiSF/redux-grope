@@ -2,7 +2,7 @@
   "name": "redux-grope",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server.js -h",
+    "start": "node server.js -h & node main/09.universal/server/index.js",
     "test": "node node_modules/jest/bin/jest.js --config config.jest.json",
     "jest-all": "node jest.js -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
     "jest-all-v": "node jest.js -r tests/.*/src/.*/.*.spec.js | npm test",
