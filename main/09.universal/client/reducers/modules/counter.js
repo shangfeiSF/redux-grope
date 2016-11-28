@@ -1,13 +1,16 @@
-import { SET_COUNTER, INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions'
+import * as Actiontypes from '../../constants/ActionTypes'
 
 const counter = (state = 0, action) => {
   switch (action.type) {
-    case SET_COUNTER:
+    case Actiontypes.SET:
       return action.payload
-    case INCREMENT_COUNTER:
+
+    case Actiontypes.INCREASE:
       return state + 1
-    case DECREMENT_COUNTER:
+
+    case Actiontypes.DECREASE:
       return state - 1
+
     default:
       return state
   }

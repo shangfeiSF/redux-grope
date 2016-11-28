@@ -1,10 +1,11 @@
-import { createStore, applyMiddleware } from 'redux'
+import {createStore, applyMiddleware} from 'redux'
+
 import thunk from 'redux-thunk'
-import rootReducer from '../reducers'
+import reducers from '../reducers'
 
 const configureStore = (preloadedState) => {
   const store = createStore(
-    rootReducer,
+    reducers,
     preloadedState,
     applyMiddleware(thunk)
   )
