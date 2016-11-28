@@ -1,6 +1,9 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var constants = require('../asset/constants.js')
+console.log(constants)
+
 module.exports = {
   devtool: 'inline-source-map',
 
@@ -11,8 +14,8 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    filename: constants.filename,
+    publicPath: constants.publicPath
   },
 
   plugins: [

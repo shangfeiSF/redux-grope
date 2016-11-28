@@ -5,14 +5,13 @@ import {render} from 'react-dom'
 
 import {Provider} from 'react-redux'
 
+import constants from '../asset/constants'
 import AppContainer from './containers/AppContainer'
+import createStore from './store/createStore'
 
-import configureStore from './store/configureStore'
+const store = createStore(window[constants.globalProp])
 
-const preloadedState = window.__PRELOADED_STATE__
-const store = configureStore(preloadedState)
-
-const root = document.getElementById('example')
+const root = document.getElementById(constants.id)
 var content = (
   <Provider store={store}>
     <AppContainer/>

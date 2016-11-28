@@ -5,27 +5,10 @@ import {Provider} from 'react-redux'
 import {renderToString} from 'react-dom/server'
 
 import {counter} from './counter'
-import configureStore from '../../client/store/configureStore'
+import {template} from './template'
 
+import createStore from '../../client/store/createStore'
 import AppContainer from '../../client/containers/AppContainer'
-
-const renderFullPage = (html, preloadedState) => {
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <title>Redux Universal Example</title>
-      </head>
-      <body>
-        <div id="example">${html}</div>
-        <script>
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\x3c')}
-        </script>
-        <script src="/static/bundle.js"></script>
-      </body>
-    </html>
-    `
-}
 
 export const renderMiddleware = (req, res) => {
   counter({
@@ -34,12 +17,10 @@ export const renderMiddleware = (req, res) => {
     max: 100
   })
     .then(data => {
-      const params = qs.parse(req.query)
-      const counter = parseInt(params.counter, 10) || data || 0
+      const query = qs.parse(req.query)
+      const counter = parseInt(query.counter, 10) || data
 
-      const preloadedState = {counter}
-
-      const store = configureStore(preloadedState)
+      const store = createStore({counter})
 
       const html = renderToString(
         <Provider store={store}>
@@ -47,8 +28,6 @@ export const renderMiddleware = (req, res) => {
         </Provider>
       )
 
-      const finalState = store.getState()
-
-      res.send(renderFullPage(html, finalState))
+      res.send(template(html, store.getState()))
     })
 }

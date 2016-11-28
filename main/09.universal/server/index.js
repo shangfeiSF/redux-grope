@@ -20,11 +20,10 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.get('/index.html', renderMiddleware)
 app.get('/serverTime.json', function (req, res) {
-  let json = JSON.stringify({
-    serverTime: Date.now()
-  })
   res.writeHead(200)
-  res.end(json)
+  res.end(JSON.stringify({
+    serverTime: Date.now()
+  }))
 })
 
 app.listen(port, (error) => {
