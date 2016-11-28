@@ -7,7 +7,7 @@ import App from './containers/App'
 
 const preloadedState = window.__PRELOADED_STATE__
 const store = configureStore(preloadedState)
-const rootElement = document.getElementById('app')
+const rootElement = document.getElementById('example')
 
 render(
   <Provider store={store}>
