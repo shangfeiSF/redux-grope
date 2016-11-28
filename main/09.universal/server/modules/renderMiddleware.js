@@ -7,7 +7,7 @@ import {renderToString} from 'react-dom/server'
 import {counter} from './counter'
 import configureStore from '../../client/store/configureStore'
 
-import App from '../../client/containers/App'
+import AppContainer from '../../client/containers/AppContainer'
 
 const renderFullPage = (html, preloadedState) => {
   return `
@@ -43,7 +43,7 @@ export const renderMiddleware = (req, res) => {
 
       const html = renderToString(
         <Provider store={store}>
-          <App />
+          <AppContainer />
         </Provider>
       )
 

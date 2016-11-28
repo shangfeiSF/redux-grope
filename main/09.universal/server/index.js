@@ -17,7 +17,15 @@ app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath
 }))
-app.use(renderMiddleware)
+
+app.get('/index.html', renderMiddleware)
+app.get('/serverTime.json', function (req, res) {
+  let json = JSON.stringify({
+    serverTime: Date.now()
+  })
+  res.writeHead(200)
+  res.end(json)
+})
 
 app.listen(port, (error) => {
   if (error) {
