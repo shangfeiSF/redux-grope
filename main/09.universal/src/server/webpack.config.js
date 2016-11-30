@@ -2,7 +2,6 @@ var path = require('path')
 var webpack = require('webpack')
 
 var constants = require('../asset/constants.js')
-console.log(constants)
 
 module.exports = {
   devtool: 'inline-source-map',
