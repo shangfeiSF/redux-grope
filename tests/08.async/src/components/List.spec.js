@@ -1,21 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 
-const mockData = {
-  selected: 'Facebook',
-
-  contexts: [
-    {
-      title: "Facebook will also cut off fake news sites from ad money"
-    },
-    {
-      title: "Facebook's Messenger Rooms in Testing, Lets You Chat With Strangers on a Topic"
-    },
-    {
-      title: "Facebook Says It Found More Miscalculated Metrics"
-    }
-  ],
-}
+import {mockData} from '../actions/mocks/utils/index'
 
 import List from '../../../../main/08.async/src/components/List'
 

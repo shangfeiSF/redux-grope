@@ -1,10 +1,18 @@
 import * as ActionTypes from '../../../../../../main/08.async/src/constants/ActionTypes'
 
 export const mockData = {
+  selected: 'Facebook',
+
   contexts: [
-    "Facebook will also cut off fake news sites from ad money",
-    "Facebook's Messenger Rooms in Testing, Lets You Chat With Strangers on a Topic",
-    "Facebook Says It Found More Miscalculated Metrics"
+    {
+      title: "Facebook will also cut off fake news sites from ad money"
+    },
+    {
+      title: "Facebook's Messenger Rooms in Testing, Lets You Chat With Strangers on a Topic"
+    },
+    {
+      title: "Facebook Says It Found More Miscalculated Metrics"
+    }
   ],
   lastUpdated: "2016-11-24T02:58:38.507Z"
 }
