@@ -23,7 +23,8 @@ class List extends Component {
     while (begin > -1) {
       let end = begin + len
 
-      nodes.push(original.slice(0, begin))
+      begin != 0 && nodes.push(original.slice(0, begin))
+
       nodes.push(
         <strong key={`${index}-${begin}`} style={{backgroundColor: 'yellow'}}>{original.slice(begin, end)}</strong>
       )
