@@ -69,7 +69,7 @@ describe('Picker component', () => {
     expect(button.props.children).toBe('Fetch')
   })
 
-  it('should call syncActions.select when change the selected theme', () => {
+  it('should call `syncActions.select` when change the selected theme', () => {
     const {props} = setup()
 
     const output = mount(<Picker {...props}></Picker>)
@@ -90,39 +90,143 @@ describe('Picker component', () => {
     expect(props.syncActions.select).toBeCalledWith(Themes[1])
   })
 
-  it('should call syncActions.select when click the fetch button', () => {
+  it('should call `syncActions.select` when click the fetch button with a new theme', () => {
     const {props} = setup()
-    const theme = 'test theme'
+    const new_theme = 'test theme'
 
     const output = mount(<Picker {...props}></Picker>)
 
     Object.keys(output.node.refs).forEach(key => {
-      output.node.refs[key].value = theme
+      output.node.refs[key].value = new_theme
     })
 
     output.find('button').simulate('click', {
       preventDefault: jest.fn()
     })
 
-    expect(props.syncActions.select).toBeCalledWith(theme)
+    expect(props.syncActions.select).toBeCalledWith(new_theme)
   })
 
-  it('should call syncActions.add and asyncActions.fetchIfNeed when receive new props with a new selected', () => {
-    const theme = 'test theme'
-    const spy = sinon.spy(Picker.prototype, 'componentWillReceiveProps')
+  it('should not call `syncActions.select` when click the fetch button with a unchanged theme', () => {
+    const {props} = setup()
+    const unchanged_theme = Themes[0]
+
+    const output = mount(<Picker {...props}></Picker>)
+
+    Object.keys(output.node.refs).forEach(key => {
+      output.node.refs[key].value = unchanged_theme
+    })
+
+    output.find('button').simulate('click', {
+      preventDefault: jest.fn()
+    })
+
+    expect(props.syncActions.select).not.toBeCalled()
+  })
+
+  it('should not call `syncActions.select` when click the fetch button with a empty theme', () => {
+    const {props} = setup()
+    const empty_theme = ''
+
+    const output = mount(<Picker {...props}></Picker>)
+
+    Object.keys(output.node.refs).forEach(key => {
+      output.node.refs[key].value = empty_theme
+    })
+
+    output.find('button').simulate('click', {
+      preventDefault: jest.fn()
+    })
+
+    expect(props.syncActions.select).not.toBeCalled()
+  })
+
+  it('should call both `syncActions.add` and `asyncActions.fetchIfNeed` in `componentWillReceiveProps` with a `unadded & changed` theme', () => {
+    const unadded_changed_theme = 'test theme'
+
+    const spy = sinon.stub(Picker.prototype, 'componentWillReceiveProps', nextProps => {
+      const {themes, selected, asyncActions, syncActions} = nextProps
+
+      if (nextProps.selected !== props.selected) {
+        if (themes.indexOf(selected) < 0) {
+          syncActions.add(selected)
+        }
+
+        asyncActions.fetchIfNeed(selected)
+      }
+    })
 
     const {props} = setup()
-
     const output = mount(<Picker {...props}></Picker>)
     expect(spy.calledOnce).toEqual(false)
 
     const {props: nextProps} = setup({
-      selected: theme
+      selected: unadded_changed_theme
     })
     output.setProps(nextProps)
     expect(spy.calledOnce).toEqual(true)
 
-    expect(props.syncActions.add).toBeCalledWith(theme)
-    expect(props.asyncActions.fetchIfNeed).toBeCalledWith(theme)
+    expect(nextProps.syncActions.add).toBeCalledWith(unadded_changed_theme) // unadded theme should be added
+    expect(nextProps.asyncActions.fetchIfNeed).toBeCalledWith(unadded_changed_theme)  // changed theme should be fetched if necessary
+
+    Picker.prototype.componentWillReceiveProps.restore()
+  })
+
+  it('should only call `asyncActions.fetchIfNeed` in `componentWillReceiveProps` with a `added & changed ` theme', () => {
+    const added_and_changed = Themes[1]
+
+    const spy = sinon.stub(Picker.prototype, 'componentWillReceiveProps', nextProps => {
+      const {themes, selected, asyncActions, syncActions} = nextProps
+
+      if (nextProps.selected !== props.selected) {
+        if (themes.indexOf(selected) < 0) {
+          syncActions.add(selected)
+        }
+
+        asyncActions.fetchIfNeed(selected)
+      }
+    })
+
+    const {props} = setup()
+    const output = mount(<Picker {...props}></Picker>)
+    expect(spy.calledOnce).toEqual(false)
+
+    const {props: nextProps} = setup({
+      selected: added_and_changed
+    })
+    output.setProps(nextProps)
+    expect(spy.calledOnce).toEqual(true)
+
+    expect(nextProps.syncActions.add).not.toBeCalled() // added theme should not be added
+    expect(nextProps.asyncActions.fetchIfNeed).toBeCalledWith(added_and_changed) // changed theme should be fetched if necessary
+
+    Picker.prototype.componentWillReceiveProps.restore()
+  })
+
+  it('should not call both `syncActions.add` and `asyncActions.fetchIfNeed`  in `componentWillReceiveProps` with a `unchanged` theme', () => {
+    const spy = sinon.stub(Picker.prototype, 'componentWillReceiveProps', nextProps => {
+      const {themes, selected, asyncActions, syncActions} = nextProps
+
+      if (nextProps.selected !== props.selected) {
+        if (themes.indexOf(selected) < 0) {
+          syncActions.add(selected)
+        }
+
+        asyncActions.fetchIfNeed(selected)
+      }
+    })
+
+    const {props} = setup()
+    const output = mount(<Picker {...props}></Picker>)
+    expect(spy.calledOnce).toEqual(false)
+
+    const {props: nextProps} = setup()
+    output.setProps(nextProps)
+    expect(spy.calledOnce).toEqual(true)
+
+    expect(nextProps.syncActions.add).not.toBeCalled()  // unchanged theme must be already added
+    expect(nextProps.asyncActions.fetchIfNeed).not.toBeCalled() // unchanged theme should not be fetched in any case
+
+    Picker.prototype.componentWillReceiveProps.restore()
   })
 })

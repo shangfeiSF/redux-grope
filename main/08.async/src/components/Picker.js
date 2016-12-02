@@ -14,11 +14,11 @@ class Picker extends Component {
   componentWillReceiveProps(nextProps) {
     const {themes, selected, asyncActions, syncActions} = nextProps
 
-    if (themes.indexOf(selected) < 0) {
-      syncActions.add(selected)
-    }
-
     if (nextProps.selected !== this.props.selected) {
+      if (themes.indexOf(selected) < 0) {
+        syncActions.add(selected)
+      }
+
       asyncActions.fetchIfNeed(selected)
     }
   }
@@ -34,7 +34,7 @@ class Picker extends Component {
 
     const theme = this.refs.appointedTheme.value
 
-    if (theme.length) {
+    if (theme.length && theme !== this.props.selected) {
       this.props.syncActions.select(theme)
     }
   }
