@@ -20,10 +20,10 @@ class Counter extends Component {
 
         <div>
           <p>
-            <button onClick={increase}>+</button>
+            <button onClick={increase}>Increase</button>
           </p>
           <p>
-            <button onClick={decrease}>-</button>
+            <button onClick={decrease}>Decrease</button>
           </p>
         </div>
 
