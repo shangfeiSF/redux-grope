@@ -1,4 +1,7 @@
 import * as syncActions from './syncActions'
+import  * as UTILS from '../utils/index'
+
+const URL = 'http://localhost:3000/serverTime.json'
 
 export const increaseIfOdd = () => (dispatch, getState) => {
   const {counter} = getState()
@@ -7,21 +10,6 @@ export const increaseIfOdd = () => (dispatch, getState) => {
     dispatch(syncActions.increase())
 }
 
-export const increaseDelay = () => dispatch => {
-  setTimeout(() => {
-    dispatch(syncActions.increase())
-  }, 1000)
-}
-
 export const increameAsync = () => dispatch => {
-  return fetch('http://localhost:3000/serverTime.json')
-    .then(response => response.json())
-    .then(json => {
-      let serverTime = json.serverTime
-      if (serverTime % 2 === 0) {
-        return dispatch(syncActions.increase())
-      } else {
-        return false
-      }
-    })
+  return dispatch(UTILS._fetch(URL))
 }

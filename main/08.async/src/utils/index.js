@@ -1,4 +1,4 @@
-import * as syncAcitons from '../actions/syncActions'
+import * as syncActions from '../actions/syncActions'
 
 const REDDIT_PATH = 'https://www.reddit.com/r/'
 const SUFFIX = '.json'
@@ -18,9 +18,9 @@ export const _need = (state, theme) => {
 }
 
 export const _fetch = theme => dispatch => {
-  dispatch(syncAcitons.request(theme))
+  dispatch(syncActions.request(theme))
 
   return fetch(REDDIT_PATH + theme + SUFFIX)
     .then(response => response.json())
-    .then(json => dispatch(syncAcitons.receive(theme, json)))
+    .then(json => dispatch(syncActions.receive(theme, json)))
 }

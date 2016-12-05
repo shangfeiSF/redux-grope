@@ -12,7 +12,7 @@ class Counter extends Component {
     let {counter} = this.props
 
     let {increase, decrease} = this.props.syncActions
-    let {increaseIfOdd, increaseDelay, increameAsync} = this.props.thunkActions
+    let {increaseIfOdd, increameAsync} = this.props.thunkActions
 
     return (
       <div>
@@ -30,9 +30,6 @@ class Counter extends Component {
         <div>
           <p>
             <button onClick={increaseIfOdd}>Increase if odd</button>
-          </p>
-          <p>
-            <button onClick={increaseDelay}>Increase delay</button>
           </p>
           <p>
             <button onClick={increameAsync}>Increase async</button>

@@ -1,8 +1,8 @@
 import * as ActionTypes from '../constants/ActionTypes'
 
-export const set = (value) => ({
+export const set = (payload) => ({
   type: ActionTypes.SET,
-  payload: value
+  payload
 })
 
 export const increase = () => ({

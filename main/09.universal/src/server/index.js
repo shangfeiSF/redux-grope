@@ -21,9 +21,12 @@ app.use(webpackDevMiddleware(compiler, {
 app.get('/index.html', renderMiddleware)
 app.get('/serverTime.json', function (req, res) {
   res.writeHead(200)
-  res.end(JSON.stringify({
-    serverTime: Date.now()
-  }))
+
+  setTimeout(function () {
+    res.end(JSON.stringify({
+      serverTime: Date.now()
+    }))
+  }, 2000)
 })
 
 app.listen(port, (error) => {
