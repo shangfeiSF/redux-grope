@@ -17,7 +17,8 @@ var makeEntry = function () {
         dir === '05.todomvc' ||
         dir === '06.shopping-cart' ||
         dir === '07.tree-view' ||
-        dir === '08.async'
+        dir === '08.async' ||
+        dir === '10.real-world'
     })
     .reduce(function (entry, dir) {
       var isDirectory = fs.statSync(path.join(mainDir, dir)).isDirectory()
