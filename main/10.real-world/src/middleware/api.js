@@ -1,5 +1,5 @@
-import {Schema, arrayOf, normalize} from 'normalizr'
 import {camelizeKeys} from 'humps'
+import {Schema, arrayOf, normalize} from 'normalizr'
 
 const API_ROOT = 'https://api.github.com/'
 
@@ -20,23 +20,24 @@ const getNextPageUrl = response => {
 const callApi = (endpoint, schema) => {
   const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
 
-  const fullUrl_token = fullUrl + '?access_token=673d6b9137454c5bc015f93550a75e01037f8542'
+  let fullUrl_token = fullUrl + '?access_token=0bcef7b3122eb4d8492997b61e7750e34bd64eee'
 
   return fetch(fullUrl_token)
-    .then(response => response.json())
-    .then(json => {
-      if (!response.ok) {
-        return Promise.reject(json)
-      }
+    .then(response =>
+      response.json().then(json => {
+        if (!response.ok) {
+          return Promise.reject(json)
+        }
 
-      const camelizedJson = camelizeKeys(json)
-      const nextPageUrl = getNextPageUrl(response)
+        const camelizedJson = camelizeKeys(json)
+        const nextPageUrl = getNextPageUrl(response)
 
-      return Object.assign({},
-        normalize(camelizedJson, schema),
-        {nextPageUrl}
-      )
-    })
+        return Object.assign({},
+          normalize(camelizedJson, schema),
+          {nextPageUrl}
+        )
+      })
+    )
 }
 
 const userSchema = new Schema('users', {

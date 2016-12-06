@@ -1,12 +1,18 @@
+import polyfill from '../polyfill'
+
 import {connect} from 'react-redux'
 import {resetErrorMessage} from '../actions'
 
 import App from '../components/App'
 
-const mapStateToProps = (state, ownProps) => ({
-  inputValue: ownProps.location.pathname.substring(1),
-  errorMessage: state.errorMessage
-})
+const mapStateToProps = (state, ownProps) => {
+  let pathname = polyfill.replace(ownProps.location.pathname.substring(1))
+
+  return {
+    inputValue: pathname,
+    errorMessage: state.errorMessage
+  }
+}
 
 export default connect(mapStateToProps, {
   resetErrorMessage

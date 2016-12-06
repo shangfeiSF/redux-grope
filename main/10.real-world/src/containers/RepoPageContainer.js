@@ -1,11 +1,13 @@
+import polyfill from '../polyfill'
+
 import {connect} from 'react-redux'
 import {loadRepo, loadStargazers} from '../actions'
 
 import RepoPage from '../components/RepoPage'
 
 const mapStateToProps = (state, ownProps) => {
-  const login = ownProps.params.login.toLowerCase()
-  const name = ownProps.params.name.toLowerCase()
+  const login = polyfill.replace(ownProps.params.login.toLowerCase())
+  const name = polyfill.replace(ownProps.params.name.toLowerCase())
 
   const {
     pagination: {stargazersByRepo},
