@@ -4,13 +4,13 @@ import {render} from 'react-dom'
 import {browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
 
-import Root from './containers/Root'
-import configureStore from './store/configureStore'
+import RootContainer from './routes/RootContainer'
+import createStore from './store/createStore'
 
-const store = configureStore()
+const store = createStore()
 const history = syncHistoryWithStore(browserHistory, store)
 
-render(
-  <Root store={store} history={history}/>,
-  document.getElementById('example')
-)
+const root = document.getElementById('example')
+var content = (<RootContainer store={store} history={history}/>)
+
+render(content, root)

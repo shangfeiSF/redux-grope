@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
+import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
 
-const Repo = ({ repo, owner }) => {
-  const { login } = owner
-  const { name, description } = repo
+const Repo = ({repo, owner}) => {
+  const {login} = owner
+  const {name, description} = repo
 
   return (
     <div className="Repo">
@@ -17,7 +17,7 @@ const Repo = ({ repo, owner }) => {
         </Link>
       </h3>
       {description &&
-        <p>{description}</p>
+      <p>{description}</p>
       }
     </div>
   )
