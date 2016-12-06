@@ -16,9 +16,22 @@ var webpackDevMiddleware = require('webpack-dev-middleware')
 
 var options = nopt({
   'hot': Boolean,
+  'dev': Boolean,
+  'pro': Boolean
 }, {
   'h': ['--hot', 'true'],
+  'd': ['--dev', 'true'],
+  'p': ['--pro', 'true']
 }, process.argv, 2)
+
+// init environment
+webpackConfig.plugins.push(
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: options.pro ? '"production"' : '"development"'
+    }
+  })
+)
 
 // init compiler
 var compiler = null
