@@ -1,7 +1,7 @@
 import zip from 'lodash/zip'
 import React, {Component, PropTypes} from 'react'
 
-import {loadUser, loadStarred} from '../actions'
+import {loadUser, loadStarred} from '../actions/thunkActions'
 
 import Repo from './modules/Repo'
 import User from './modules/User'

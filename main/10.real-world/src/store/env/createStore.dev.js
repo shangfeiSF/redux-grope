@@ -5,7 +5,7 @@ import createLogger from 'redux-logger'
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware} from 'redux'
 
-import api from '../../middleware/api'
+import github from '../../middleware/github'
 import reducers from '../../reducers'
 
 export default  initState => {
@@ -13,7 +13,7 @@ export default  initState => {
     reducers,
     initState,
     compose(
-      applyMiddleware(thunk, api, createLogger()),
+      applyMiddleware(thunk, github, createLogger()),
       DevTools.instrument()
     )
   )
