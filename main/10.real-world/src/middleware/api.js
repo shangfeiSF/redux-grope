@@ -1,7 +1,7 @@
 import {camelizeKeys} from 'humps'
 import {Schema, arrayOf, normalize} from 'normalizr'
 
-const API_ROOT = 'https://api.github.com/'
+import {AccessToken, ApiRoot} from '../constants/Github'
 
 const getNextPageUrl = response => {
   const link = response.headers.get('link')
@@ -18,11 +18,9 @@ const getNextPageUrl = response => {
 }
 
 const callApi = (endpoint, schema) => {
-  const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint
+  const fullUrl = (endpoint.indexOf(ApiRoot) === -1) ? ApiRoot + endpoint : endpoint
 
-  let fullUrl_token = fullUrl + '?access_token=0bcef7b3122eb4d8492997b61e7750e34bd64eee'
-
-  return fetch(fullUrl_token)
+  return fetch(fullUrl + `?access_token=${AccessToken}`)
     .then(response =>
       response.json().then(json => {
         if (!response.ok) {
