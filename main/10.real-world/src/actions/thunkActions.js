@@ -5,7 +5,7 @@ export const loadUser = (login, requiredFields = []) => (dispatch, getState) => 
 
   const exist = requiredFields.every(key => user && user.hasOwnProperty(key))
 
-  return user && exist ? null : dispatch(syncActions.fetchUser(login))
+  return user && exist ? null : dispatch(syncActions.loadUserActions(login))
 }
 
 export const loadRepo = (fullName, requiredFields = []) => (dispatch, getState) => {
@@ -13,7 +13,7 @@ export const loadRepo = (fullName, requiredFields = []) => (dispatch, getState) 
 
   const exist = requiredFields.every(key => repo && repo.hasOwnProperty(key))
 
-  return repo && exist ? null : dispatch(syncActions.fetchRepo(fullName))
+  return repo && exist ? null : dispatch(syncActions.loadRepoActions(fullName))
 }
 
 export const loadStarred = (login, nextPage) => (dispatch, getState) => {
@@ -22,7 +22,7 @@ export const loadStarred = (login, nextPage) => (dispatch, getState) => {
     pageCount = 0
   } = getState().pagination.starredByUser[login] || {}
 
-  return pageCount > 0 && !nextPage ? null : dispatch(syncActions.fetchStarred(login, nextPageUrl))
+  return pageCount > 0 && !nextPage ? null : dispatch(syncActions.loadStarredActions(login, nextPageUrl))
 }
 
 export const loadStargazers = (fullName, nextPage) => (dispatch, getState) => {
@@ -31,5 +31,5 @@ export const loadStargazers = (fullName, nextPage) => (dispatch, getState) => {
     pageCount = 0
   } = getState().pagination.stargazersByRepo[fullName] || {}
 
-  return pageCount > 0 && !nextPage ? null : dispatch(syncActions.fetchStargazers(fullName, nextPageUrl))
+  return pageCount > 0 && !nextPage ? null : dispatch(syncActions.loadStargazersActions(fullName, nextPageUrl))
 }

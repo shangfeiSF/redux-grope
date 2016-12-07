@@ -9,7 +9,7 @@ export default (store, next, action) => {
   const {schema} = actionSpec
   const [REQUEST, SUCCESS, FAILURE] = actionSpec.types
 
-  const endpoint = typeof actionSpec.endpoint === 'function' ? actionSpec.endpoint(store.getState()) : actionSpec.endpoint
+  const route = typeof actionSpec.route === 'function' ? actionSpec.route(store.getState()) : actionSpec.route
 
   // resolve load-action to three actions: request-action, success-action, // failure-action
   // request-action
@@ -18,7 +18,7 @@ export default (store, next, action) => {
   })
   next(requestAction)
 
-  return UTILS.request(endpoint, schema)
+  return UTILS.request(route, schema)
     .then(
       response => {
         // success-action

@@ -6,10 +6,10 @@ import {ACCESSTOKEN, APIROOT} from '../../constants/Github'
 
 // verify the spec of action is conformed, or would throw error
 export const verifyActionSpec = actionSpec => {
-  const {endpoint, schema, types} = actionSpec
+  const {route, schema, types} = actionSpec
 
-  if (!(typeof endpoint === 'string' || typeof endpoint === 'function')) {
-    throw new Error('endpoint must be a string or a function to specify a part of URL.')
+  if (!(typeof route === 'string' || typeof route === 'function')) {
+    throw new Error('route must be a string or a function to specify a part of URL.')
   }
 
   if (!schema) {
@@ -49,8 +49,8 @@ export const getNextPageUrl = response => {
 }
 
 // fetch data form github and then normalize the data handled by `camelizeKeys`  with schema
-export const request = (endpoint, schema) => {
-  const url = (endpoint.indexOf(APIROOT) === -1 ? APIROOT + endpoint : endpoint) + `?access_token=${ACCESSTOKEN}`
+export const request = (route, schema) => {
+  const url = (route.indexOf(APIROOT) === -1 ? APIROOT + route : route) + `?access_token=${ACCESSTOKEN}`
 
   return fetch(url)
     .then(
