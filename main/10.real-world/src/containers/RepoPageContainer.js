@@ -1,7 +1,7 @@
 import polyfill from '../polyfill'
 
 import {connect} from 'react-redux'
-import {loadRepo, loadStargazers} from '../actions/thunkActions'
+import {loadRepo, loadStargazers} from '../actions/repPageThunkActions'
 
 import RepoPage from '../components/RepoPage'
 

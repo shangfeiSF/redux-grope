@@ -1,7 +1,7 @@
 import polyfill from '../polyfill'
 
 import {connect} from 'react-redux'
-import {resetErrorMessage} from '../actions/syncActions'
+import {resetErrorMessage} from '../actions/errorActions'
 
 import App from '../components/App'
 

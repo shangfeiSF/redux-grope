@@ -15,18 +15,6 @@ export const loadUserActions = login => ({
   }
 })
 
-export const loadRepoActions = fullName => ({
-  [SPEC]: {
-    types: [
-      ActionTypes.REPO_REQUEST,
-      ActionTypes.REPO_SUCCESS,
-      ActionTypes.REPO_FAILURE
-    ],
-    route: `repos/${fullName}`,
-    schema: Schemas.REPO
-  }
-})
-
 export const loadStarredActions = (login, nextPageUrl) => ({
   login,
 
@@ -39,22 +27,4 @@ export const loadStarredActions = (login, nextPageUrl) => ({
     route: nextPageUrl,
     schema: Schemas.REPO_ARRAY
   }
-})
-
-export const loadStargazersActions = (fullName, nextPageUrl) => ({
-  fullName,
-
-  [SPEC]: {
-    types: [
-      ActionTypes.STARGAZERS_REQUEST,
-      ActionTypes.STARGAZERS_SUCCESS,
-      ActionTypes.STARGAZERS_FAILURE
-    ],
-    route: nextPageUrl,
-    schema: Schemas.USER_ARRAY
-  }
-})
-
-export const resetErrorMessage = () => ({
-  type: ActionTypes.RESET_ERROR_MESSAGE
 })

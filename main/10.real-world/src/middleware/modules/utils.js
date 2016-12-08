@@ -55,9 +55,22 @@ export const request = (route, schema) => {
   return fetch(url)
     .then(
       response => response.json().then(json => {
-        return !response.ok ?
-          Promise.reject(json) :
-          Object.assign({}, normalize(camelizeKeys(json), schema), {nextPageUrl: getNextPageUrl(response)})
+        let result = null
+
+        // parse to some steps and some let for debugger
+        if (!response.ok) {
+          result = Promise.reject(json)
+        } else {
+          let camelizedJson = camelizeKeys(json)
+          let normalizedJson = normalize(camelizedJson, schema)
+          let extraData = {nextPageUrl: getNextPageUrl(response)}
+
+          result = Object.assign({}, normalizedJson, extraData)
+        }
+
+        debugger
+
+        return result
       })
     )
 }

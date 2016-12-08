@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {loadUser, loadStarred} from '../actions/thunkActions'
+import {loadUser, loadStarred} from '../actions/userPageThunkActions'
 
 import UserPage from '../components/UserPage'
 
