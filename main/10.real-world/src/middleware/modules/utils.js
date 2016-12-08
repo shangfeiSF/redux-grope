@@ -4,6 +4,8 @@ import {camelizeKeys} from 'humps'
 import {SPEC} from '../symbol'
 import {ACCESSTOKEN, APIROOT} from '../../constants/Github'
 
+const token = `?access_token=${ACCESSTOKEN}`
+
 // verify the spec of action is conformed, or would throw error
 export const verifyActionSpec = actionSpec => {
   const {route, schema, types} = actionSpec
@@ -50,7 +52,11 @@ export const getNextPageUrl = response => {
 
 // fetch data form github and then normalize the data handled by `camelizeKeys`  with schema
 export const request = (route, schema) => {
-  const url = (route.indexOf(APIROOT) === -1 ? APIROOT + route : route) + `?access_token=${ACCESSTOKEN}`
+  let url = route.indexOf(APIROOT) == -1 ? APIROOT + route : route
+
+  if(url.indexOf(token) == -1){
+    url += token
+  }
 
   return fetch(url)
     .then(

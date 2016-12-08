@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {browserHistory} from 'react-router'
 
 import Explore from './modules/Explore'
 
@@ -12,39 +11,17 @@ class App extends Component {
     children: PropTypes.node
   }
 
-  handleDismissClick = e => {
-    e.preventDefault()
-
-    this.props.resetErrorMessage()
-  }
-
-  handleChange = nextValue => {
-    browserHistory.push(`/${nextValue}`)
-  }
-
-  renderErrorMessage() {
-    const {errorMessage} = this.props
-
-    if (!errorMessage) {
-      return null
-    }
-
-    return (
-      <p style={{ backgroundColor: '#e99', padding: 10 }}>
-        <b>{errorMessage}</b>
-        <a href="#" onClick={this.handleDismissClick}>(Dismiss)</a>
-      </p>
-    )
-  }
-
   render() {
-    const {children, inputValue} = this.props
+    const {inputValue, errorMessage, resetErrorMessage} = this.props
 
     return (
       <div>
-        <Explore value={inputValue} onChange={this.handleChange}/>
-        {this.renderErrorMessage()}
-        {children}
+        <Explore
+          inputValue={inputValue}
+          errorMessage={errorMessage}
+          resetErrorMessage={resetErrorMessage}
+        />
+        {this.props.children}
       </div>
     )
   }

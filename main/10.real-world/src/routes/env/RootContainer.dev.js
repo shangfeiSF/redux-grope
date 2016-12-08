@@ -18,6 +18,7 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <div>
+          <p>Hide DevTools with Ctrl+H.</p>
           <Router history={history} routes={routes}/>
           <DevTools />
         </div>

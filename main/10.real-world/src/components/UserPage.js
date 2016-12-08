@@ -10,10 +10,10 @@ class UserPage extends Component {
     login: PropTypes.string.isRequired,
     user: PropTypes.object,
 
+    starredPagination: PropTypes.object,
+
     starredRepos: PropTypes.array.isRequired,
     starredRepoOwners: PropTypes.array.isRequired,
-
-    starredPagination: PropTypes.object,
 
     loadUser: PropTypes.func.isRequired,
     loadStarred: PropTypes.func.isRequired
@@ -21,6 +21,7 @@ class UserPage extends Component {
 
   loadData(props) {
     const {login} = props
+
     props.loadUser(login, ['name'])
     props.loadStarred(login)
   }
@@ -35,30 +36,30 @@ class UserPage extends Component {
     }
   }
 
-  handleLoadMoreClick = () => {
+  _handleLoadMoreClick = ()=> {
     this.props.loadStarred(this.props.login, true)
   }
 
-  renderRepo([repo, owner]) {
-    return (
-      <Repo repo={repo} owner={owner} key={repo.fullName}/>
-    )
+  _renderRepo([repo, owner]) {
+    return <Repo repo={repo} owner={owner} key={repo.fullName}/>
   }
 
   render() {
     const {user, login} = this.props
+
     if (!user) {
       return <h1><i>Loading {login}{"'s profile..."}</i></h1>
     }
 
     const {starredRepos, starredRepoOwners, starredPagination} = this.props
+
     return (
       <div>
         <User user={user}/>
         <List
           items={zip(starredRepos, starredRepoOwners)}
-          renderItem={this.renderRepo}
-          onLoadMoreClick={this.handleLoadMoreClick}
+          renderItems={this._renderRepo}
+          onLoadMoreClick={this._handleLoadMoreClick}
           loadingLabel={`Loading ${login}'s starred...`}
           {...starredPagination}
         />

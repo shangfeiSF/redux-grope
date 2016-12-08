@@ -1,11 +1,11 @@
-import * as usePageSyncActions from './usePageSyncActions'
+import * as userPageSyncActions from './userPageSyncActions'
 
 export const loadUser = (login, requiredFields = []) => (dispatch, getState) => {
   const user = getState().entities.users[login]
 
   const exist = requiredFields.every(key => user && user.hasOwnProperty(key))
 
-  return user && exist ? null : dispatch(usePageSyncActions.loadUserActions(login))
+  return user && exist ? null : dispatch(userPageSyncActions.loadUserActions(login))
 }
 
 export const loadStarred = (login, nextPage) => (dispatch, getState) => {
@@ -14,5 +14,5 @@ export const loadStarred = (login, nextPage) => (dispatch, getState) => {
     pageCount = 0
   } = getState().pagination.starredByUser[login] || {}
 
-  return pageCount > 0 && !nextPage ? null : dispatch(usePageSyncActions.loadStarredActions(login, nextPageUrl))
+  return pageCount > 0 && !nextPage ? null : dispatch(userPageSyncActions.loadStarredActions(login, nextPageUrl))
 }

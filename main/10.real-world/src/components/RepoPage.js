@@ -9,11 +9,11 @@ class RepoPage extends Component {
     repo: PropTypes.object,
     owner: PropTypes.object,
 
-    fullName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    fullName: PropTypes.string.isRequired,
 
-    stargazers: PropTypes.array.isRequired,
     stargazersPagination: PropTypes.object,
+    stargazers: PropTypes.array.isRequired,
 
     loadRepo: PropTypes.func.isRequired,
     loadStargazers: PropTypes.func.isRequired
@@ -21,6 +21,7 @@ class RepoPage extends Component {
 
   loadData(props) {
     const {fullName} = props
+
     props.loadRepo(fullName, ['description'])
     props.loadStargazers(fullName)
   }
@@ -35,11 +36,11 @@ class RepoPage extends Component {
     }
   }
 
-  handleLoadMoreClick = () => {
+  _handlerOnLoadMoreClick = () => {
     this.props.loadStargazers(this.props.fullName, true)
   }
 
-  renderUser(user) {
+  _renderUser(user) {
     return <User user={user} key={user.login}/>
   }
 
@@ -57,8 +58,8 @@ class RepoPage extends Component {
         <Repo repo={repo} owner={owner}/>
         <List
           items={stargazers}
-          renderItem={this.renderUser}
-          onLoadMoreClick={this.handleLoadMoreClick}
+          renderItems={this._renderUser}
+          onLoadMoreClick={this._handlerOnLoadMoreClick}
           loadingLabel={`Loading stargazers of ${name}...`}
           {...stargazersPagination}
         />

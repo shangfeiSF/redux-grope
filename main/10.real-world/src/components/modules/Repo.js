@@ -1,36 +1,32 @@
-import React, {PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 
-const Repo = ({repo, owner}) => {
-  const {login} = owner
-  const {name, description} = repo
+class Repo extends Component {
+  static propTypes = {
+    repo: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string
+    }).isRequired,
 
-  return (
-    <div className="Repo">
-      <h3>
-        <Link to={`/${login}/${name}`}>
-          {name}
-        </Link>
-        {' by '}
-        <Link to={`/${login}`}>
-          {login}
-        </Link>
-      </h3>
-      {description &&
-      <p>{description}</p>
-      }
-    </div>
-  )
-}
+    owner: PropTypes.shape({
+      login: PropTypes.string.isRequired
+    }).isRequired
+  }
 
-Repo.propTypes = {
-  repo: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string
-  }).isRequired,
-  owner: PropTypes.shape({
-    login: PropTypes.string.isRequired
-  }).isRequired
+  render() {
+    const {repo: {name, description}, owner: {login}} = this.props
+
+    return (
+      <div className="Repo">
+        <h3>
+          <Link to={`/${login}/${name}`}>{name}</Link>
+          {' by '}
+          <Link to={`/${login}`}>{login} </Link>
+        </h3>
+        {description && <p>{description}</p> }
+      </div>
+    )
+  }
 }
 
 export default Repo

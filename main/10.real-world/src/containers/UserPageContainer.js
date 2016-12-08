@@ -1,15 +1,14 @@
 import {connect} from 'react-redux'
-import {loadUser, loadStarred} from '../actions/userPageThunkActions'
+import {bindActionCreators} from 'redux'
 
 import UserPage from '../components/UserPage'
 
-const mapStateToProps = (state, ownProps) => {
-  const login = ownProps.params.login.toLowerCase()
+import {loadUser, loadStarred} from '../actions/userPageThunkActions'
 
-  const {
-    pagination: {starredByUser},
-    entities: {users, repos}
-  } = state
+const mapStateToProps = (state, ownProps) => {
+  const {pagination: {starredByUser}, entities: {users, repos}} = state
+
+  const login = ownProps.params.login.toLowerCase()
 
   const starredPagination = starredByUser[login] || {ids: []}
   const starredRepos = starredPagination.ids.map(id => repos[id])
@@ -19,14 +18,20 @@ const mapStateToProps = (state, ownProps) => {
     login,
     user: users[login],
 
-    starredRepos,
-    starredRepoOwners,
+    starredPagination,
 
-    starredPagination
+    starredRepos,
+    starredRepoOwners
   }
 }
 
-export default connect(mapStateToProps, {
-  loadUser,
-  loadStarred
-})(UserPage)
+const mapDispatchToProps = dispatch => ({
+  loadUser: bindActionCreators(loadUser, dispatch),
+
+  loadStarred: bindActionCreators(loadStarred, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserPage)
