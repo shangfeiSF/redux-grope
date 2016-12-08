@@ -68,8 +68,6 @@ export const request = (route, schema) => {
           result = Object.assign({}, normalizedJson, extraData)
         }
 
-        debugger
-
         return result
       })
     )
