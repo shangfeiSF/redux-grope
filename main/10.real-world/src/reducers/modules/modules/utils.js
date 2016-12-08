@@ -8,7 +8,6 @@ const inital = {
 }
 
 export const update = (state = inital, action) => {
-
   switch (action.typeIndex) {
     case 0:
       return {

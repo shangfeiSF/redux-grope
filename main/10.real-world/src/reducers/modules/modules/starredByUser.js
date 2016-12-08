@@ -18,7 +18,7 @@ export default (state = inital, action) => {
 
       return {
         ...state,
-        [key]: UTILS.update(state[key], action, _index_)
+        [key]: UTILS.update(state[key], action)
       }
 
     default:

@@ -63,6 +63,7 @@ export const request = (route, schema) => {
         } else {
           let camelizedJson = camelizeKeys(json)
           let normalizedJson = normalize(camelizedJson, schema)
+
           let extraData = {nextPageUrl: getNextPageUrl(response)}
 
           result = Object.assign({}, normalizedJson, extraData)
