@@ -1,5 +1,5 @@
-const MATCHES = ['main', '10.real-world', 'main/10.real-world/']
-const REPLACED = ['facebook', 'react', 'facebook/react/']
+const MATCHES = ['10.real-world', '10.real-world/']
+const REPLACED = ['tj', 'tj']
 
 export default {
   replace(originalValue){

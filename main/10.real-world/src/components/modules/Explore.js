@@ -15,7 +15,7 @@ class Explore extends Component {
   }
 
   handlerOnKeyUp = (e) => {
-    e.keyCode === 13 && this.handlerOnClick()
+    e.keyCode === 13 && this.handlerOnClickGo()
   }
 
   handlerOnClickGo = () => {

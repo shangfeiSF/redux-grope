@@ -1,5 +1,3 @@
-import polyfill from '../polyfill'
-
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -10,8 +8,8 @@ import {loadRepo, loadStargazers} from '../actions/repoPageThunkActions'
 const mapStateToProps = (state, ownProps) => {
   const {pagination: {stargazersByRepo}, entities: {users, repos}} = state
 
-  const login = polyfill.replace(ownProps.params.login.toLowerCase())
-  const name = polyfill.replace(ownProps.params.name.toLowerCase())
+  const login = ownProps.params.login.toLowerCase()
+  const name = ownProps.params.name.toLowerCase()
 
   const fullName = `${login}/${name}`
 

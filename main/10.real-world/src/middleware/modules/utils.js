@@ -53,10 +53,7 @@ export const getNextPageUrl = response => {
 // fetch data form github and then normalize the data handled by `camelizeKeys`  with schema
 export const request = (route, schema) => {
   let url = route.indexOf(APIROOT) == -1 ? APIROOT + route : route
-
-  if(url.indexOf(token) == -1){
-    url += token
-  }
+  url = url.indexOf(token) == -1 ? url + token : url
 
   return fetch(url)
     .then(
