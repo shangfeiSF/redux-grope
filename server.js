@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var child_process = require('child_process')
 
 var nopt = require('nopt')
 var colors = require('colors')
@@ -14,15 +15,41 @@ var webpackConfig = require('./webpack.config')
 var WebpackDevServer = require('webpack-dev-server')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 
-var options = nopt({
+// declare the directories
+var mainDir = path.join(__dirname, 'main')
+var mainSubDirs = fs.readdirSync(mainDir).filter(function (dir) {
+  return fs.statSync(path.join(mainDir, dir)).isDirectory()
+})
+
+// init the nopt
+var knowns = {
   'hot': Boolean,
+  'index': Array,
+  'quiet': Boolean,
   'dev': Boolean,
   'pro': Boolean
-}, {
-  'h': ['--hot', 'true'],
-  'd': ['--dev', 'true'],
-  'p': ['--pro', 'true']
-}, process.argv, 2)
+}
+
+var shorts = (function () {
+  var shorts = {
+    'h': ['--hot', 'true'],
+    'i': ['--index'],
+    'q': ['--quiet'],
+    'd': ['--dev', 'true'],
+    'p': ['--pro', 'true']
+  }
+
+  mainSubDirs.forEach(function (dir) {
+    var index = dir.split('\.').shift()
+    var cmd = 'i' + index
+    shorts[cmd] = ['--index']
+    shorts[cmd].push(index)
+  })
+
+  return shorts
+})()
+
+var options = nopt(knowns, shorts, process.argv, 2)
 
 // init environment
 webpackConfig.plugins.push(
@@ -32,6 +59,20 @@ webpackConfig.plugins.push(
     }
   })
 )
+
+// init webpackConfig.entry by webpackConfig._makeEntry
+var bundleDirs = mainSubDirs
+if (options.index && options.index.length) {
+  bundleDirs = mainSubDirs.filter(function (dir) {
+    return options.index.indexOf(dir.split('\.').shift()) > -1
+  })
+}
+
+if (!options.index || (options.index && options.index.indexOf('09') > -1)) {
+  child_process.exec('npm run universal', {cwd: __dirname})
+}
+
+webpackConfig.entry = webpackConfig._makeEntry(bundleDirs)
 
 // init compiler
 var compiler = null
@@ -70,18 +111,43 @@ if (options.hot) {
     },
 
     setup: function (app) {
+      app.use(express.static('./main/'))
+
+      app.get('/index.html', function (req, res) {
+        var file = path.join(__dirname, 'index.html')
+
+        fs.readFile(file, function (error, data) {
+          var html = data.toString('utf-8')
+          var LINKS = bundleDirs.map(function (dir) {
+            var href = '/' + dir + '/'
+            var title = dir
+
+            if (dir == '09.universal') {
+              href = 'http://localhost:3000/index.html?counter=10'
+              title = '09.universal'
+            }
+
+            return '<li><a href="' + href + '">' + title + '</a></li>'
+          })
+
+          var html = html.replace('{{LINKS}}', LINKS.join('\n'))
+          res.writeHead(200)
+          res.end(html)
+        })
+      })
+
       fs.readdirSync(path.join(__dirname, 'main'))
         .filter(function (file) {
           return fs.statSync(path.join(__dirname, 'main', file)).isDirectory()
         })
         .forEach(function (dir) {
-          app.use(expressUrlrewrite('/main/' + dir + '/*', '/main/' + dir + '/index.html'))
+          app.use(expressUrlrewrite('/' + dir + '/*', '/' + dir + '/index.html'))
         })
     },
 
     noInfo: false,
 
-    quiet: false,
+    quiet: !!options.quiet,
 
     publicPath: '/__build__/',
 
@@ -98,7 +164,7 @@ else {
   devConfig = {
     noInfo: false,
 
-    quiet: false,
+    quiet: !!options.quiet,
 
     publicPath: '/__build__/',
 
@@ -120,8 +186,31 @@ if (options.hot) {
 else {
   server = express()
 
-  server.use(express.static('./'))
+  server.use(express.static('./main/'))
   server.use(express.static(path.join(__dirname, '__build__')))
+
+  server.get('/index.html', function (req, res) {
+    var file = path.join(__dirname, 'index.html')
+
+    fs.readFile(file, function (error, data) {
+      var html = data.toString('utf-8')
+      var LINKS = bundleDirs.map(function (dir) {
+        var href = '/' + dir + '/'
+        var title = dir
+
+        if (dir == '09.universal') {
+          href = 'http://localhost:3000/index.html?counter=10'
+          title = '09.universal'
+        }
+
+        return '<li><a href="' + href + '">' + title + '</a></li>'
+      })
+
+      var html = html.replace('{{LINKS}}', LINKS.join('\n'))
+      res.writeHead(200)
+      res.end(html)
+    })
+  })
 
   server.use(webpackDevMiddleware(compiler, devConfig))
 
@@ -134,7 +223,7 @@ else {
     })
     .then(function (files) {
       files.forEach(function (file) {
-        server.use(expressUrlrewrite('/main/' + file + '/*', '/main/' + file + '/index.html'))
+        server.use(expressUrlrewrite('/' + file + '/*', '/' + file + '/index.html'))
       })
     })
 }

@@ -2,23 +2,16 @@ var fs = require('fs')
 var path = require('path')
 
 var webpack = require('webpack')
+var Visualizer = require('webpack-visualizer-plugin')
 
 var mainDir = path.join(__dirname, 'main')
 
-var makeEntry = function () {
+var makeEntry = function (dirs) {
   var entry = {}
 
   fs.readdirSync(mainDir)
     .filter(function (dir) {
-      return dir === '01.counter-vanilla' ||
-        dir === '02.counter' ||
-        dir === '03.todos' ||
-        dir === '04.todos-with-undo' ||
-        dir === '05.todomvc' ||
-        dir === '06.shopping-cart' ||
-        dir === '07.tree-view' ||
-        dir === '08.async' ||
-        dir === '10.real-world'
+      return dir !== '09.universal' && (dirs === undefined ? true : dirs.indexOf(dir) > -1)
     })
     .reduce(function (entry, dir) {
       var isDirectory = fs.statSync(path.join(mainDir, dir)).isDirectory()
@@ -34,7 +27,7 @@ var makeEntry = function () {
 module.exports = {
   devtool: 'inline-source-map',
 
-  entry: makeEntry(),
+  _makeEntry: makeEntry,
 
   output: {
     path: __dirname + '/__build__',
@@ -87,6 +80,7 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('shared.js')
+    new webpack.optimize.CommonsChunkPlugin('shared.js'),
+    new Visualizer()
   ]
 }
