@@ -4,19 +4,17 @@ var path = require('path')
 var webpack = require('webpack')
 var Visualizer = require('webpack-visualizer-plugin')
 
-var mainDir = path.join(__dirname, '../main')
+var DirSpec = require('./constants/DirSpec')
 
 var makeEntry = function (dirs) {
   var entry = {}
 
-  fs.readdirSync(mainDir)
+  DirSpec.mainSubDirNames
     .filter(function (dir) {
       return dir !== '09.universal' && (dirs === undefined ? true : dirs.indexOf(dir) > -1)
     })
     .reduce(function (entry, dir) {
-      var isDirectory = fs.statSync(path.join(mainDir, dir)).isDirectory()
-
-      isDirectory && (entry[dir] = path.join(mainDir, dir, 'src', 'index.js'));
+      entry[dir] = path.join(DirSpec.mainDirPath, dir, 'src', 'index.js')
 
       return entry
     }, entry)
@@ -27,10 +25,12 @@ var makeEntry = function (dirs) {
 module.exports = {
   devtool: 'inline-source-map',
 
+  entry: makeEntry(DirSpec.mainSubDirNames),
+
   _makeEntry: makeEntry,
 
   output: {
-    path: path.join(__dirname + '../__build__'),
+    path: path.join(__dirname, '../__build__'),
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
     publicPath: '/__build__/'
