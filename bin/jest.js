@@ -7,6 +7,8 @@ var Promise = require('bluebird')
 
 Promise.promisifyAll(fs)
 
+var testsDir = path.join(__dirname, '../tests').split(path.sep).join('/')
+
 var knowns = {
   'bail': Boolean,
   'verbose': Boolean,
@@ -15,8 +17,6 @@ var knowns = {
   'index': String
 }
 var shorts = (function () {
-  var testsDir = path.join(process.cwd(), 'tests')
-
   var shorts = {
     'b': ['--bail'],
     'b1': ['--bail', 'true'],
@@ -41,7 +41,7 @@ var shorts = (function () {
 })()
 var options = nopt(knowns, shorts, process.argv, 2)
 
-var jestConfigFile = path.join(__dirname, 'config.jest.json')
+var jestConfigFile = path.join(__dirname, './config.jest.json')
 
 fs.statAsync(jestConfigFile)
   .then(
@@ -67,7 +67,7 @@ fs.statAsync(jestConfigFile)
     }
   )
   .then(function (spec) {
-    var testRegex = 'tests/.*/src/.*/.*.spec.js$'
+    var testRegex = testsDir + '/.*/src/.*/.*.spec.js$'
 
     if (options.path && options.path.length) {
       testRegex = options.path.replace(/\./g, '\.') + '$'
@@ -76,7 +76,7 @@ fs.statAsync(jestConfigFile)
       testRegex = options.regexp
     }
     else if (options.index && options.index.length) {
-      testRegex = 'tests/' + (options.index.length == 1 ? ('0' + options.index) : options.index ) + '.*/src/.*/.*\.spec\.js$'
+      testRegex = testsDir + '/' + (options.index.length == 1 ? ('0' + options.index) : options.index ) + '.*/src/.*/.*\.spec\.js$'
     }
 
     var json = {

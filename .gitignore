@@ -1,6 +1,5 @@
-authorization.js
-config.jest.json
 .idea/
-node_modules/
 npm-debug.log
+node_modules/
+bin/config.jest.json
 __build__/
