@@ -1,11 +1,10 @@
 var path = require('path')
-var child_process = require('child_process')
-
 var webpack = require('webpack')
-var webpackConfig = require('../webpack.config')
+var child_process = require('child_process')
 
 var options = require('./options')
 var DirSpec = require('../constants/DirSpec')
+var webpackConfig = require('../webpack.config')
 
 webpackConfig.plugins.push(
   new webpack.DefinePlugin({

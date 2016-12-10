@@ -1,13 +1,10 @@
 var lodash = require('lodash')
-var webpack = require('webpack')
-
 var express = require('express')
 var expressUrlrewrite = require('express-urlrewrite')
 
+var options = require('./options')
 var DirSpec = require('../constants/DirSpec')
 var ServerConfig = require('../constants/ServerConfig')
-
-var options = require('./options')
 
 var devConfig = {
   quiet: !!options.quiet,
@@ -37,6 +34,7 @@ if (options.hot) {
 
     setup: function (app) {
       app.use(express.static(DirSpec.mainDirPath))
+      app.use(express.static(DirSpec.vendorsPath))
 
       app.get('/index.html', function (req, res) {
         res.writeHead(200)

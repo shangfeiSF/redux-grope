@@ -2,16 +2,17 @@
   "name": "redux-grope",
   "version": "1.0.0",
   "scripts": {
-    "start": "node bin/server.js -h",
-    "si": "node bin/server.js -h -i",
-    "sp": "node bin/server.js -p",
-    "spi": "node bin/server.js -p-i",
+    "dll": "webpack --config server/webpack.dll.js",
+    "start": "node bin/server -h",
+    "si": "node bin/server -h -i",
+    "sp": "node bin/server -p",
+    "spi": "node bin/server -p-i",
     "universal": "node main/09.universal/server.js",
     "test": "node node_modules/jest/bin/jest.js --config bin/config.jest.json",
-    "jest-all": "node bin/jest.js -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
-    "jest-all-v": "node bin/jest.js -r tests/.*/src/.*/.*.spec.js | npm test",
-    "jest-i": "node bin/jest.js -v0 -i",
-    "jest-v-i": "node bin/jest.js -i"
+    "jest-all": "node bin/jest -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
+    "jest-all-v": "node bin/jest -r tests/.*/src/.*/.*.spec.js | npm test",
+    "jest-i": "node bin/jest -v0 -i",
+    "jest-v-i": "node bin/jest -i"
   },
   "dependencies": {
     "react": "^15.3.0",

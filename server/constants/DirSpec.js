@@ -9,10 +9,14 @@ var mainSubDirNames = fs.readdirSync(mainDirPath).filter(function (dir) {
 
 var buildDirPath = path.join(__dirname, '../../__build__')
 
+var vendorsPath = path.join(__dirname, '../vendors')
+
 module.exports = {
   mainDirPath: mainDirPath,
 
   mainSubDirNames: mainSubDirNames,
 
-  buildDirPath: buildDirPath
+  buildDirPath: buildDirPath,
+
+  vendorsPath: vendorsPath
 }

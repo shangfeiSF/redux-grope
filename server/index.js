@@ -1,11 +1,10 @@
 var fs = require('fs')
 var path = require('path')
-
 var colors = require('colors')
-var ServerConfig = require('./constants/ServerConfig')
 
-var options = require('./components/options')
 var server = require('./components/server')
+var options = require('./components/options')
+var ServerConfig = require('./constants/ServerConfig')
 
 module.exports.start = function () {
   server.listen(ServerConfig.port, function () {

@@ -1,6 +1,5 @@
 var fs = require('fs')
 var path = require('path')
-
 var webpack = require('webpack')
 var Visualizer = require('webpack-visualizer-plugin')
 
@@ -80,7 +79,11 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('shared.js'),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./vendors/manifest.json'),
+    }),
+    // new webpack.optimize.CommonsChunkPlugin('shared.js'),
     new Visualizer()
   ]
 }

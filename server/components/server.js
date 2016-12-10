@@ -1,23 +1,23 @@
-var webpack = require('webpack')
+var path = require('path')
+var express = require('express')
+var expressUrlrewrite = require('express-urlrewrite')
 var WebpackDevServer = require('webpack-dev-server')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 
-var express = require('express')
-var expressUrlrewrite = require('express-urlrewrite')
-
-var DirSpec = require('../constants/DirSpec')
-var ServerConfig = require('../constants/ServerConfig')
-
 var options = require('./options')
+var DirSpec = require('../constants/DirSpec')
 var compiler = require('./compiler')
 var devConfig = require('./devConfig')
+var ServerConfig = require('../constants/ServerConfig')
 
 var server = new WebpackDevServer(compiler, devConfig)
+
 if (!options.hot) {
   server = express()
 
   server.use(express.static(DirSpec.mainDirPath))
   server.use(express.static(path.join(DirSpec.mainDirPath, '../__build__')))
+  server.use(express.static(DirSpec.vendorsPath))
 
   server.use(webpackDevMiddleware(compiler, devConfig))
 
