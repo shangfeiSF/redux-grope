@@ -1,0 +1,75 @@
+#!/usr/bin/env node
+var fs = require('fs')
+var path = require('path')
+var child_process = require('child_process')
+
+var Promise = require('bluebird')
+
+Promise.promisifyAll(fs)
+var execAsync = Promise.promisify(child_process.exec, {
+  context: child_process,
+  multiArgs: true
+})
+
+var webpackDllConfig = require('../server/webpack.dll')
+var _baseName = webpackDllConfig._baseName
+var _manifest = webpackDllConfig._manifest
+
+var dllCommand = 'npm run dll'
+var pattern = new RegExp(_baseName + '\\.\\w*\\.js')
+
+execAsync(dllCommand, {cwd: path.join(__dirname, '../')})
+  .then(
+    function (details) {
+      console.log(details[0])
+      console.log(details[1])
+
+      var manifestJson = fs.readFileAsync(path.join(__dirname, '../server/vendors', _manifest))
+
+      var targetDirs = fs.readdirAsync(path.join(__dirname, '../main'))
+        .filter(function (dir) {
+          return fs.statAsync(path.join(__dirname, '../main', dir))
+            .then(function (stat) {
+              var existed = fs.statAsync(path.join(__dirname, '../main', dir, 'index.html'))
+                .then(function () {
+                  return true
+                }, function () {
+                  return false
+                })
+
+              return stat.isDirectory() && existed
+            })
+        })
+
+      return Promise.join(manifestJson, targetDirs)
+    },
+    function (error) {
+      console.log(error.cmd)
+      console.log(error.message)
+    }
+  )
+  .then(function (result) {
+    var manifestJson = result[0]
+    var targetDirs = result[1]
+
+    var manifestJson = JSON.parse(manifestJson.toString('utf-8'))
+
+    return targetDirs.map(function (dir) {
+      return {
+        dir: dir,
+        filename: manifestJson.name + '.js',
+        target: path.join(__dirname, '../main', dir, 'index.html')
+      }
+    })
+  })
+  .each(function (spec) {
+    fs.readFileAsync(spec.target)
+      .then(function (data) {
+        var data = data.toString('utf-8').replace(pattern, spec.filename)
+
+        return fs.writeFileAsync(spec.target, data)
+      })
+      .then(function (error) {
+        error ? console.log(error) : console.log('[Replaced vendor completed]:', spec.dir)
+      })
+  })

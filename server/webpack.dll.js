@@ -20,11 +20,17 @@ var vendors = [
   'classnames'
 ]
 
+var baseName = 'vendor'
+var manifest = 'manifest.json'
+
 module.exports = {
+  _baseName: baseName,
+  _manifest: manifest,
+
   output: {
     path: path.join(__dirname, './vendors'),
-    filename: 'index_[chunkhash].js',
-    library: 'index_[chunkhash]',
+    filename: baseName + '.[chunkhash].js',
+    library: baseName + '_[chunkhash]',
   },
 
   entry: {
@@ -33,8 +39,8 @@ module.exports = {
 
   plugins: [
     new webpack.DllPlugin({
-      path: path.join(__dirname, 'vendors/manifest.json'),
-      name: 'index_[chunkhash]',
+      path: path.join(__dirname, 'vendors', manifest),
+      name: baseName + '.[chunkhash]',
       context: __dirname
     })
   ]
