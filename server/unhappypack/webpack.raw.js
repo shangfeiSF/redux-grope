@@ -1,8 +1,6 @@
 var fs = require('fs')
 var path = require('path')
-
 var webpack = require('webpack')
-var HappyPack = require('happypack')
 var Visualizer = require('webpack-visualizer-plugin')
 
 var DirSpec = require('./constants/DirSpec')
@@ -55,7 +53,7 @@ module.exports = {
       {
         test: /\.json/,
         include: path.join(__dirname, '../main/06.shopping-cart/src/api'),
-        loaders: ['happypack/loader?id=json']
+        loader: 'json-loader'
       },
       {
         test: /\.css$/,
@@ -63,37 +61,20 @@ module.exports = {
           path.join(__dirname, '../main'),
           path.join(__dirname, '../node_modules/todomvc-app-css')
         ],
-        loaders: ['happypack/loader?id=css']
+        loader: "style!css"
       },
       {
         test: /\.js$/,
         include: path.join(__dirname, '../main'),
-        loaders: ['happypack/loader?id=js']
+        loader: "babel-loader",
+        query: {
+          presets: ['react', 'es2015', 'stage-1']
+        }
       }
     ]
   },
 
   plugins: [
-    new HappyPack({
-      id: 'json',
-      loaders: ['json'],
-      threads: 2
-    }),
-    new HappyPack({
-      id: 'css',
-      loaders: ['style!css'],
-      threads: 2
-    }),
-    new HappyPack({
-      id: 'js',
-      loaders: [{
-        path: 'babel',
-        query: {
-          presets: ['react', 'es2015', 'stage-1']
-        }
-      }],
-      threads: 2
-    }),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('./vendors/manifest.json'),

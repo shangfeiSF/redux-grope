@@ -52,6 +52,7 @@
     "deep-freeze": "0.0.1",
     "enzyme": "^2.4.1",
     "express-urlrewrite": "^1.2.0",
+    "happypack": "^3.0.1",
     "jest": "^16.0.2",
     "jest-cli": "^16.0.2",
     "json-loader": "^0.5.4",

@@ -4,3 +4,4 @@ node_modules/
 bin/config.jest.json
 server/vendors/*
 __build__/
+server/.happypack/
