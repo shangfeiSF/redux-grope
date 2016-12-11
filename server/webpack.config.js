@@ -83,7 +83,6 @@ module.exports = {
       context: __dirname,
       manifest: require('./vendors/manifest.json'),
     }),
-    // new webpack.optimize.CommonsChunkPlugin('shared.js'),
     new Visualizer()
   ]
 }

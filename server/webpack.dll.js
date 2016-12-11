@@ -1,26 +1,9 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var vendors = [
-  'react',
-  'react-dom',
-  'react-redux',
-  'react-router',
-  'react-router-redux',
-  'redux',
-  'redux-undo',
-  'redux-logger',
-  'redux-thunk',
-  'babel-polyfill',
-  'babel-register',
-  'qs',
-  'humps',
-  'lodash',
-  'normalizr',
-  'classnames'
-]
+var vendors = require('./dll/index')
 
-var baseName = 'vendor'
+var baseName = 'vendorsBundle'
 var manifest = 'manifest.json'
 
 module.exports = {
@@ -29,7 +12,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, './vendors'),
-    filename: baseName + '.[chunkhash].js',
+    filename: baseName + '_[chunkhash].js',
     library: baseName + '_[chunkhash]',
   },
 
@@ -40,7 +23,7 @@ module.exports = {
   plugins: [
     new webpack.DllPlugin({
       path: path.join(__dirname, 'vendors', manifest),
-      name: baseName + '.[chunkhash]',
+      name: baseName + '_[chunkhash]',
       context: __dirname
     })
   ]
