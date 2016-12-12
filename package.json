@@ -8,7 +8,7 @@
     "sp": "node bin/server -p",
     "spi": "node bin/server -p-i",
     "universal": "node main/09.universal/server.js",
-    "test": "node node_modules/jest/bin/jest.js --config bin/config.jest.json",
+    "test": "node node_modules/jest/bin/jest --config bin/config.jest.json",
     "jest-all": "node bin/jest -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
     "jest-all-v": "node bin/jest -r tests/.*/src/.*/.*.spec.js | npm test",
     "jest-i": "node bin/jest -v0 -i",
