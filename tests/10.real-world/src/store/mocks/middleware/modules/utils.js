@@ -55,19 +55,19 @@ export const mocks = {
     let json = null
     let response = null
 
-    if (route.indexOf('repos/')) {
+    if (route.match(/^repos\/.*/g) !== null) {
       json = repoJson
       response = repoReponse
     }
-    if (route.indexOf('users/')) {
+    if (route.match(/^users\/.*/g) !== null) {
       json = userJson
       response = userReponse
     }
-    if (route.indexOf('starred')) {
+    if (route.match(/^users\/.*\/starred/g) !== null) {
       json = starredJson
       response = starredReponse
     }
-    if (route.indexOf('stargazers')) {
+    if (route.match(/^repos\/.*\/stargazers/g) !== null) {
       json = stargazersJson
       response = stargazersReponse
     }
