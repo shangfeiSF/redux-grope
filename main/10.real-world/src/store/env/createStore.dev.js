@@ -8,14 +8,14 @@ import {createStore, applyMiddleware} from 'redux'
 import github from '../../middleware/github'
 import reducers from '../../reducers'
 
-export default initState => {
+export default (initState, test) => {
+  let middlewares = [thunk, github]
+  !test && middlewares.push(createLogger())
+
   const store = createStore(
     reducers,
     initState,
-    compose(
-      applyMiddleware(thunk, github, createLogger()),
-      DevTools.instrument()
-    )
+    compose(applyMiddleware(...middlewares), DevTools.instrument())
   )
 
   if (module.hot) {
