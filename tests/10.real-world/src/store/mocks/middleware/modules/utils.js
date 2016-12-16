@@ -3,10 +3,10 @@ import {camelizeKeys} from 'humps'
 
 import {SPEC} from '../../../../../../../main/10.real-world/src/middleware/symbol'
 
-import {repo as repoJson, response as repoReponse} from './repoJson.mock'
-import {user as userJson, response as userReponse} from './userJson.mock'
-import {starred as starredJson, response as starredReponse} from './starredJson.mock'
-import {stargazers as stargazersJson, response as stargazersReponse} from './stargazersJson.mock'
+import {repo as repoJson, response as repoReponse} from './json/repoJson.mock'
+import {user as userJson, response as userReponse} from './json/userJson.mock'
+import {starred as starredJson, response as starredReponse} from './json/starredJson.mock'
+import {stargazers as stargazersJson, response as stargazersReponse} from './json/stargazersJson.mock'
 
 export const mocks = {
   verifyActionSpec: actionSpec => {

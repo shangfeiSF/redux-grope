@@ -5,21 +5,23 @@ import {bindActionCreators} from 'redux'
 import {mocks} from '../mocks/middleware/modules/utils'
 jest.mock('../../../../../main/10.real-world/src/middleware/modules/utils', () => mocks)
 
-import {repo as repoJson} from '../mocks/middleware/modules/repoJson.mock'
+import {repo as repoJson} from '../mocks/middleware/modules/json/repoJson.mock'
 import {
   stargazers as stargazersJson,
   response as stargazersReponse
-} from '../mocks/middleware/modules/stargazersJson.mock'
+} from '../mocks/middleware/modules/json/stargazersJson.mock'
 
 import {loadRepo, loadStargazers} from '../../../../../main/10.real-world/src/actions/repoPageThunkActions'
 
-import {user as userJson} from '../mocks/middleware/modules/userJson.mock'
+import {user as userJson} from '../mocks/middleware/modules/json/userJson.mock'
 import {
   starred as starredJson,
   response as starredReponse
-} from '../mocks/middleware/modules/starredJson.mock'
+} from '../mocks/middleware/modules/json/starredJson.mock'
 
 import {loadUser, loadStarred} from '../../../../../main/10.real-world/src/actions/userPageThunkActions'
+
+import {resetErrorMessage} from '../../../../../main/10.real-world/src/actions/errorActions'
 
 import {routerReducer as routing} from 'react-router-redux'
 import {Schemas} from '../../../../../main/10.real-world/src/middleware/schema'
@@ -225,5 +227,40 @@ describe('createStore.dev', () => {
     }
 
     expect(store.getState()).toEqual(expectedValue)
+  })
+
+  it('should change store correctly by `resetErrorMessage`', () => {
+    const initState = {
+      routing: routing,
+      entities: {
+        users: {},
+        repos: {}
+      },
+      pagination: {
+        starredByUser: {},
+        stargazersByRepo: {}
+      },
+      errorMessage: 'This is an error message'
+    }
+
+    const store = createStore(initState, TEST)
+
+    store.dispatch(resetErrorMessage())
+
+    const expectedValue = {
+      routing: routing,
+      entities: {
+        users: {},
+        repos: {}
+      },
+      pagination: {
+        starredByUser: {},
+        stargazersByRepo: {}
+      },
+      errorMessage: null
+    }
+
+    expect(store.getState()).toEqual(expectedValue)
+
   })
 })
