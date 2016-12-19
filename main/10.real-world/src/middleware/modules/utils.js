@@ -1,6 +1,7 @@
 import {normalize} from 'normalizr'
 import {camelizeKeys} from 'humps'
 
+import {_fetch} from './_fetch'
 import {SPEC} from '../symbol'
 import {ACCESSTOKEN, APIROOT} from '../../constants/Github'
 
@@ -55,7 +56,7 @@ export const request = (route, schema) => {
   let url = route.indexOf(APIROOT) == -1 ? APIROOT + route : route
   url = url.indexOf(token) == -1 ? url + token : url
 
-  return fetch(url)
+  return _fetch(url)
     .then(
       response => response.json().then(json => {
         let result = null
