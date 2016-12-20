@@ -9,8 +9,8 @@ class Explore extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      this.refs.input.value = nextProps.value
+    if (nextProps.value !== this.props.inputValue) {
+      this.refs.input.value = nextProps.inputValue
     }
   }
 
@@ -27,7 +27,7 @@ class Explore extends Component {
     this.props.resetErrorMessage()
   }
 
-  renderExploreArea(){
+  renderExploreArea() {
     const {inputValue} = this.props
 
     return (
@@ -48,12 +48,12 @@ class Explore extends Component {
     const {errorMessage} = this.props
 
     return !errorMessage ? null : (
-    <div className="errorMessage">
-      <p style={{backgroundColor: '#e99', padding: 10}}>
-        <b>{errorMessage}</b>
-        <a href="#" onClick={this.handlerOnClickDismiss}>(Dismiss)</a>
-      </p>
-    </div>
+      <div className="errorMessage">
+        <p style={{backgroundColor: '#e99', padding: 10}}>
+          <b>{errorMessage}</b>
+          <a href="#" onClick={this.handlerOnClickDismiss}>(Dismiss)</a>
+        </p>
+      </div>
     )
   }
 
