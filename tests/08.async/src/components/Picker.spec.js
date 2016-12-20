@@ -1,7 +1,7 @@
 import React from 'react'
+import sinon from 'sinon'
 import {mount} from 'enzyme'
 import TestUtils from 'react-addons-test-utils'
-import sinon from 'sinon'
 
 import Themes from '../../../../main/08.async/src/constants/Themes'
 import Picker from '../../../../main/08.async/src/components/Picker'
