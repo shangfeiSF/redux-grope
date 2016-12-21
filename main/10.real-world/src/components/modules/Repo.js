@@ -21,7 +21,7 @@ class Repo extends Component {
         <h3>
           <Link to={`/${login}/${name}`}>{name}</Link>
           {' by '}
-          <Link to={`/${login}`}>{login} </Link>
+          <Link to={`/${login}`}>{login}</Link>
         </h3>
         {description && <p>{description}</p> }
       </div>

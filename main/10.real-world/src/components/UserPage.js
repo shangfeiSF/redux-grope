@@ -36,7 +36,7 @@ class UserPage extends Component {
     }
   }
 
-  _handleLoadMoreClick = ()=> {
+  _handleLoadMoreClick = () => {
     this.props.loadStarred(this.props.login, true)
   }
 
