@@ -6,3 +6,4 @@ server/vendors/*
 .happypack/
 __build__/
 server/.happypack/
+bin/.cacheDirectory/

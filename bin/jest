@@ -80,6 +80,7 @@ fs.statAsync(jestConfigFile)
     }
 
     var json = {
+      cacheDirectory: path.join(__dirname, './.cacheDirectory'),
       testRegex: testRegex,
       bail: options.bail === undefined ? false : options.bail,
       verbose: options.verbose === undefined ? true : options.verbose

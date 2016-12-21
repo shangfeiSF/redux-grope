@@ -62,7 +62,7 @@ describe('RepoPage', () => {
     expect(output.type).toBe('h1')
     expect(i.type).toBe('i')
 
-    expect(i.props.children).toEqual(['Loading ', props.name, 'details...'])
+    expect(i.props.children).toEqual(['Loading ', props.name, ' details...'])
   })
 
   it('should display correctly', () => {
