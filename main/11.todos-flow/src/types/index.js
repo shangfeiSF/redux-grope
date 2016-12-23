@@ -1,7 +1,7 @@
 // @flow
 
-import * as ActionTypes from '../constants/ActionTypes'
-import * as FilterTypes from '../constants/FilterTypes'
+import {ADD, TOGGLE, FILTER} from '../constants/ActionTypes'
+import {ALL, ACTIVE, COMPLETED} from '../constants/FilterTypes'
 
 // http://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html
 import type {Store as ReduxStore, Dispatch as ReduxDispatch} from 'redux'
@@ -18,25 +18,23 @@ export type Todo = {
 
 export type Todos = Array<Todo>
 
-export type VisibilityFilter = FilterTypes.SHOW_ALL |
-  FilterTypes.SHOW_ACTIVE |
-  FilterTypes.SHOW_COMPLETED
+export type Filter = ALL | ACTIVE | COMPLETED
 
 export type State = {
   todos: Todos,
-  visibilityFilter: VisibilityFilter
+  filter: Filter
 }
 
 export type Action = {
-  type: ActionTypes.ADD_TODO,
+  type: ADD,
   id: Id,
   text: Text
 } | {
-  type: ActionTypes.TOGGLE_TODO,
+  type: TOGGLE,
   id: Id
 } | {
-  type: ActionTypes.SET_VISIBILITY_FILTER,
-  filter: VisibilityFilter
+  type: FILTER,
+  filter: Filter
 }
 
 export type Store = ReduxStore<State, Action>

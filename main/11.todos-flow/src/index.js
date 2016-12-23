@@ -11,6 +11,8 @@ import {Provider} from 'react-redux'
 import App from './components/App'
 import reducers from './reducers'
 
+import '../../global.css'
+
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 
