@@ -1,14 +1,17 @@
 // @flow
+
 import React from 'react'
-import Footer from './Footer'
-import AddTodo from '../containers/AddTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
+
+import FilterList from './FilterList'
+
+import ItemListContainer from '../containers/ItemListContainer'
+import AddContainer from '../containers/AddContainer'
 
 const App = () => (
   <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
+    <FilterList />
+    <ItemListContainer />
+    <AddContainer />
   </div>
 )
 
