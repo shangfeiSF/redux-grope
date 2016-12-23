@@ -1,3 +1,5 @@
+// @flow
+
 import {connect} from 'react-redux'
 
 import type {Connector} from 'react-redux'
