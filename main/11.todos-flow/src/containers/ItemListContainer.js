@@ -3,12 +3,13 @@
 import {connect} from 'react-redux'
 
 import type {Connector} from 'react-redux'
-import type {Id, State, Dispatch} from '../types'
+import type {State, Dispatch} from '../types'
 import type {Props} from '../components/ItemList'
 
-import {ALL, ACTIVE, COMPLETED} from '../constants/FilterTypes'
 import ItemList from '../components/ItemList'
 import {toggle} from '../actions'
+
+import {ALL, ACTIVE, COMPLETED} from '../constants/FilterTypes'
 
 const filterHandler = (todos, filter) => {
   switch (filter) {
@@ -29,11 +30,14 @@ const mapStateToProps = (state: State) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onItemClick: (id: Id) => {
+  onItemClick: (id) => {
     dispatch(toggle(id))
   }
 })
 
-const connector: Connector<{}, Props> = connect(mapStateToProps, mapDispatchToProps)
+const connector: Connector<{}, Props> = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 
 export default connector(ItemList)

@@ -1,9 +1,10 @@
 // @flow
 
 import React, {PropTypes}from 'react'
+import type {Text} from '../types'
 
 export type Props = {
-  onSubmit: () => void
+  onSubmit: (value: Text) => void
 }
 
 const Add = ({onSubmit}: Props) => {

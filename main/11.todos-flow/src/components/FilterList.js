@@ -1,7 +1,7 @@
 // @flow
 
 import React, {PropTypes}from 'react'
-import {ALL, ACTIVE, COMPLETED} from '../constants/FilterTypes'
+import * as FilterTypes from '../constants/FilterTypes'
 import FilterContainer from '../containers/FilterContainer'
 
 const FilterList = () => (
@@ -10,15 +10,15 @@ const FilterList = () => (
 
     <ul>
       <li className="all">
-        <FilterContainer filter={ALL}>All</FilterContainer>
+        <FilterContainer filter={FilterTypes.ALL}>All</FilterContainer>
       </li>
 
       <li className="active">
-        <FilterContainer filter={ACTIVE}>Active</FilterContainer>
+        <FilterContainer filter={FilterTypes.ACTIVE}>Active</FilterContainer>
       </li>
 
       <li className="completed">
-        <FilterContainer filter={COMPLETED}>Completed</FilterContainer>
+        <FilterContainer filter={FilterTypes.COMPLETED}>Completed</FilterContainer>
       </li>
     </ul>
   </div>

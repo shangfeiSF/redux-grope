@@ -7,7 +7,7 @@ export type Props = {
   id: Id,
   text: Text,
   completed: boolean,
-  onClick: () => void
+  onClick: (id: Id) => void
 }
 
 const Item = ({id, text, completed, onClick}: Props) => (
