@@ -1,7 +1,5 @@
 // @flow
 
-import * as ActionTypes from '../../constants/ActionTypes'
-
 import type {Id, Text, Todo, Todos, Action} from '../../types'
 
 const _add = (id: Id, text: Text): Todo => ({

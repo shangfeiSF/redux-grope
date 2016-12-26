@@ -1,8 +1,5 @@
 // @flow
 
-import * as ActionTypes from '../constants/ActionTypes'
-import * as FilterTypes from '../constants/FilterTypes'
-
 // http://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html
 import type {Store as ReduxStore, Dispatch as ReduxDispatch} from 'redux'
 
@@ -18,7 +15,7 @@ export type Todo = {
 
 export type Todos = Array<Todo>
 
-export type Filter = FilterTypes.ALL | FilterTypes.ACTIVE | FilterTypes.COMPLETED
+export type Filter = 'ALL' | 'ACTIVE' | 'COMPLETED'
 
 export type State = {
   todos: Todos,
@@ -26,14 +23,14 @@ export type State = {
 }
 
 export type Action = {
-  type: ActionTypes.ADD,
+  type: 'ADD',
   id: Id,
   text: Text
 } | {
-  type: ActionTypes.TOGGLE,
+  type: 'TOGGLE',
   id: Id
 } | {
-  type: ActionTypes.FILTER,
+  type: 'FILTER',
   filter: Filter
 }
 
