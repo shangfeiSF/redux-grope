@@ -4,8 +4,8 @@ import React, {PropTypes}from 'react'
 
 export type Props = {
   active: boolean,
-  children?: React$Element<any>,
-  onClick: () => void
+  onClick: () => void,
+  children?: React$Element<any>
 }
 
 const Filter = ({active, children, onClick}: Props) => active ?

@@ -7,18 +7,18 @@ export type Id = number
 
 export type Text = string
 
-export type Todo = {
+export type Item = {
   id: Id,
   text: Text,
   completed: boolean
 }
 
-export type Todos = Array<Todo>
+export type Items = Array<Item>
 
 export type Filter = 'ALL' | 'ACTIVE' | 'COMPLETED'
 
 export type State = {
-  todos: Todos,
+  items: Items,
   filter: Filter
 }
 

@@ -6,7 +6,7 @@ import type {Connector} from 'react-redux'
 import type {State, Dispatch} from '../types'
 import type {Props} from '../components/Add'
 
-import Add from '../components/Add'
+import AddComp from '../components/Add'
 import {add} from '../actions'
 
 const mapStateToProps = (state: State) => ({})
@@ -17,9 +17,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   }
 })
 
+// http://www.typescriptlang.org/docs/handbook/generics.html
 const connector: Connector<{}, Props> = connect(
   mapStateToProps,
   mapDispatchToProps
 )
 
-export default connector(Add)
+export default connector(AddComp)

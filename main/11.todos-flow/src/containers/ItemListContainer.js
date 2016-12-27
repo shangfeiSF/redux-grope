@@ -6,27 +6,27 @@ import type {Connector} from 'react-redux'
 import type {State, Dispatch} from '../types'
 import type {Props} from '../components/ItemList'
 
-import ItemList from '../components/ItemList'
+import ItemListComp from '../components/ItemList'
 import {toggle} from '../actions'
 
 import {ALL, ACTIVE, COMPLETED} from '../constants/FilterTypes'
 
-const filterHandler = (todos, filter) => {
+const filterHandler = (items, filter) => {
   switch (filter) {
     case ACTIVE:
-      return todos.filter(t => !t.completed)
+      return items.filter(item => !item.completed)
 
     case COMPLETED:
-      return todos.filter(t => t.completed)
+      return items.filter(item => item.completed)
 
     case ALL:
     default:
-      return todos
+      return items
   }
 }
 
 const mapStateToProps = (state: State) => ({
-  items: filterHandler(state.todos, state.filter)
+  items: filterHandler(state.items, state.filter)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -40,4 +40,4 @@ const connector: Connector<{}, Props> = connect(
   mapDispatchToProps
 )
 
-export default connector(ItemList)
+export default connector(ItemListComp)

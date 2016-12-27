@@ -1,11 +1,11 @@
 // @flow
 
 import React, {PropTypes}from 'react'
-import type {Id, Todos} from '../types'
+import type {Id, Items} from '../types'
 import Item from './Item'
 
 export type Props = {
-  items: Todos,
+  items: Items,
   onItemClick: (id: Id) => void
 }
 
