@@ -16,6 +16,10 @@ var html = fs.readFileSync(path.join(__dirname, 'index.html'), {
   encoding: 'utf-8'
 }).replace('{{LINKS}}', LINKS.join('\n'))
 
+var webpackDllConfig = require('../webpack.dll')
+var manifestPath = path.join(__dirname, '../vendors', webpackDllConfig._manifest)
+var manifestJson = JSON.parse(fs.readFileSync(manifestPath).toString('utf-8'))
+
 module.exports = {
   port: 8080,
 
@@ -24,4 +28,9 @@ module.exports = {
   universalIndex: universalIndex,
 
   html: html,
+
+  vendors: {
+    from: '/vendorsBundle.js',
+    to: '/' + manifestJson.name + '.js'
+  }
 }
