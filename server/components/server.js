@@ -15,6 +15,12 @@ var server = new WebpackDevServer(compiler, devConfig)
 if (!options.hot) {
   server = express()
 
+  server.use(expressUrlrewrite(ServerConfig.vendors.from, ServerConfig.vendors.to))
+
+  DirSpec.mainSubDirNames.forEach(function (dir) {
+    server.use(expressUrlrewrite('/' + dir + '/*', '/' + dir + '/index.html'))
+  })
+
   server.use(express.static(DirSpec.mainDirPath))
   server.use(express.static(path.join(DirSpec.mainDirPath, '../__build__')))
   server.use(express.static(DirSpec.vendorsPath))
@@ -24,10 +30,6 @@ if (!options.hot) {
   server.get('/index.html', function (req, res) {
     res.writeHead(200)
     res.end(ServerConfig.html)
-  })
-
-  DirSpec.mainSubDirNames.forEach(function (dir) {
-    server.use(expressUrlrewrite('/' + dir + '/*', '/' + dir + '/index.html'))
   })
 }
 

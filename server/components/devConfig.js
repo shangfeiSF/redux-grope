@@ -33,17 +33,19 @@ if (options.hot) {
     },
 
     setup: function (app) {
-      app.use(express.static(DirSpec.mainDirPath))
-      app.use(express.static(DirSpec.vendorsPath))
+      app.use(expressUrlrewrite(ServerConfig.vendors.from, ServerConfig.vendors.to))
+
+      DirSpec.mainSubDirNames.forEach(function (dir) {
+        app.use(expressUrlrewrite('/' + dir + '/*', '/' + dir + '/index.html'))
+      })
 
       app.get('/index.html', function (req, res) {
         res.writeHead(200)
         res.end(ServerConfig.html)
       })
 
-      DirSpec.mainSubDirNames.forEach(function (dir) {
-        app.use(expressUrlrewrite('/' + dir + '/*', '/' + dir + '/index.html'))
-      })
+      app.use(express.static(DirSpec.mainDirPath))
+      app.use(express.static(DirSpec.vendorsPath))
     }
   })
 }
