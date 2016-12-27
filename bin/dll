@@ -5,72 +5,22 @@ var child_process = require('child_process')
 
 var Promise = require('bluebird')
 Promise.promisifyAll(fs)
+
 var execAsync = Promise.promisify(child_process.exec, {
   context: child_process,
   multiArgs: true
 })
 
-var webpackDllConfig = require('../server/webpack.dll')
-
-var htmlEntry = 'index.html'
-var mainDirPath = path.join(__dirname, '../main')
-var manifestPath = path.join(__dirname, '../server/vendors', webpackDllConfig._manifest)
-
 var dllCommand = 'npm run dll'
-var pattern = new RegExp(webpackDllConfig._baseName + '\\_\\w*\\.js')
 
 execAsync(dllCommand, {cwd: path.join(__dirname, '../')})
   .then(
     function (details) {
       console.log(details[0])
       console.log(details[1])
-
-      var manifestJson = fs.readFileAsync(manifestPath)
-
-      var targetDirs = fs.readdirAsync(mainDirPath)
-        .filter(function (dir) {
-          return fs.statAsync(path.join(mainDirPath, dir))
-            .then(function (stat) {
-              var existed = fs.statAsync(path.join(mainDirPath, dir, htmlEntry))
-                .then(function () {
-                  return true
-                }, function () {
-                  return false
-                })
-
-              return stat.isDirectory() && existed
-            })
-        })
-
-      return Promise.join(manifestJson, targetDirs)
     },
     function (error) {
       console.log(error.cmd)
       console.log(error.message)
     }
   )
-  .then(function (result) {
-    var manifestJson = result[0]
-    var targetDirs = result[1]
-
-    var manifestJson = JSON.parse(manifestJson.toString('utf-8'))
-
-    return targetDirs.map(function (dir) {
-      return {
-        dir: dir,
-        filename: manifestJson.name + '.js',
-        target: path.join(mainDirPath, dir, htmlEntry)
-      }
-    })
-  })
-  .each(function (spec) {
-    fs.readFileAsync(spec.target)
-      .then(function (data) {
-        var data = data.toString('utf-8').replace(pattern, spec.filename)
-
-        return fs.writeFileAsync(spec.target, data)
-      })
-      .then(function (error) {
-        error ? console.log(error) : console.log('[Replaced vendor completed]:', spec.dir)
-      })
-  })
