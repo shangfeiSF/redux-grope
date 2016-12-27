@@ -1,5 +1,6 @@
 var fs = require('fs')
 var path = require('path')
+var colors = require('colors')
 
 var webpack = require('webpack')
 var HappyPack = require('happypack')
@@ -21,6 +22,14 @@ var makeEntry = function (dirs) {
     }, entry)
 
   return entry
+}
+
+try {
+  fs.accessSync(path.join(__dirname, './vendors/manifest.json'), fs.F_OK)
+} catch (e) {
+  console.log(colors.red(e.message))
+  console.log(colors.yellow('[Tips]:Please execute `node bin/dll` or `npm run dll` first and then execute `node bin/server` or `npm start`.'))
+  process.exit(500)
 }
 
 module.exports = {
