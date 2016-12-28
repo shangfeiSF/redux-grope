@@ -1,37 +1,39 @@
 // @flow
 
-import React, {PropTypes}from 'react'
-import type {Text} from '../types'
+import React, {Component, PropTypes} from 'react'
+import type {Text, Event} from '../types'
 
 export type Props = {
   onSubmit: (value: Text) => void
 }
 
-const Add = ({onSubmit}: Props) => {
-  let input
-  return (
-    <div>
-      <form onSubmit={e =>{
-        e.preventDefault()
+class Add extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired
+  }
 
-        if (input.value.trim().length) {
-          onSubmit(input.value)
-          input.value = ''
-        }
-      }}>
+  handlerOnSubmit = (e: Event) => {
+    e.preventDefault()
 
-        <input ref={node => {
-          input = node
-        }}/>
-        <button type="submit">Add</button>
+    let {onSubmit}:Props = this.props
+    let input = this.refs.addInput
 
-      </form>
-    </div>
-  )
-}
+    if (input.value.trim().length) {
+      onSubmit(input.value)
+      input.value = ''
+    }
+  }
 
-Add.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handlerOnSubmit}>
+          <input ref="addInput"/>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    )
+  }
 }
 
 export default Add

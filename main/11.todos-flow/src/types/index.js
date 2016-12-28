@@ -7,6 +7,10 @@ export type Id = number
 
 export type Text = string
 
+export type Event = {
+  preventDefault: () => void
+}
+
 export type Item = {
   id: Id,
   text: Text,
