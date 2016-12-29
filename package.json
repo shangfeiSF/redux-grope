@@ -6,7 +6,7 @@
     "start": "node bin/server -h",
     "si": "node bin/server -h -i",
     "sp": "node bin/server -p",
-    "spi": "node bin/server -p-i",
+    "spi": "node bin/server -p -i",
     "universal": "node main/09.universal/server.js",
     "test": "node node_modules/jest/bin/jest --config bin/config.jest.json",
     "jest-all": "node bin/jest -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
