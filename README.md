@@ -102,7 +102,7 @@ This is the most advanced example. It is dense by design. It covers keeping fetc
 
 > **NOTE**
 
-> You should first update the [access-token](https://developer.github.com/v3/oauth/) necessary for calling [APIs of github](https://developer.github.com/v3/) which is stored in `10.real-world/src/constants/Github`. You can link to https://github.com/settings/tokens to generate a new token and update the value of `ACCESSTOKEN`  that will make this demo run correctly when calling [APIs of github](https://developer.github.com/v3/).
+> You should first update the [access-token](https://developer.github.com/v3/oauth/#3-use-the-access-token-to-access-the-api) necessary for calling [APIs of github](https://developer.github.com/v3/) which is stored in `10.real-world/src/constants/Github`. You can link to https://github.com/settings/tokens to generate a new token and update the value of `ACCESSTOKEN`  that will make this demo run correctly when calling [APIs of github](https://developer.github.com/v3/).
 
 ### `11.todos-flow:`
 
