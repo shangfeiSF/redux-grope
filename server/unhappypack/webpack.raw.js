@@ -1,9 +1,10 @@
 var fs = require('fs')
 var path = require('path')
+
 var webpack = require('webpack')
 var Visualizer = require('webpack-visualizer-plugin')
 
-var DirSpec = require('./constants/DirSpec')
+var DirSpec = require('../constants/DirSpec')
 
 var makeEntry = function (dirs) {
   var entry = {}
@@ -29,20 +30,20 @@ module.exports = {
   _makeEntry: makeEntry,
 
   output: {
-    path: path.join(__dirname, '../__build__'),
+    path: path.join(__dirname, '../../__build_raw__'),
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
-    publicPath: '/__build__/'
+    publicPath: '/__build_raw__/'
   },
 
   resolve: {
     alias: {
-      'react-router': path.join(__dirname, '../node_modules', 'react-router', 'lib')
+      'react-router': path.join(__dirname, '../../node_modules', 'react-router', 'lib')
     },
     extensions: ['', '.js', '.json']
   },
 
-  context: path.join(__dirname, '../'),
+  context: path.join(__dirname, '../../'),
 
   node: {
     __dirname: true
@@ -52,20 +53,20 @@ module.exports = {
     loaders: [
       {
         test: /\.json/,
-        include: path.join(__dirname, '../main/06.shopping-cart/src/api'),
+        include: path.join(__dirname, '../../main/06.shopping-cart/src/api'),
         loader: 'json-loader'
       },
       {
         test: /\.css$/,
         include: [
-          path.join(__dirname, '../main'),
-          path.join(__dirname, '../node_modules/todomvc-app-css')
+          path.join(__dirname, '../../main'),
+          path.join(__dirname, '../../node_modules/todomvc-app-css')
         ],
         loader: "style!css"
       },
       {
         test: /\.js$/,
-        include: path.join(__dirname, '../main'),
+        include: path.join(__dirname, '../../main'),
         loader: "babel-loader",
         query: {
           presets: ['react', 'es2015', 'stage-1']
@@ -77,7 +78,7 @@ module.exports = {
   plugins: [
     new webpack.DllReferencePlugin({
       context: __dirname,
-      manifest: require('./vendors/manifest.json'),
+      manifest: require('../vendors/manifest.json'),
     }),
     new Visualizer()
   ]

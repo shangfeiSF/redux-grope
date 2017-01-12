@@ -1,10 +1,11 @@
 var fs = require('fs')
 var path = require('path')
-var colors = require('colors')
 
 var webpack = require('webpack')
-var HappyPack = require('happypack')
 var Visualizer = require('webpack-visualizer-plugin')
+
+var colors = require('colors')
+var HappyPack = require('happypack')
 
 var DirSpec = require('./constants/DirSpec')
 
