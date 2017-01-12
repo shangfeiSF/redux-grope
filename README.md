@@ -36,7 +36,7 @@ You should execute `cd redux-grope` and `npm run dll`  or `node bin/dll`. It hel
 
 > **NOTE**
 
-> If you want comapre with the efficiency of webpack without [HappyPack](https://github.com/amireh/happypack), you can use `server/unhappypack/webpack.raw.js`  instead of `server/webpack.config.js`
+> If you want comapre with the efficiency of webpack without [HappyPack](https://github.com/amireh/happypack), you can use `webpack --config server/unhappypack/webpack.raw.js`  instead of `webpack --config server/webpack.config.js`
 
 ###  3.2 Start the local server to build and view applicatons in main
 
