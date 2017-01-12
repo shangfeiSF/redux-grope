@@ -3,15 +3,13 @@ import React, {Component, PropTypes} from 'react'
 class Add extends Component {
   constructor(props, context) {
     super(props, context)
-
-    this.handlerOnSubmit = this.handlerOnSubmit.bind(this)
   }
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired
   }
 
-  handlerOnSubmit(e) {
+  handlerOnSubmit = (e) => {
     e.preventDefault()
 
     let {onSubmit} = this.props
