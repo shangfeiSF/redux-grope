@@ -100,6 +100,10 @@ This is a basic demonstration of [server rendering](https://github.com/reactjs/r
 
 This is the most advanced example. It is dense by design. It covers keeping fetched entities in a normalized cache, implementing a custom middleware for API calls, rendering partially loaded data, pagination, caching responses, displaying error messages, and routing. Additionally, it includes Redux DevTools.
 
+> **NOTE**
+
+> You should first update the [access-token](https://developer.github.com/v3/oauth/#3-use-the-access-token-to-access-the-api) necessary for calling [APIs of github](https://developer.github.com/v3/) which is stored in `10.real-world/src/constants/Github`. You can link to https://github.com/settings/tokens to generate a new token and update the value of `ACCESSTOKEN`  that will make this demo run correctly when calling [APIs of github](https://developer.github.com/v3/).
+
 ### `11.todos-flow:`
 
 This is the same as `03.todos`, but it import [Facebook/Flow](https://flowtype.org/) to check Javascript.
