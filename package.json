@@ -2,7 +2,7 @@
   "name": "redux-grope",
   "version": "1.0.0",
   "scripts": {
-    "dll": "webpack --config server/webpack.dll.js",
+    "dll": "./node_modules/.bin/webpack --config server/webpack.dll.js",
     "start": "node bin/server -h",
     "si": "node bin/server -h -i",
     "sp": "node bin/server -p",

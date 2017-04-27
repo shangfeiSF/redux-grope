@@ -3,9 +3,6 @@ import React, {Component, PropTypes} from 'react'
 class Counter extends Component {
   constructor(props, context) {
     super(props, context)
-
-    this.handlerOnIncreaseIfOdd = this.handlerOnIncreaseIfOdd.bind(this)
-    this.handlerOnIncreaseAsync = this.handlerOnIncreaseAsync.bind(this)
   }
 
   static propTypes = {
@@ -14,13 +11,13 @@ class Counter extends Component {
     handlerOnDecrease: PropTypes.func.isRequired
   }
 
-  handlerOnIncreaseIfOdd() {
+  handlerOnIncreaseIfOdd = () => {
     if (this.props.value % 2 !== 0) {
       this.props.handlerOnIncrease()
     }
   }
 
-  handlerOnIncreaseAsync() {
+  handlerOnIncreaseAsync = () => {
     setTimeout(this.props.handlerOnIncrease, 1000)
   }
 

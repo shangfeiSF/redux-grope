@@ -19,8 +19,8 @@ class App {
     let store = this.store
 
     let content = <Counter value={ store.getState() }
-      handlerOnIncrease={ () => store.dispatch({ type: 'INCREMENT' }) }
-      handlerOnDecrease={ () => store.dispatch({ type: 'DECREMENT' }) }
+      handlerOnIncrease={ () => store.dispatch({type: 'INCREMENT'}) }
+      handlerOnDecrease={ () => store.dispatch({type: 'DECREMENT'}) }
     />
 
     render(content, this.root)
