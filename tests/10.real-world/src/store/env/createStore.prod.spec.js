@@ -1,5 +1,6 @@
 import {normalize} from 'normalizr'
 import {camelizeKeys} from 'humps'
+import Immutable from 'immutable'
 import {bindActionCreators} from 'redux'
 
 import {mocks} from '../mocks/middleware/modules/utils'
@@ -23,14 +24,15 @@ import {loadUser, loadStarred} from '../../../../../main/10.real-world/src/actio
 
 import {resetErrorMessage} from '../../../../../main/10.real-world/src/actions/errorActions'
 
-import {routerReducer as routing} from 'react-router-redux'
 import {Schemas} from '../../../../../main/10.real-world/src/middleware/schema'
 import createStore from '../../../../../main/10.real-world/src/store/env/createStore.prod'
 
 describe('createStore.dev', () => {
   it('should create store correctly with initState', () => {
     const initState = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -42,16 +44,18 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    const store = createStore(initState)
+    const store = createStore(Immutable.fromJS(initState))
 
     const expectedValue = initState
 
-    expect(store.getState()).toEqual(expectedValue)
+    expect(store.getState().toJS()).toEqual(expectedValue)
   })
 
   it('should change store correctly by `loadRepo` when enter the `RepoPage`', async() => {
     const initState = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -63,7 +67,7 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    const store = createStore(initState)
+    const store = createStore(Immutable.fromJS(initState))
 
     const loadRepoBinded = bindActionCreators(loadRepo, store.dispatch)
 
@@ -75,7 +79,9 @@ describe('createStore.dev', () => {
     let normalized = normalize(camelized, Schemas.REPO)
 
     let expectedValue = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: normalized.entities.users,
         repos: normalized.entities.repos
@@ -87,12 +93,14 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    expect(store.getState()).toEqual(expectedValue)
+    expect(store.getState().toJS()).toEqual(expectedValue)
   })
 
   it('should change store correctly by `loadStargazers` when enter the `RepoPage`', async() => {
     const initState = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -104,7 +112,7 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    const store = createStore(initState)
+    const store = createStore(Immutable.fromJS(initState))
 
     const loadStargazersBinded = bindActionCreators(loadStargazers, store.dispatch)
 
@@ -116,7 +124,9 @@ describe('createStore.dev', () => {
     let normalized = normalize(camelized, Schemas.USER_ARRAY)
 
     let expectedValue = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: normalized.entities.users,
         repos: {}
@@ -135,12 +145,14 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    expect(store.getState()).toEqual(expectedValue)
+    expect(store.getState().toJS()).toEqual(expectedValue)
   })
 
   it('should change store correctly by `loadUser` when enter the `UserPage`', async() => {
     const initState = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -152,7 +164,7 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    const store = createStore(initState)
+    const store = createStore(Immutable.fromJS(initState))
 
     const loadRepoBinded = bindActionCreators(loadUser, store.dispatch)
 
@@ -164,7 +176,9 @@ describe('createStore.dev', () => {
     let normalized = normalize(camelized, Schemas.USER)
 
     let expectedValue = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: normalized.entities.users,
         repos: {}
@@ -176,12 +190,14 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    expect(store.getState()).toEqual(expectedValue)
+    expect(store.getState().toJS()).toEqual(expectedValue)
   })
 
   it('should change store correctly by `loadStarred` when enter the `UserPage`', async() => {
     const initState = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -193,7 +209,7 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    const store = createStore(initState)
+    const store = createStore(Immutable.fromJS(initState))
 
     const loadStarredBinded = bindActionCreators(loadStarred, store.dispatch)
 
@@ -205,7 +221,9 @@ describe('createStore.dev', () => {
     let normalized = normalize(camelized, Schemas.REPO_ARRAY)
 
     let expectedValue = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: normalized.entities.users,
         repos: normalized.entities.repos
@@ -224,12 +242,14 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    expect(store.getState()).toEqual(expectedValue)
+    expect(store.getState().toJS()).toEqual(expectedValue)
   })
 
   it('should change store correctly by `resetErrorMessage`', () => {
     const initState = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -241,12 +261,14 @@ describe('createStore.dev', () => {
       errorMessage: 'This is an error message'
     }
 
-    const store = createStore(initState)
+    const store = createStore(Immutable.fromJS(initState))
 
     store.dispatch(resetErrorMessage())
 
     const expectedValue = {
-      routing: routing,
+      routing: {
+        locationBeforeTransitions: null
+      },
       entities: {
         users: {},
         repos: {}
@@ -258,7 +280,6 @@ describe('createStore.dev', () => {
       errorMessage: null
     }
 
-    expect(store.getState()).toEqual(expectedValue)
-
+    expect(store.getState().toJS()).toEqual(expectedValue)
   })
 })

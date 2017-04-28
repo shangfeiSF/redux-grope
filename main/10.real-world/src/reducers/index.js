@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux'
+import {combineReducers} from 'redux-immutable'
 
 import routing from './modules/routing'
 import entities from './modules/entities'

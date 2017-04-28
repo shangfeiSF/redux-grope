@@ -1,5 +1,7 @@
-const nextUrl = '<https://api.github.com/repositories/10270250/stargazers?access_token=4b2e139b5f63ca86657f0dbbc6d10ea16100616e&page=2>'
-const lastUrl = '<https://api.github.com/repositories/10270250/stargazers?access_token=4b2e139b5f63ca86657f0dbbc6d10ea16100616e&page=1334>'
+import ACCESSTOKEN from '../../../../../../main/10.real-world/src/constants/Github'
+
+const nextUrl = '<https://api.github.com/repositories/10270250/stargazers?access_token=' + ACCESSTOKEN + '&page=2>'
+const lastUrl = '<https://api.github.com/repositories/10270250/stargazers?access_token=' + ACCESSTOKEN + '&page=1334>'
 
 const jsonMocked = {
   id: 10270250,

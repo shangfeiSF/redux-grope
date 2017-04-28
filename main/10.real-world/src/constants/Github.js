@@ -1,2 +1,2 @@
-export const ACCESSTOKEN = '9efb093d427e61593cea9972c5f58e72d115d4e3'
+export const ACCESSTOKEN = 'f5ef152d58d7f33bcd358b07aa66490849252a20'
 export const APIROOT = 'https://api.github.com/'

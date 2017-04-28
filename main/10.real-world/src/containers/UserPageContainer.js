@@ -8,7 +8,9 @@ import UserPage from '../components/UserPage'
 import {loadUser, loadStarred} from '../actions/userPageThunkActions'
 
 const mapStateToProps = (state, ownProps) => {
-  const {pagination: {starredByUser}, entities: {users, repos}} = state
+  let _state = state.toJS()
+
+  const {pagination: {starredByUser}, entities: {users, repos}} = _state
 
   const login = polyfill.replace(ownProps.params.login.toLowerCase())
 

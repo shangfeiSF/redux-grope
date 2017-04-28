@@ -1,7 +1,9 @@
 import * as repoPageSyncActions from './repoPageSyncActions'
 
 export const loadRepo = (fullName, requiredFields = []) => (dispatch, getState) => {
-  const repo = getState().entities.repos[fullName]
+  let _state = getState().toJS()
+
+  const repo = _state.entities.repos[fullName]
 
   const exist = requiredFields.every(key => repo && repo.hasOwnProperty(key))
 
@@ -9,10 +11,12 @@ export const loadRepo = (fullName, requiredFields = []) => (dispatch, getState) 
 }
 
 export const loadStargazers = (fullName, nextPage) => (dispatch, getState) => {
+  let _state = getState().toJS()
+
   const {
     nextPageUrl = `repos/${fullName}/stargazers`,
     pageCount = 0
-  } = getState().pagination.stargazersByRepo[fullName] || {}
+  } = _state.pagination.stargazersByRepo[fullName] || {}
 
   return pageCount > 0 && !nextPage ? null : dispatch(repoPageSyncActions.loadStargazersActions(fullName, nextPageUrl))
 }

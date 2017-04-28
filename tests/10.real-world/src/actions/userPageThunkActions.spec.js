@@ -1,3 +1,5 @@
+import Immutable from 'immutable'
+
 import {SPEC} from '../../../../main/10.real-world/src/middleware/symbol'
 import {Schemas} from '../../../../main/10.real-world/src/middleware/schema'
 
@@ -22,7 +24,7 @@ describe('userPageThunkActions', () => {
     }
 
     let dispatch = action => action
-    let getState = () => ({
+    let getState = () => Immutable.Map({
       entities: {
         users: {}
       }
@@ -56,7 +58,7 @@ describe('userPageThunkActions', () => {
     }
 
     let dispatch = action => action
-    let getState = () => ({
+    let getState = () => Immutable.Map({
       entities: {
         users: {
           [login]: userDeatils
@@ -84,7 +86,7 @@ describe('userPageThunkActions', () => {
     let expectedValue = null
 
     let dispatch = action => action
-    let getState = () => ({
+    let getState = () => Immutable.Map({
       entities: {
         users: {
           [login]: userDeatils
@@ -124,7 +126,7 @@ describe('userPageThunkActions', () => {
     }
 
     let dispatch = action => action
-    let getState = () => ({
+    let getState = () => Immutable.Map({
       pagination: {
         starredByUser: {
           [login]: starredByUserDeatils
@@ -164,7 +166,7 @@ describe('userPageThunkActions', () => {
     }
 
     let dispatch = action => action
-    let getState = () => ({
+    let getState = () => Immutable.Map({
       pagination: {
         starredByUser: {
           [login]: starredByUserDeatils
@@ -192,7 +194,7 @@ describe('userPageThunkActions', () => {
     let expectedValue = null
 
     let dispatch = action => action
-    let getState = () => ({
+    let getState = () => Immutable.Map({
       pagination: {
         starredByUser: {
           [login]: starredByUserDeatils

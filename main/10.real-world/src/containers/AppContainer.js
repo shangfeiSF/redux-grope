@@ -8,11 +8,13 @@ import App from '../components/App'
 import {resetErrorMessage} from '../actions/errorActions'
 
 const mapStateToProps = (state, ownProps) => {
+  let _state = state.toJS()
+
   let pathname = polyfill.replace(ownProps.location.pathname.substring(1))
 
   return {
     inputValue: pathname,
-    errorMessage: state.errorMessage
+    errorMessage: _state.errorMessage
   }
 }
 

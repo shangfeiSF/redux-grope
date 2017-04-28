@@ -48,13 +48,13 @@ class Explore extends Component {
     const {errorMessage} = this.props
 
     return !errorMessage ? null : (
-      <div className="errorMessage">
-        <p style={{backgroundColor: '#e99', padding: 10}}>
-          <b>{errorMessage}</b>
-          <a href="#" onClick={this.handlerOnClickDismiss}>(Dismiss)</a>
-        </p>
-      </div>
-    )
+        <div className="errorMessage">
+          <p style={{backgroundColor: '#e99', padding: 10}}>
+            <b>{errorMessage}</b>
+            <a href="#" onClick={this.handlerOnClickDismiss}>(Dismiss)</a>
+          </p>
+        </div>
+      )
   }
 
   render() {
