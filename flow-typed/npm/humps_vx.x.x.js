@@ -1,4 +1,4 @@
-// flow-typed signature: 8ba729041fb11bb3887223b47ccf7be5
+// flow-typed signature: feff23d2ab13e66911cf8312b0431b7b
 // flow-typed version: <<STUB>>/humps_v^1.1.0/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

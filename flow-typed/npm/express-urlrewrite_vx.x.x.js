@@ -1,4 +1,4 @@
-// flow-typed signature: 1d33683ae9677ed8b619dfd5acb90fcd
+// flow-typed signature: 4263840ccdf78ec80a3e1d3b1117aee0
 // flow-typed version: <<STUB>>/express-urlrewrite_v^1.2.0/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

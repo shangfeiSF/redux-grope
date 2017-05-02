@@ -1,4 +1,4 @@
-// flow-typed signature: f3f4729077d712b1eead5ea04f244d79
+// flow-typed signature: f304f0017512da0742e11eb346174129
 // flow-typed version: <<STUB>>/happypack_v^3.0.1/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

@@ -1,4 +1,4 @@
-// flow-typed signature: f99863086e185a02a191e66cdf599781
+// flow-typed signature: a37331d8a858a751c2b677b4f3ce3f91
 // flow-typed version: <<STUB>>/webpack-visualizer-plugin_v^0.1.5/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -22,10 +22,6 @@ declare module 'webpack-visualizer-plugin' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'webpack-visualizer-plugin/lib/buildHierarchy' {
-  declare module.exports: any;
-}
-
 declare module 'webpack-visualizer-plugin/lib/plugin' {
   declare module.exports: any;
 }
@@ -35,9 +31,6 @@ declare module 'webpack-visualizer-plugin/lib/pluginmain' {
 }
 
 // Filename aliases
-declare module 'webpack-visualizer-plugin/lib/buildHierarchy.js' {
-  declare module.exports: $Exports<'webpack-visualizer-plugin/lib/buildHierarchy'>;
-}
 declare module 'webpack-visualizer-plugin/lib/plugin.js' {
   declare module.exports: $Exports<'webpack-visualizer-plugin/lib/plugin'>;
 }

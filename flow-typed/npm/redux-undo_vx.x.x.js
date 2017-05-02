@@ -1,4 +1,4 @@
-// flow-typed signature: 6e30e44765fd2e9bb785eb65cc9308b0
+// flow-typed signature: f4ce3d911cfe195a5eb50f62d64b5b8c
 // flow-typed version: <<STUB>>/redux-undo_v^1.0.0-beta9/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -215,10 +215,6 @@ declare module 'redux-undo/_book/webpack.config.babel' {
 }
 
 declare module 'redux-undo/dist/redux-undo' {
-  declare module.exports: any;
-}
-
-declare module 'redux-undo/dist/redux-undo.min' {
   declare module.exports: any;
 }
 
@@ -509,9 +505,6 @@ declare module 'redux-undo/_book/webpack.config.babel.js' {
 }
 declare module 'redux-undo/dist/redux-undo.js' {
   declare module.exports: $Exports<'redux-undo/dist/redux-undo'>;
-}
-declare module 'redux-undo/dist/redux-undo.min.js' {
-  declare module.exports: $Exports<'redux-undo/dist/redux-undo.min'>;
 }
 declare module 'redux-undo/es/actions.js' {
   declare module.exports: $Exports<'redux-undo/es/actions'>;

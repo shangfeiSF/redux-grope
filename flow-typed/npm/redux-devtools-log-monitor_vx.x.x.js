@@ -1,4 +1,4 @@
-// flow-typed signature: fcec3c0980b892920471676a2483a53b
+// flow-typed signature: d626d4b282ace1c948b7a73b6865ea8e
 // flow-typed version: <<STUB>>/redux-devtools-log-monitor_v^1.0.11/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -39,6 +39,10 @@ declare module 'redux-devtools-log-monitor/lib/LogMonitor' {
 }
 
 declare module 'redux-devtools-log-monitor/lib/LogMonitorButton' {
+  declare module.exports: any;
+}
+
+declare module 'redux-devtools-log-monitor/lib/LogMonitorButtonBar' {
   declare module.exports: any;
 }
 
@@ -78,6 +82,10 @@ declare module 'redux-devtools-log-monitor/src/LogMonitorButton' {
   declare module.exports: any;
 }
 
+declare module 'redux-devtools-log-monitor/src/LogMonitorButtonBar' {
+  declare module.exports: any;
+}
+
 declare module 'redux-devtools-log-monitor/src/LogMonitorEntry' {
   declare module.exports: any;
 }
@@ -110,6 +118,9 @@ declare module 'redux-devtools-log-monitor/lib/LogMonitor.js' {
 declare module 'redux-devtools-log-monitor/lib/LogMonitorButton.js' {
   declare module.exports: $Exports<'redux-devtools-log-monitor/lib/LogMonitorButton'>;
 }
+declare module 'redux-devtools-log-monitor/lib/LogMonitorButtonBar.js' {
+  declare module.exports: $Exports<'redux-devtools-log-monitor/lib/LogMonitorButtonBar'>;
+}
 declare module 'redux-devtools-log-monitor/lib/LogMonitorEntry.js' {
   declare module.exports: $Exports<'redux-devtools-log-monitor/lib/LogMonitorEntry'>;
 }
@@ -136,6 +147,9 @@ declare module 'redux-devtools-log-monitor/src/LogMonitor.js' {
 }
 declare module 'redux-devtools-log-monitor/src/LogMonitorButton.js' {
   declare module.exports: $Exports<'redux-devtools-log-monitor/src/LogMonitorButton'>;
+}
+declare module 'redux-devtools-log-monitor/src/LogMonitorButtonBar.js' {
+  declare module.exports: $Exports<'redux-devtools-log-monitor/src/LogMonitorButtonBar'>;
 }
 declare module 'redux-devtools-log-monitor/src/LogMonitorEntry.js' {
   declare module.exports: $Exports<'redux-devtools-log-monitor/src/LogMonitorEntry'>;

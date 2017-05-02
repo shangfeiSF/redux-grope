@@ -1,4 +1,4 @@
-// flow-typed signature: 5ee58a6871947ff6bc934a4e3d813e1a
+// flow-typed signature: 08a3aceb63daa03ebc6b657f44b09de8
 // flow-typed version: <<STUB>>/sinon_v^1.17.6/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -134,11 +134,11 @@ declare module 'sinon/lib/sinon/walk' {
   declare module.exports: any;
 }
 
-declare module 'sinon/pkg/sinon-1.17.6' {
+declare module 'sinon/pkg/sinon-1.17.7' {
   declare module.exports: any;
 }
 
-declare module 'sinon/pkg/sinon-ie-1.17.6' {
+declare module 'sinon/pkg/sinon-ie-1.17.7' {
   declare module.exports: any;
 }
 
@@ -146,7 +146,7 @@ declare module 'sinon/pkg/sinon-ie' {
   declare module.exports: any;
 }
 
-declare module 'sinon/pkg/sinon-server-1.17.6' {
+declare module 'sinon/pkg/sinon-server-1.17.7' {
   declare module.exports: any;
 }
 
@@ -243,17 +243,17 @@ declare module 'sinon/lib/sinon/util/xhr_ie.js' {
 declare module 'sinon/lib/sinon/walk.js' {
   declare module.exports: $Exports<'sinon/lib/sinon/walk'>;
 }
-declare module 'sinon/pkg/sinon-1.17.6.js' {
-  declare module.exports: $Exports<'sinon/pkg/sinon-1.17.6'>;
+declare module 'sinon/pkg/sinon-1.17.7.js' {
+  declare module.exports: $Exports<'sinon/pkg/sinon-1.17.7'>;
 }
-declare module 'sinon/pkg/sinon-ie-1.17.6.js' {
-  declare module.exports: $Exports<'sinon/pkg/sinon-ie-1.17.6'>;
+declare module 'sinon/pkg/sinon-ie-1.17.7.js' {
+  declare module.exports: $Exports<'sinon/pkg/sinon-ie-1.17.7'>;
 }
 declare module 'sinon/pkg/sinon-ie.js' {
   declare module.exports: $Exports<'sinon/pkg/sinon-ie'>;
 }
-declare module 'sinon/pkg/sinon-server-1.17.6.js' {
-  declare module.exports: $Exports<'sinon/pkg/sinon-server-1.17.6'>;
+declare module 'sinon/pkg/sinon-server-1.17.7.js' {
+  declare module.exports: $Exports<'sinon/pkg/sinon-server-1.17.7'>;
 }
 declare module 'sinon/pkg/sinon-server.js' {
   declare module.exports: $Exports<'sinon/pkg/sinon-server'>;

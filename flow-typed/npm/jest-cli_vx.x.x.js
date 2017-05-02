@@ -1,4 +1,4 @@
-// flow-typed signature: 1f1fa15e445daaef43028c075cdad3b9
+// flow-typed signature: 3981b00eb302d348f75cba271e168ad3
 // flow-typed version: <<STUB>>/jest-cli_v^16.0.2/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

@@ -1,4 +1,4 @@
-// flow-typed signature: e41906dc2124e0f7d5dc1c0c29377f05
+// flow-typed signature: 7e92270e188762a3bd65fad50323e531
 // flow-typed version: <<STUB>>/redux-devtools-dock-monitor_v^1.1.1/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

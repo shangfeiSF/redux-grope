@@ -124,8 +124,8 @@ You should execute `cd redux-grope` and `node bin/jest [-p] [-r] [-i] <params> |
 
 * `npm run jest-all` : the same to `node bin/jest -r tests/.*/src/.*/.*.spec.js -v0 | npm test`
 * `npm run jest-all-v` : the same to `node bin/jest -r tests/.*/src/.*/.*.spec.js | npm test`
-* `npm run jest-i <number>` : the same to `jest-i": "node bin/jest -v0 -i <number>`
-* `npm run jest-v-i <number>`  : the same to `node bin/jest -i <number>`
+* `i=<number> npm run jest-i` : the same to `jest-i": "node bin/jest -v0 -i <number> | npm test`
+* `i=<number> npm run jest-v-i`  : the same to `node bin/jest -i <number> | npm test`
 
 #### Sources may usefull:
 

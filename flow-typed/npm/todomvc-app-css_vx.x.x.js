@@ -1,4 +1,4 @@
-// flow-typed signature: 6b60b6b09b70b97bd05aa87296c9b764
+// flow-typed signature: d6f9b1ce507a082dfd986bff0d6886ac
 // flow-typed version: <<STUB>>/todomvc-app-css_v^2.0.6/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 

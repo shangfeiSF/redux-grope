@@ -1,4 +1,4 @@
-// flow-typed signature: c942df54fbe3ea29d4eee0bed01001ff
+// flow-typed signature: a704eb8c5d85f13e2e06350a02e598b8
 // flow-typed version: <<STUB>>/babel-runtime_v^6.3.13/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -630,6 +630,18 @@ declare module 'babel-runtime/core-js/weak-set' {
   declare module.exports: any;
 }
 
+declare module 'babel-runtime/helpers/_async-generator-delegate' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/_async-generator' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/_async-iterator' {
+  declare module.exports: any;
+}
+
 declare module 'babel-runtime/helpers/_async-to-generator' {
   declare module.exports: any;
 }
@@ -742,7 +754,31 @@ declare module 'babel-runtime/helpers/_typeof' {
   declare module.exports: any;
 }
 
+declare module 'babel-runtime/helpers/async-generator-delegate' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/async-generator' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/async-iterator' {
+  declare module.exports: any;
+}
+
 declare module 'babel-runtime/helpers/async-to-generator' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/asyncGenerator' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/asyncGeneratorDelegate' {
+  declare module.exports: any;
+}
+
+declare module 'babel-runtime/helpers/asyncIterator' {
   declare module.exports: any;
 }
 
@@ -1395,6 +1431,15 @@ declare module 'babel-runtime/core-js/weak-map.js' {
 declare module 'babel-runtime/core-js/weak-set.js' {
   declare module.exports: $Exports<'babel-runtime/core-js/weak-set'>;
 }
+declare module 'babel-runtime/helpers/_async-generator-delegate.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/_async-generator-delegate'>;
+}
+declare module 'babel-runtime/helpers/_async-generator.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/_async-generator'>;
+}
+declare module 'babel-runtime/helpers/_async-iterator.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/_async-iterator'>;
+}
 declare module 'babel-runtime/helpers/_async-to-generator.js' {
   declare module.exports: $Exports<'babel-runtime/helpers/_async-to-generator'>;
 }
@@ -1479,8 +1524,26 @@ declare module 'babel-runtime/helpers/_to-consumable-array.js' {
 declare module 'babel-runtime/helpers/_typeof.js' {
   declare module.exports: $Exports<'babel-runtime/helpers/_typeof'>;
 }
+declare module 'babel-runtime/helpers/async-generator-delegate.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/async-generator-delegate'>;
+}
+declare module 'babel-runtime/helpers/async-generator.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/async-generator'>;
+}
+declare module 'babel-runtime/helpers/async-iterator.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/async-iterator'>;
+}
 declare module 'babel-runtime/helpers/async-to-generator.js' {
   declare module.exports: $Exports<'babel-runtime/helpers/async-to-generator'>;
+}
+declare module 'babel-runtime/helpers/asyncGenerator.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/asyncGenerator'>;
+}
+declare module 'babel-runtime/helpers/asyncGeneratorDelegate.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/asyncGeneratorDelegate'>;
+}
+declare module 'babel-runtime/helpers/asyncIterator.js' {
+  declare module.exports: $Exports<'babel-runtime/helpers/asyncIterator'>;
 }
 declare module 'babel-runtime/helpers/asyncToGenerator.js' {
   declare module.exports: $Exports<'babel-runtime/helpers/asyncToGenerator'>;

@@ -1,4 +1,4 @@
-// flow-typed signature: f35eca2a2062e1c94e6dcf312732560f
+// flow-typed signature: 6968c3f2324ed43840dbe2c277bccb6b
 // flow-typed version: <<STUB>>/babel-loader_v^6.2.0/flow_v0.37.4
 
 /**
@@ -8,8 +8,8 @@
  *
  * Fill this stub out by replacing all the `any` types.
  *
- * Once filled out, we encourage you to share your work with the 
- * community by sending a pull request to: 
+ * Once filled out, we encourage you to share your work with the
+ * community by sending a pull request to:
  * https://github.com/flowtype/flow-typed
  */
 
@@ -26,11 +26,7 @@ declare module 'babel-loader/lib/fs-cache' {
   declare module.exports: any;
 }
 
-declare module 'babel-loader/lib/helpers/exists' {
-  declare module.exports: any;
-}
-
-declare module 'babel-loader/lib/helpers/read' {
+declare module 'babel-loader/lib/index' {
   declare module.exports: any;
 }
 
@@ -38,22 +34,34 @@ declare module 'babel-loader/lib/resolve-rc' {
   declare module.exports: any;
 }
 
+declare module 'babel-loader/lib/utils/exists' {
+  declare module.exports: any;
+}
+
+declare module 'babel-loader/lib/utils/read' {
+  declare module.exports: any;
+}
+
+declare module 'babel-loader/lib/utils/relative' {
+  declare module.exports: any;
+}
+
 // Filename aliases
-declare module 'babel-loader/index' {
-  declare module.exports: $Exports<'babel-loader'>;
-}
-declare module 'babel-loader/index.js' {
-  declare module.exports: $Exports<'babel-loader'>;
-}
 declare module 'babel-loader/lib/fs-cache.js' {
   declare module.exports: $Exports<'babel-loader/lib/fs-cache'>;
 }
-declare module 'babel-loader/lib/helpers/exists.js' {
-  declare module.exports: $Exports<'babel-loader/lib/helpers/exists'>;
-}
-declare module 'babel-loader/lib/helpers/read.js' {
-  declare module.exports: $Exports<'babel-loader/lib/helpers/read'>;
+declare module 'babel-loader/lib/index.js' {
+  declare module.exports: $Exports<'babel-loader/lib/index'>;
 }
 declare module 'babel-loader/lib/resolve-rc.js' {
   declare module.exports: $Exports<'babel-loader/lib/resolve-rc'>;
+}
+declare module 'babel-loader/lib/utils/exists.js' {
+  declare module.exports: $Exports<'babel-loader/lib/utils/exists'>;
+}
+declare module 'babel-loader/lib/utils/read.js' {
+  declare module.exports: $Exports<'babel-loader/lib/utils/read'>;
+}
+declare module 'babel-loader/lib/utils/relative.js' {
+  declare module.exports: $Exports<'babel-loader/lib/utils/relative'>;
 }
