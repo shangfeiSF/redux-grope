@@ -1,4 +1,6 @@
 var webpack = require('webpack')
+var Dashboard = require('webpack-dashboard')
+var DashboardPlugin = require('webpack-dashboard/plugin')
 
 var options = require('./options')
 var webpackConfig = require('./webpackConfig')
@@ -14,6 +16,8 @@ var plugins = [
   new webpack.NoErrorsPlugin(),
   new webpack.HotModuleReplacementPlugin()
 ]
+
+!ServerConfig.isWin32 && plugins.push(new DashboardPlugin(new Dashboard().setData))
 
 if (options.hot) {
   Object.keys(webpackConfig.entry).forEach(function (name) {

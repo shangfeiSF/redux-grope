@@ -11,8 +11,8 @@
     "test": "node node_modules/jest/bin/jest --config bin/config.jest.json",
     "jest-all": "node bin/jest -r tests/.*/src/.*/.*.spec.js -v0 | npm test",
     "jest-all-v": "node bin/jest -r tests/.*/src/.*/.*.spec.js | npm test",
-    "jest-i": "node bin/jest -v0 -i",
-    "jest-v-i": "node bin/jest -i"
+    "jest-i": "node bin/jest -v0 -i ${i} | npm test",
+    "jest-v-i": "node bin/jest -i ${i} | npm test"
   },
   "dependencies": {
     "babel-polyfill": "^6.3.14",

@@ -1,4 +1,5 @@
 var fs = require('fs')
+var os = require('os')
 var path = require('path')
 
 var webpackConfig = require('../components/webpackConfig')
@@ -21,6 +22,8 @@ var manifestPath = path.join(__dirname, '../vendors', webpackDllConfig._manifest
 var manifestJson = JSON.parse(fs.readFileSync(manifestPath).toString('utf-8'))
 
 module.exports = {
+  isWin32: os.platform() == 'win32',
+
   port: 8080,
 
   universalPort: universalPort,

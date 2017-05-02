@@ -87,12 +87,14 @@ module.exports = {
     new HappyPack({
       id: 'json',
       loaders: ['json'],
-      threads: 2
+      threads: 2,
+      verbose: false
     }),
     new HappyPack({
       id: 'css',
       loaders: ['style!css'],
-      threads: 2
+      threads: 2,
+      verbose: false
     }),
     new HappyPack({
       id: 'js',
@@ -102,7 +104,8 @@ module.exports = {
           presets: ['react', 'es2015', 'stage-1']
         }
       }],
-      threads: 2
+      threads: 2,
+      verbose: false
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,

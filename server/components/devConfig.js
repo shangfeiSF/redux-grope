@@ -1,3 +1,5 @@
+var os = require('os')
+
 var lodash = require('lodash')
 var express = require('express')
 var expressUrlrewrite = require('express-urlrewrite')
@@ -7,7 +9,7 @@ var DirSpec = require('../constants/DirSpec')
 var ServerConfig = require('../constants/ServerConfig')
 
 var devConfig = {
-  quiet: !!options.quiet,
+  quiet: ServerConfig.isWin32 ? !!options.quiet : true,
 
   publicPath: '/__build__/',
 
