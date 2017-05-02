@@ -3,9 +3,6 @@ import React, {Component, PropTypes} from 'react'
 class UndoRedo extends Component {
   constructor(props, context) {
     super(props, context)
-
-    this.handlerOnUndoClick = this.handlerOnUndoClick.bind(this)
-    this.handlerOnRedoClick = this.handlerOnRedoClick.bind(this)
   }
 
   static propTypes = {
@@ -15,11 +12,11 @@ class UndoRedo extends Component {
     onRedo: PropTypes.func.isRequired
   }
 
-  handlerOnUndoClick() {
+  handlerOnUndoClick = () => {
     this.props.canUndo && this.props.onUndo()
   }
 
-  handlerOnRedoClick() {
+  handlerOnRedoClick = () => {
     this.props.canRedo && this.props.onRedo()
   }
 

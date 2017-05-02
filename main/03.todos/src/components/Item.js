@@ -3,8 +3,6 @@ import React, {Component, PropTypes} from 'react'
 class Item extends Component {
   constructor(props, context) {
     super(props, context)
-
-    this.handlerOnClick = this.handlerOnClick.bind(this)
   }
 
   static propTypes = {
@@ -14,10 +12,10 @@ class Item extends Component {
     onClick: PropTypes.func.isRequired
   }
 
-  handlerOnClick(e) {
+  handlerOnClick = (e) => {
     e.preventDefault()
     let {id, onClick} = this.props
-    
+
     onClick(id)
   }
 

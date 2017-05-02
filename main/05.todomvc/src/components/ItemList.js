@@ -18,6 +18,7 @@ class ItemList extends Component {
     actions: PropTypes.object.isRequired
   }
 
+  // 维护自身的state，适用于不需要进入store的部分
   state = {
     filter: FilterTypes.SHOW_ALL
   }
@@ -27,7 +28,10 @@ class ItemList extends Component {
   }
 
   handleOnShow = filter => {
-    this.setState({filter})
+    this.setState({filter}, () => {
+      console.log('确定state已经修改', this.state.filter)
+    })
+    console.warn('state还未修改', this.state.filter)
   }
 
   renderToggleAll(completedCount) {
@@ -56,8 +60,8 @@ class ItemList extends Component {
           completedCount={completedCount}
           activeCount={activeCount}
           selectedFilter={filter}
-          onClearCompleted={this.handlerOnClearCompleted.bind(this)}
-          onShow={this.handleOnShow.bind(this)}
+          onClearCompleted={this.handlerOnClearCompleted}
+          onShow={this.handleOnShow}
         />
       )
     }

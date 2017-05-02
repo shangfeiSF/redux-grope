@@ -16,6 +16,7 @@ class App {
 
   reducers(state, action) {
     if (typeof state === 'undefined') {
+      console.log(action.type)
       return 0
     }
 

@@ -7,9 +7,7 @@ class Header extends Component {
   }
 
   handlerOnSave = (text) => {
-    if (text.length !== 0) {
-      this.props.add(text)
-    }
+    text.length !== 0 && this.props.add(text)
   }
 
   render() {

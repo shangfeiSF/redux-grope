@@ -10,7 +10,7 @@ import {add} from '../actions'
  * 容器组件向展示组件传递了add方法（命名为onSubmit）
  * */
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = null
 
 const mapDispatchToProps = ({
   onSubmit: add

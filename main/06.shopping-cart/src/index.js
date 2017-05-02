@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import {createStore, applyMiddleware} from 'redux'
+import {compose, createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 
 import AppContainer from './containers/AppContainer'
@@ -15,7 +15,7 @@ import {getAllProducts} from './actions'
  * Q: What's the motivation of redux-thunk(https://github.com/gaearon/redux-thunk)?
  * A: Redux Thunk middleware allows you to write action creators that return a function instead of an action.
  *     The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met.
- *     The inner function receives the store methods dispatch and getState as parameters.
+ *     The inner function receives the store methods `dispatch()` and `getState()` as parameters.
  * */
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
@@ -29,7 +29,7 @@ import createLogger from 'redux-logger'
 const middleware = [thunk]
 process.env.NODE_ENV !== 'production' && middleware.push(createLogger())
 
-const store = createStore(reducers, applyMiddleware(...middleware))
+const store = createStore(reducers, compose(applyMiddleware(...middleware)))
 
 store.dispatch(getAllProducts())
 

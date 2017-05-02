@@ -15,6 +15,12 @@ const mapStateToProps = (state, ownProps) => ({
   active: ownProps.filter === state.filter
 })
 
+// https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments
+// 使用filter的两种方式
+const _mapDispatchToProps = ({
+  onClick: filter
+})
+
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => {
     dispatch(filter(ownProps.filter))
@@ -23,5 +29,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 export default connect(
   mapStateToProps,
+  // _mapDispatchToProps
   mapDispatchToProps
 )(Filter)
