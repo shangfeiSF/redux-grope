@@ -1,24 +1,24 @@
 var fs = require('fs')
+var os = require('os')
 var path = require('path')
 
+var colors = require('colors')
 var webpack = require('webpack')
+var HappyPack = require('happypack')
 var Visualizer = require('webpack-visualizer-plugin')
 
-var colors = require('colors')
-var HappyPack = require('happypack')
+var dirConfig = require('./configs/dirConfig')
 
-var DirSpec = require('./constants/DirSpec')
-
+var isWin32 = os.platform() == 'win32'
 var makeEntry = function (dirs) {
   var entry = {}
 
-  DirSpec.mainSubDirNames
+  dirConfig.mainSubDirNames
     .filter(function (dir) {
       return dir !== '09.universal' && (dirs === undefined ? true : dirs.indexOf(dir) > -1)
     })
     .reduce(function (entry, dir) {
-      entry[dir] = path.join(DirSpec.mainDirPath, dir, 'src', 'index.js')
-
+      entry[dir] = path.join(dirConfig.mainDirPath, dir, 'src', 'index.js')
       return entry
     }, entry)
 
@@ -27,29 +27,31 @@ var makeEntry = function (dirs) {
 
 try {
   fs.accessSync(path.join(__dirname, './vendors/manifest.json'), fs.F_OK)
-} catch (e) {
+}
+catch (e) {
   console.log(colors.red(e.message))
-  console.log(colors.yellow('[Tips]:Please execute `node bin/dll` or `npm run dll` first and then execute `node bin/server` or `npm start`.'))
+  console.log(colors.yellow('[Tips]: Please execute `node bin/dll` or `npm run dll` first and then execute `node bin/server` or `npm start`.'))
   process.exit(500)
 }
 
 module.exports = {
-  devtool: 'inline-source-map',
-
-  entry: makeEntry(DirSpec.mainSubDirNames),
-
+  _isWin32: isWin32,
   _makeEntry: makeEntry,
 
+  devtool: 'inline-source-map',
+
+  entry: makeEntry(dirConfig.mainSubDirNames),
+
   output: {
-    path: path.join(__dirname, '../__build__'),
+    path: dirConfig.buildDirPath,
     filename: '[name].js',
     chunkFilename: '[id].chunk.js',
-    publicPath: '/__build__/'
+    publicPath: '/' + dirConfig.buildDirName + '/'
   },
 
   resolve: {
     alias: {
-      'react-router': path.join(__dirname, '../node_modules', 'react-router', 'lib')
+      'react-router': path.join(__dirname, '..', 'node_modules', 'react-router', 'lib')
     },
     extensions: ['', '.js', '.json']
   },
@@ -88,13 +90,13 @@ module.exports = {
       id: 'json',
       loaders: ['json'],
       threads: 2,
-      verbose: false
+      verbose: isWin32 ? true : false
     }),
     new HappyPack({
       id: 'css',
       loaders: ['style!css'],
       threads: 2,
-      verbose: false
+      verbose: isWin32 ? true : false
     }),
     new HappyPack({
       id: 'js',
@@ -105,7 +107,7 @@ module.exports = {
         }
       }],
       threads: 2,
-      verbose: false
+      verbose: isWin32 ? true : false
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,

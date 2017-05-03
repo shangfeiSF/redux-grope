@@ -1,7 +1,9 @@
 var path = require('path')
+
 var webpack = require('webpack')
 
 var vendors = require('./dll/index')
+var dirConfig = require('./configs/dirConfig')
 
 var baseName = 'vendorsBundle'
 var manifest = 'manifest.json'
@@ -11,7 +13,7 @@ module.exports = {
   _manifest: manifest,
 
   output: {
-    path: path.join(__dirname, './vendors'),
+    path: dirConfig.vendorsPath,
     filename: baseName + '_[chunkhash].js',
     library: baseName + '_[chunkhash]',
   },
@@ -22,7 +24,7 @@ module.exports = {
 
   plugins: [
     new webpack.DllPlugin({
-      path: path.join(__dirname, 'vendors', manifest),
+      path: path.join(dirConfig.vendorsPath, manifest),
       name: baseName + '_[chunkhash]',
       context: __dirname
     })

@@ -5,6 +5,5 @@ bin/config.jest.json
 server/vendors/*
 .happypack/
 __build__/
-__build_raw__/
-server/.happypack/
+__build_unhappy__/
 bin/.cacheDirectory/
