@@ -1,7 +1,7 @@
 var nopt = require('nopt')
 var lodash = require('lodash')
 
-var DirSpec = require('../constants/DirSpec')
+var dirConfig = require('../configs/dirConfig')
 
 var knowns = {
   'hot': Boolean,
@@ -20,7 +20,7 @@ var baseShorts = {
 }
 
 var extraShorts = {}
-DirSpec.mainSubDirNames.forEach(function (dir) {
+dirConfig.mainSubDirNames.forEach(function (dir) {
   var index = dir.split('\.').shift()
   var cmd = 'i' + index
 
