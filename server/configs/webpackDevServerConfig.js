@@ -25,7 +25,7 @@ var setup = function (app) {
   app.use(express.static(dirConfig.vendorsPath))
 }
 
-var devServerConfig = {
+var webpackDevServerConfig = {
   quiet: serverConfig.isWin32 ? !!options.quiet : true,
 
   publicPath: '/' + dirConfig.buildDirName + '/',
@@ -38,7 +38,7 @@ var devServerConfig = {
 }
 
 if (options.hot) {
-  devServerConfig = lodash.merge(devServerConfig, {
+  webpackDevServerConfig = lodash.merge(webpackDevServerConfig, {
     inline: true,
 
     hot: true,
@@ -49,4 +49,4 @@ if (options.hot) {
   })
 }
 
-module.exports = devServerConfig
+module.exports = webpackDevServerConfig

@@ -14,12 +14,12 @@ var compiler = require('./compiler')
 
 var dirConfig = require('../configs/dirConfig')
 var serverConfig = require('../configs/serverConfig')
-var devServerConfig = require('../configs/devServerConfig')
+var webpackDevServerConfig = require('../configs/webpackDevServerConfig')
 
 var server = null
 
 if (options.hot) {
-  server = new WebpackDevServer(compiler, devServerConfig)
+  server = new WebpackDevServer(compiler, webpackDevServerConfig)
 }
 else {
   server = express()
@@ -35,7 +35,7 @@ else {
   server.use(express.static(dirConfig.vendorsPath))
 
   !serverConfig.isWin32 && compiler.apply(new DashboardPlugin(new Dashboard().setData))
-  server.use(webpackDevMiddleware(compiler, devServerConfig))
+  server.use(webpackDevMiddleware(compiler, webpackDevServerConfig))
 
   server.get('/index.html', function (req, res) {
     res.writeHead(200)

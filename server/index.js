@@ -9,7 +9,7 @@ var serverConfig = require('./configs/serverConfig')
 
 module.exports.start = function () {
   server.listen(serverConfig.port, function () {
-    var hot = '[Hot Module Replacement]: ' + options.hot ? 'Yes' : 'No'
+    var hot = '[Hot Module Replacement]: ' + (options.hot ? 'Yes' : 'No')
     var info = '[Server Info]: Server is listening on http://localhost:' + serverConfig.port + '/index.html'
 
     console.log(hot.yellow)
