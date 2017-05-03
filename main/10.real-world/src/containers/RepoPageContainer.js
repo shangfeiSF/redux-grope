@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
   const {pagination: {stargazersByRepo}, entities: {users, repos}} = _state
 
-  const login = ownProps.params.login.toLowerCase()
-  const name = ownProps.params.name.toLowerCase()
+  const login = ownProps.params.login
+  const name = ownProps.params.name
 
   const fullName = `${login}/${name}`
 

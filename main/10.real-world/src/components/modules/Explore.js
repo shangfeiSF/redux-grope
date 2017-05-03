@@ -19,7 +19,7 @@ class Explore extends Component {
   }
 
   handlerOnClickGo = () => {
-    browserHistory.push(`/${this.refs.input.value}`)
+    browserHistory.push(`/10.real-world/${this.refs.input.value}`)
   }
 
   handlerOnClickDismiss = e => {
@@ -36,6 +36,7 @@ class Explore extends Component {
         <input
           ref="input"
           size="30"
+          style={{marginRight: 10}}
           defaultValue={inputValue}
           onKeyUp={this.handlerOnKeyUp}
         />

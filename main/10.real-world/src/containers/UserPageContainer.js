@@ -1,5 +1,3 @@
-import polyfill from '../polyfill'
-
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -12,7 +10,7 @@ const mapStateToProps = (state, ownProps) => {
 
   const {pagination: {starredByUser}, entities: {users, repos}} = _state
 
-  const login = polyfill.replace(ownProps.params.login.toLowerCase())
+  const login = ownProps.params.login
 
   const starredPagination = starredByUser[login] || {ids: []}
   const starredRepos = starredPagination.ids.map(id => repos[id])

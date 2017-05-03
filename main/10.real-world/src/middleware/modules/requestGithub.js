@@ -11,7 +11,7 @@ export default (store, next, action) => {
 
   const route = typeof actionSpec.route === 'function' ? actionSpec.route(store.getState()) : actionSpec.route
 
-  // resolve load-action to three actions: request-action, success-action, // failure-action
+  // resolve load-action to three actions: request-action, success-action or failure-action
   // request-action
   const requestAction = UTILS.resolveAction(action, {
     type: REQUEST

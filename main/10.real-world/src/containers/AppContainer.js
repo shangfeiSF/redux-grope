@@ -1,5 +1,3 @@
-import polyfill from '../polyfill'
-
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 
@@ -10,10 +8,17 @@ import {resetErrorMessage} from '../actions/errorActions'
 const mapStateToProps = (state, ownProps) => {
   let _state = state.toJS()
 
-  let pathname = polyfill.replace(ownProps.location.pathname.substring(1))
+  let inputValue = ''
+
+  if (ownProps.params.login) {
+    inputValue += ownProps.params.login
+    if (ownProps.params.name) {
+      inputValue += '/' + ownProps.params.name
+    }
+  }
 
   return {
-    inputValue: pathname,
+    inputValue: inputValue,
     errorMessage: _state.errorMessage
   }
 }

@@ -14,8 +14,8 @@ class User extends Component {
     const {user: {login, avatarUrl, name}} = this.props
 
     return (
-      <div className="User">
-        <Link to={`/${login}`}>
+      <div className="User" style={{marginTop: 10}}>
+        <Link to={`/10.real-world/${login}`}>
           <img src={avatarUrl} alt={login} width="72" height="72"/>
           <h3>
             {login} {name && <span>({name})</span>}

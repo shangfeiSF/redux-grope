@@ -6,9 +6,10 @@ import UserPageContainer from '../containers/UserPageContainer'
 import RepoPageContainer from '../containers/RepoPageContainer'
 
 const routes = (
-  <Route path="/" component={AppContainer}>
-    <Route path="/:login" component={UserPageContainer}/>
-    <Route path="/:login/:name" component={RepoPageContainer}/>
+  <Route path="/10.real-world/" component={AppContainer}>
+    <Route path="/10.real-world/:login" component={UserPageContainer}>
+      <Route path="/10.real-world/:login/:name" component={RepoPageContainer}/>
+    </Route>
   </Route>
 )
 

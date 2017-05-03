@@ -27,14 +27,14 @@ class List extends Component {
     const {onLoadMoreClick, pageCount, isFetching, nextPageUrl} = this.props
 
     return pageCount > 0 && nextPageUrl ? (
-      <button
-        style={{ fontSize: '150%' }}
-        onClick={onLoadMoreClick}
-        disabled={isFetching}
-      >
-        {isFetching ? 'Loading...' : 'Load More'}
-      </button>
-    ) : null
+        <button
+          style={{ fontSize: '150%' }}
+          onClick={onLoadMoreClick}
+          disabled={isFetching}
+        >
+          {isFetching ? 'Loading...' : 'Load More'}
+        </button>
+      ) : null
   }
 
   render() {
@@ -51,7 +51,7 @@ class List extends Component {
     }
 
     return (
-      <div>
+      <div style={{marginTop: 10}}>
         {this.renderItems()}
         {this.renderLoadMore()}
       </div>
