@@ -9,10 +9,12 @@ var serverConfig = require('./configs/serverConfig')
 
 module.exports.start = function () {
   server.listen(serverConfig.port, function () {
+    var dev = '[Development Mode]: ' + (options.dev ? 'Yes' : 'No')
     var hot = '[Hot Module Replacement]: ' + (options.hot ? 'Yes' : 'No')
-    var info = '[Server Info]: Server is listening on http://localhost:' + serverConfig.port + '/index.html'
+    var indexes = '[Start Indexes]: ' + (options.index ? options.index.join(',') : 'all')
 
+    console.log(dev.yellow)
     console.log(hot.yellow)
-    console.log(info.green)
+    console.log(indexes.yellow)
   })
 }

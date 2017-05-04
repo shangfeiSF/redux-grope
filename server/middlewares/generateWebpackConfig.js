@@ -31,7 +31,7 @@ var generate = function (webpackRaw) {
   webpackConfig.plugins.push(
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: options.pro ? '"production"' : '"development"'
+        NODE_ENV: options.dev ? '"development"' : '"production"'
       }
     })
   )

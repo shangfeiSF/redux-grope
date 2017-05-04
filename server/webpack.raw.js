@@ -7,9 +7,12 @@ var webpack = require('webpack')
 var HappyPack = require('happypack')
 var Visualizer = require('webpack-visualizer-plugin')
 
+var options = require('./components/options')
+
 var dirConfig = require('./configs/dirConfig')
 
 var isWin32 = os.platform() == 'win32'
+var verbose = options.quiet == undefined ? (isWin32 ? true : false) : !options.quiet
 var makeEntry = function (dirs) {
   var entry = {}
 
@@ -90,13 +93,13 @@ module.exports = {
       id: 'json',
       loaders: ['json'],
       threads: 2,
-      verbose: isWin32 ? true : false
+      verbose: verbose
     }),
     new HappyPack({
       id: 'css',
       loaders: ['style!css'],
       threads: 2,
-      verbose: isWin32 ? true : false
+      verbose: verbose
     }),
     new HappyPack({
       id: 'js',
@@ -107,7 +110,7 @@ module.exports = {
         }
       }],
       threads: 2,
-      verbose: isWin32 ? true : false
+      verbose: verbose
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,

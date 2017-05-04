@@ -4,19 +4,17 @@ var lodash = require('lodash')
 var dirConfig = require('../configs/dirConfig')
 
 var knowns = {
-  'hot': Boolean,
   'index': Array,
   'quiet': Boolean,
-  'dev': Boolean,
-  'pro': Boolean
+  'hot': Boolean,
+  'dev': Boolean
 }
 
 var baseShorts = {
-  'h': ['--hot', 'true'],
   'i': ['--index'],
-  'q': ['--quiet'],
-  'd': ['--dev', 'true'],
-  'p': ['--pro', 'true']
+  'q': ['--quiet', 'true'],
+  'h': ['--hot', 'true'],
+  'd': ['--dev', 'true']
 }
 
 var extraShorts = {}
