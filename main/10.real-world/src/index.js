@@ -1,23 +1,23 @@
 import React from 'react'
 import {render} from 'react-dom'
 
-import Immutable from 'immutable'
-import {browserHistory} from 'react-router'
-import {syncHistoryWithStore} from 'react-router-redux'
+import Sparker from './sparker'
+import createStore from './sparker/createStore'
+import createHistory from './sparker/createHistory'
 
-import RootContainer from './routes/RootContainer'
-import createStore from './store/createStore'
+import routes from './routes'
+import reducers from './reducers'
+import thunk from 'redux-thunk'
+import github from './middleware/github'
 
-const initialState = Immutable.Map({})
-
-const store = createStore(initialState)
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState (state) {
-    return state.get('routing').toJS()
-  }
+const store = createStore({
+  initState: {},
+  reducers: reducers,
+  middlewares: [thunk, github]
 })
+const history = createHistory(store)
 
 const root = document.getElementById('example')
-var content = (<RootContainer store={store} history={history}/>)
+var content = <Sparker routes={routes} store={store} history={history}/>
 
 render(content, root)
