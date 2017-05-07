@@ -6,7 +6,7 @@ import DockMonitor from 'redux-devtools-dock-monitor'
 
 export const keyMaps = {
   toggleVisibilityKey: 'ctrl-h',
-  changePositionKey: 'ctrl-w'
+  changePositionKey: 'ctrl-d'
 }
 
 export const DevTools = createDevTools(

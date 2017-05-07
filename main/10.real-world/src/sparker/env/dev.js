@@ -17,11 +17,12 @@ class Sparker extends Component {
 
     return (
       <Provider store={store}>
-        <div>
-          <p>Hide DevTools with {keyMaps.toggleVisibilityKey}.</p>
-          <p>Change DevTools Position with {keyMaps.changePositionKey}</p>
-          <DevTools />
-
+        <div className="app">
+          <div className="devTools">
+            <p>Hide DevTools with {keyMaps.toggleVisibilityKey}.</p>
+            <p>Change DevTools Position with {keyMaps.changePositionKey}</p>
+            <DevTools />
+          </div>
           <Router history={history} routes={routes}/>
         </div>
       </Provider>

@@ -15,7 +15,9 @@ class Sparker extends Component {
 
     return (
       <Provider store={store}>
-        <Router history={history} routes={routes}/>
+        <div className="app">
+          <Router history={history} routes={routes}/>
+        </div>
       </Provider>
     )
   }
