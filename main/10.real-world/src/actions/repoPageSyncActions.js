@@ -1,10 +1,10 @@
-import {SPEC} from '../middleware/symbol'
-import {Schemas} from '../middleware/schema'
+import actionSpec from '../middlewares/github/sybmols/actionSpec'
+import Schemas from '../middlewares/github/schemas'
 
 import * as ActionTypes from '../constants/ActionTypes'
 
 export const loadRepoActions = fullName => ({
-  [SPEC]: {
+  [actionSpec]: {
     types: [
       ActionTypes.REPO_REQUEST,
       ActionTypes.REPO_SUCCESS,
@@ -18,7 +18,7 @@ export const loadRepoActions = fullName => ({
 export const loadStargazersActions = (fullName, nextPageUrl) => ({
   fullName,
 
-  [SPEC]: {
+  [actionSpec]: {
     types: [
       ActionTypes.STARGAZERS_REQUEST,
       ActionTypes.STARGAZERS_SUCCESS,

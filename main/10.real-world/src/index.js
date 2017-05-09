@@ -8,7 +8,7 @@ import createHistory from './sparker/createHistory'
 import routes from './routes'
 import reducers from './reducers'
 import thunk from 'redux-thunk'
-import github from './middleware/github'
+import github from './middlewares/github'
 
 const store = createStore({
   initState: {},
