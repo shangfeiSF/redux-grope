@@ -1,1 +1,0 @@
-export const SPEC = Symbol('the spec of action')
