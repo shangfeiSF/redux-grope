@@ -27,6 +27,8 @@ export default (store, next, action) => {
           response
         })
         next(successAction)
+
+        return response
       },
       error => {
         // failure-action
@@ -35,6 +37,8 @@ export default (store, next, action) => {
           error: error.message || 'Something bad happened'
         })
         next(failureAction)
+
+        return error
       }
     )
 }

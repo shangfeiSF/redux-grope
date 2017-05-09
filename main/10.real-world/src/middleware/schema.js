@@ -1,11 +1,11 @@
 import {Schema, arrayOf} from 'normalizr'
 
 const userSchema = new Schema('users', {
-  idAttribute: user => user.login.toLowerCase()
+  idAttribute: user => user.login
 })
 
 const repoSchema = new Schema('repos', {
-  idAttribute: repo => repo.fullName.toLowerCase()
+  idAttribute: repo => repo.fullName
 })
 
 repoSchema.define({
