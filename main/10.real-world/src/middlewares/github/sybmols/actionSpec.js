@@ -1,0 +1,1 @@
+export default Symbol('the spec of action')
