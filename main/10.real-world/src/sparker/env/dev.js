@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react'
 import {Router} from 'react-router'
 import {Provider} from 'react-redux'
 
-import {DevTools, keyMaps} from '../devTools'
+// import {DevTools, keyMaps} from '../devTools'
 
 class Sparker extends Component {
   static propTypes = {
@@ -18,11 +18,11 @@ class Sparker extends Component {
     return (
       <Provider store={store}>
         <div className="app">
-          <div className="devTools">
-            <p>Hide DevTools with {keyMaps.toggleVisibilityKey}.</p>
-            <p>Change DevTools Position with {keyMaps.changePositionKey}</p>
-            <DevTools />
-          </div>
+          {/*<div className="devTools">*/}
+            {/*<p>Hide DevTools with {keyMaps.toggleVisibilityKey}.</p>*/}
+            {/*<p>Change DevTools Position with {keyMaps.changePositionKey}</p>*/}
+            {/*<DevTools />*/}
+          {/*</div>*/}
           <Router history={history} routes={routes}/>
         </div>
       </Provider>

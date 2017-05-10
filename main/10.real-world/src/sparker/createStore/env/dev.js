@@ -1,8 +1,15 @@
 import Immutable from 'immutable'
-import {createStore, applyMiddleware, compose} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 
-import {DevTools} from '../../devTools'
+//import {DevTools} from '../../devTools'
 import createLogger from 'redux-logger'
+import {composeWithDevTools} from 'redux-devtools-extension'
+
+const composeEnhancers = composeWithDevTools({
+  serialize: {
+    immutable: Immutable
+  }
+})
 
 export default (config) => {
   !config.test && config.middlewares.push(createLogger())
@@ -11,7 +18,7 @@ export default (config) => {
   const store = createStore(
     config.reducers,
     Immutable.Map(config.initState || {}),
-    compose(applyMiddleware(...config.middlewares), DevTools.instrument())
+    composeEnhancers(applyMiddleware(...config.middlewares)/*, DevTools.instrument()*/)
   )
 
   return store
