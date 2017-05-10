@@ -20,10 +20,8 @@ class UserPage extends Component {
   }
 
   loadData(props) {
-    const {login} = props
-
-    props.loadUser(login, ['name'])
-    props.loadStarred(login)
+    props.loadUser()
+    props.loadStarred()
   }
 
   componentWillMount() {

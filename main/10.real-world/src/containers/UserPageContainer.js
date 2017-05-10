@@ -5,6 +5,10 @@ import UserPage from '../components/UserPage'
 
 import {loadUser, loadStarred} from '../actions/userPageThunkActions'
 
+// https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+
+// mapStateToProp(state, ownProps)可以是Function or null or undefined
+// mapStateToProps的返回值必须是一个纯对象(null, undefined会使视图层不响应store更新)
 const mapStateToProps = (state, ownProps) => {
   let _state = state.toJS()
 
@@ -27,13 +31,24 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
+// mapDispatchToProps(dispatch, ownProps)是Function or Object
+const mapDispatchToProps = (dispatch, ownProps) => ({
   loadUser: bindActionCreators(loadUser, dispatch),
 
   loadStarred: bindActionCreators(loadStarred, dispatch)
 })
 
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+
+  return Object.assign({}, ownProps, stateProps, dispatchProps, {
+    loadUser: () => dispatchProps.loadUser(stateProps.login, ['name']),
+
+    loadStarred: () => dispatchProps.loadStarred(stateProps.login)
+  })
+}
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(UserPage)
