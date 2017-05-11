@@ -16,7 +16,6 @@
     "jest-v-i": "node bin/jest -i"
   },
   "dependencies": {
-    "babel-polyfill": "^6.3.14",
     "babel-register": "^6.4.3",
     "classnames": "^2.2.5",
     "express": "^4.13.3",
@@ -43,12 +42,13 @@
     "babel-jest": "^17.0.2",
     "babel-loader": "^6.2.0",
     "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-1": "^6.16.0",
     "babel-preset-stage-3": "^6.17.0",
-    "babel-runtime": "^6.3.13",
+    "babel-runtime": "^6.23.0",
     "blessed": "^0.1.81",
     "bluebird": "^3.4.6",
     "colors": "^1.1.2",
