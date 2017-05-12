@@ -16,14 +16,13 @@ class RepoPage extends Component {
     stargazers: PropTypes.array.isRequired,
 
     loadRepo: PropTypes.func.isRequired,
-    loadStargazers: PropTypes.func.isRequired
+    loadStargazers: PropTypes.func.isRequired,
+    loadMoreStargazers: PropTypes.func.isRequired
   }
 
   loadData(props) {
-    const {fullName} = props
-
-    props.loadRepo(fullName, ['description'])
-    props.loadStargazers(fullName)
+    props.loadRepo()
+    props.loadStargazers()
   }
 
   componentWillMount() {
@@ -37,7 +36,7 @@ class RepoPage extends Component {
   }
 
   _handlerOnLoadMoreClick = () => {
-    this.props.loadStargazers(this.props.fullName, true)
+    this.props.loadMoreStargazers()
   }
 
   _renderUser(user) {
@@ -55,7 +54,9 @@ class RepoPage extends Component {
 
     return (
       <div>
+        <h4>Repo Profile</h4>
         <Repo repo={repo} owner={owner}/>
+        <h4>Stargazers</h4>
         <List
           items={stargazers}
           renderItems={this._renderUser}

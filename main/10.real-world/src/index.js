@@ -10,6 +10,8 @@ import reducers from './reducers'
 import thunk from 'redux-thunk'
 import github from './middlewares/github'
 
+import '../../global.css'
+
 const store = createStore({
   initState: {},
   reducers: reducers,

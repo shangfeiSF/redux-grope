@@ -32,7 +32,7 @@ class Explore extends Component {
 
     return (
       <div className="exploreArea">
-        <p>input a username or a repo full name then click 'Go':</p>
+        <h4>Please input a username or a full reponame then click 'Go':</h4>
         <input
           ref="input"
           size="30"

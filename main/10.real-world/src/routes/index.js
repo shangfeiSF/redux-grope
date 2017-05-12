@@ -9,9 +9,8 @@ const nameSpace = '/10.real-world'
 
 const routes = (
   <Route path={`${nameSpace}/`} component={AppContainer}>
-    <Route path={`${nameSpace}/:login`} component={UserPageContainer}>
-      <Route path={`${nameSpace}/:login/:name`} component={RepoPageContainer}/>
-    </Route>
+    <Route path={`${nameSpace}/:login`} component={UserPageContainer}/>
+    <Route path={`${nameSpace}/:login/:name`} component={RepoPageContainer}/>
   </Route>
 )
 

@@ -36,7 +36,17 @@ const mapDispatchToProps = dispatch => ({
   loadStargazers: bindActionCreators(loadStargazers, dispatch)
 })
 
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, dispatchProps, {
+    loadRepo: () => dispatchProps.loadRepo(stateProps.fullName, ['description']),
+
+    loadStargazers: () => dispatchProps.loadStargazers(stateProps.fullName),
+
+    loadMoreStargazers: () => dispatchProps.loadStargazers(stateProps.fullName, true)
+  })
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
+  mergeProps
 )(RepoPage)

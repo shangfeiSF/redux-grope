@@ -16,7 +16,8 @@ class UserPage extends Component {
     starredRepoOwners: PropTypes.array.isRequired,
 
     loadUser: PropTypes.func.isRequired,
-    loadStarred: PropTypes.func.isRequired
+    loadStarred: PropTypes.func.isRequired,
+    loadMoreStarred: PropTypes.func.isRequired
   }
 
   loadData(props) {
@@ -35,7 +36,7 @@ class UserPage extends Component {
   }
 
   _handleLoadMoreClick = () => {
-    this.props.loadStarred(this.props.login, true)
+    this.props.loadMoreStarred()
   }
 
   _renderRepo([repo, owner]) {
@@ -53,7 +54,9 @@ class UserPage extends Component {
 
     return (
       <div>
+        <h4>User Profile</h4>
         <User user={user}/>
+        <h4>Repos starred</h4>
         <List
           items={zip(starredRepos, starredRepoOwners)}
           renderItems={this._renderRepo}

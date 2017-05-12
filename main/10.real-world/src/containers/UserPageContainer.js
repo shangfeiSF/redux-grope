@@ -7,8 +7,8 @@ import {loadUser, loadStarred} from '../actions/userPageThunkActions'
 
 // https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
-// mapStateToProp(state, ownProps)可以是Function or null or undefined
-// mapStateToProps的返回值必须是一个纯对象(null, undefined会使视图层不响应store更新)
+// [mapStateToProp(state, [ownProps]): stateProps] (Function or null or undefined)
+// If you don't want to subscribe to store updates, pass `null` or `undefined` in place of `mapStateToProps`.
 const mapStateToProps = (state, ownProps) => {
   let _state = state.toJS()
 
@@ -31,21 +31,27 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-// mapDispatchToProps(dispatch, ownProps)是Function or Object
+// [mapDispatchToProps(dispatch, [ownProps]): dispatchProps] (Function or Object)
+// Each function inside `mapDispatchToProps` is assumed to be a Redux action creator.
+// The object return from `mapDispatchToProps` with the same function names,
+// but with every action creator wrapped into a dispatch call so they may be called directly
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadUser: bindActionCreators(loadUser, dispatch),
 
   loadStarred: bindActionCreators(loadStarred, dispatch)
 })
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-
-  return Object.assign({}, ownProps, stateProps, dispatchProps, {
+// [mergeProps(stateProps, dispatchProps, ownProps): props] (Function)
+// The plain object you return from `mergeProps` will be passed as props to the wrapped component.
+//  If you omit `mergeProps`, Object.assign({}, ownProps, stateProps, dispatchProps) is used by default.
+const mergeProps = (stateProps, dispatchProps, ownProps) =>
+  Object.assign({}, ownProps, stateProps, dispatchProps, {
     loadUser: () => dispatchProps.loadUser(stateProps.login, ['name']),
 
-    loadStarred: () => dispatchProps.loadStarred(stateProps.login)
+    loadStarred: () => dispatchProps.loadStarred(stateProps.login),
+
+    loadMoreStarred: () => dispatchProps.loadStarred(stateProps.login, true)
   })
-}
 
 export default connect(
   mapStateToProps,
