@@ -23,10 +23,20 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new webpack.DllPlugin({
       path: path.join(dirConfig.vendorsPath, manifest),
       name: baseName + '_[chunkhash]',
       context: __dirname
-    })
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
   ]
 }

@@ -34,6 +34,8 @@ var webpackDevServerConfig = {
 
   noInfo: false,
 
+  compress: true,
+
   stats: {colors: true}
 }
 

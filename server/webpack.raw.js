@@ -116,6 +116,11 @@ module.exports = {
       context: __dirname,
       manifest: require('./vendors/manifest.json'),
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     new Visualizer()
   ]
 }
