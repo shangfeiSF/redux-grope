@@ -41,8 +41,6 @@ module.exports = {
   _isWin32: isWin32,
   _makeEntry: makeEntry,
 
-  devtool: 'inline-source-map',
-
   entry: makeEntry(dirConfig.mainSubDirNames),
 
   output: {
@@ -115,11 +113,6 @@ module.exports = {
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('./vendors/manifest.json'),
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
     }),
     new Visualizer()
   ]

@@ -7,14 +7,19 @@ var knowns = {
   'index': Array,
   'quiet': Boolean,
   'hot': Boolean,
-  'dev': Boolean
+  'dev': Boolean,
+  'compress': Boolean,
+  'map': Boolean
 }
 
 var baseShorts = {
   'i': ['--index'],
   'q': ['--quiet', 'true'],
   'h': ['--hot', 'true'],
-  'd': ['--dev', 'true']
+  'd': ['--dev', 'true'],
+  'c': ['--compress', 'true'],
+  'm': ['--map', 'true'],
+  'cm': ['--compress', 'true', '--map', 'true']
 }
 
 var extraShorts = {}

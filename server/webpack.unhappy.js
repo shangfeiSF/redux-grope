@@ -82,7 +82,8 @@ module.exports = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: false,
+        drop_debugger: true
       }
     }),
     new Visualizer()

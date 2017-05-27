@@ -36,6 +36,21 @@ var generate = function (webpackRaw) {
     })
   )
 
+  if (options.compress) {
+    webpackConfig.plugins.push(
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false,
+          drop_debugger: true
+        }
+      })
+    )
+  }
+
+  if (options.map) {
+    webpackConfig.devtool = 'inline-source-map'
+  }
+
   return webpackConfig
 }
 
