@@ -6,20 +6,29 @@ import {
 
 import * as UTILS from './utils'
 
-const inital = {}
+import {starredByUserInitialState} from '../../../models'
 
-export default (state = inital, action) => {
+export default (state = starredByUserInitialState, action) => {
+  const key = action.login
+
   switch (action.type) {
     case REQUEST:
+      return state.merge({
+        [key]: {
+          ids: [],
+          pageCount: 0,
+          isFetching: true,
+          nextPageUrl: undefined
+        }
+      })
+
     case SUCCESS:
     case FAILURE:
-      const key = action.login
-      action.typeIndex = [REQUEST, SUCCESS, FAILURE].indexOf(action.type)
+      action.typeIndex = [SUCCESS, FAILURE].indexOf(action.type)
 
-      return {
-        ...state,
-        [key]: UTILS.update(state[key], action)
-      }
+      return state.merge({
+        [key]: UTILS.update(state.getIn([key]), action)
+      })
 
     default:
       return state
