@@ -6,9 +6,9 @@ import RepoPage from '../components/RepoPage'
 import {loadRepo, loadStargazers} from '../actions/repoPageThunkActions'
 
 const mapStateToProps = (state, ownProps) => {
-  let _state = state.toJS()
-
-  const {pagination: {stargazersByRepo}, entities: {users, repos}} = _state
+  const users = state.getIn(['entities', 'users'])
+  const repos = state.getIn(['entities', 'repos'])
+  const stargazersByRepo = state.getIn(['pagination', 'stargazersByRepo'])
 
   const login = ownProps.params.login
   const name = ownProps.params.name
