@@ -1,16 +1,13 @@
-import merge from 'lodash/merge'
+import {entitiesInitialState} from '../../models'
 
-const initial = {
-  users: {},
-  repos: {}
-}
+import {Map} from 'Immutable'
 
-const entities = (state = initial, action) => {
+const entities = (state = entitiesInitialState, action) => {
   if (action.response && action.response.entities) {
-    return merge({}, state, action.response.entities)
+    return state.mergeDeep(action.response.entities)
+  } else {
+    return state
   }
-
-  return state
 }
 
 export default entities
