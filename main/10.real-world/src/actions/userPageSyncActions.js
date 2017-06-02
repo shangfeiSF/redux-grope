@@ -4,6 +4,8 @@ import Schemas from '../middlewares/github/schemas'
 import * as ActionTypes from '../constants/ActionTypes'
 
 export const loadUserActions = login => ({
+  login,
+
   [actionSpec]: {
     types: [
       ActionTypes.USER_REQUEST,

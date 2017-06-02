@@ -4,6 +4,8 @@ import Schemas from '../middlewares/github/schemas'
 import * as ActionTypes from '../constants/ActionTypes'
 
 export const loadRepoActions = fullName => ({
+  fullName,
+
   [actionSpec]: {
     types: [
       ActionTypes.REPO_REQUEST,
