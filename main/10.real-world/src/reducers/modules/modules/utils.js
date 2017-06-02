@@ -13,7 +13,7 @@ export const update = (state, action) => {
 
     case 1:
       return state.mergeDeep({
-        ids: union(state.getIn(['ids']), action.response.result),
+        ids: union(state.toJS()['ids'], action.response.result),
         pageCount: state.getIn(['pageCount']) + 1,
         isFetching: false,
         nextPageUrl: action.response.nextPageUrl

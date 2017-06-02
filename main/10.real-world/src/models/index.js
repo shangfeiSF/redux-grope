@@ -6,7 +6,9 @@ export const entitiesInitialState = Immutable.fromJS({
   repos: {}
 })
 
-export const errorMessageInitialState = Immutable.fromJS(null)
+export const errorMessageInitialState = Immutable.fromJS({
+  spec: null
+})
 
 export const starredByUserInitialState = Immutable.fromJS({})
 

@@ -1,15 +1,17 @@
 import * as ActionTypes from '../../constants/ActionTypes'
 
-const initial = null
+import {errorMessageInitialState} from '../../models'
 
-const errorMessage = (state = initial, action) => {
+const errorMessage = (state = errorMessageInitialState, action) => {
   const {type, error} = action
 
   if (type === ActionTypes.RESET_ERROR_MESSAGE) {
-    return initial
+    return errorMessageInitialState
   }
   else if (error) {
-    return action.error
+    return state.merge({
+      spec: error
+    })
   }
 
   return state

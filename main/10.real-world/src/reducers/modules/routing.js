@@ -1,11 +1,8 @@
-import Immutable from 'immutable'
 import {LOCATION_BEFORE_TRANSITIONS, LOCATION_CHANGE} from '../../constants/RouterRedux'
 
-const initialState = Immutable.fromJS({
-  [LOCATION_BEFORE_TRANSITIONS]: null
-})
+import {routingInitialState} from '../../models'
 
-const routing = (state = initialState, action) => {
+const routing = (state = routingInitialState, action) => {
   if (action.type === LOCATION_CHANGE) {
     return state.set(LOCATION_BEFORE_TRANSITIONS, action.payload)
   }

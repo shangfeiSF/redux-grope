@@ -48,10 +48,10 @@ class Explore extends Component {
   renderErrorMessage() {
     const {errorMessage} = this.props
 
-    return !errorMessage ? null : (
+    return !errorMessage.spec ? null : (
         <div className="errorMessage">
           <p style={{backgroundColor: '#e99', padding: 10}}>
-            <b>{errorMessage}</b>
+            <b>{errorMessage.spec}</b>
             <a href="#" onClick={this.handlerOnClickDismiss}>(Dismiss)</a>
           </p>
         </div>
