@@ -12,7 +12,9 @@ const composeEnhancers = composeWithDevTools({
 })
 
 export default (config) => {
-  !config.test && config.middlewares.push(createLogger())
+  !config.test && config.middlewares.push(createLogger({
+    stateTransformer: state => state.toJS()
+  }))
 
   // http://cn.redux.js.org/docs/api/compose.html
   const store = createStore(
