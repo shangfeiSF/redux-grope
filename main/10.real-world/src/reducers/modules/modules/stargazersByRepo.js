@@ -9,22 +9,13 @@ import * as UTILS from './utils'
 import {stargazersByRepoInitialState} from '../../../models'
 
 export default (state = stargazersByRepoInitialState, action) => {
-  const key = action.login
+  const key = action.fullName
 
   switch (action.type) {
-    case  REQUEST:
-      return state.merge({
-        [key]: {
-          ids: [],
-          pageCount: 0,
-          isFetching: true,
-          nextPageUrl: undefined
-        }
-      })
-
+    case REQUEST:
     case SUCCESS:
     case FAILURE:
-      action.typeIndex = [SUCCESS, FAILURE].indexOf(action.type)
+      action.typeIndex = [REQUEST, SUCCESS, FAILURE].indexOf(action.type)
 
       return state.merge({
         [key]: UTILS.update(state.getIn([key]), action)
