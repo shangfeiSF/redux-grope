@@ -1,4 +1,4 @@
-// flow-typed signature: bdd3959b18d06e406aaba87bb9e044d2
+// flow-typed signature: 8252c59b223fbde3b3f3cd8b2c0c1d3a
 // flow-typed version: <<STUB>>/react-hot-loader_v^3.0.0-beta.5/flow_v0.37.4
 
 /**
@@ -42,7 +42,15 @@ declare module 'react-hot-loader/lib/babel/index' {
   declare module.exports: any;
 }
 
+declare module 'react-hot-loader/lib/index.dev' {
+  declare module.exports: any;
+}
+
 declare module 'react-hot-loader/lib/index' {
+  declare module.exports: any;
+}
+
+declare module 'react-hot-loader/lib/index.prod' {
   declare module.exports: any;
 }
 
@@ -100,8 +108,14 @@ declare module 'react-hot-loader/lib/AppContainer.prod.js' {
 declare module 'react-hot-loader/lib/babel/index.js' {
   declare module.exports: $Exports<'react-hot-loader/lib/babel/index'>;
 }
+declare module 'react-hot-loader/lib/index.dev.js' {
+  declare module.exports: $Exports<'react-hot-loader/lib/index.dev'>;
+}
 declare module 'react-hot-loader/lib/index.js' {
   declare module.exports: $Exports<'react-hot-loader/lib/index'>;
+}
+declare module 'react-hot-loader/lib/index.prod.js' {
+  declare module.exports: $Exports<'react-hot-loader/lib/index.prod'>;
 }
 declare module 'react-hot-loader/lib/patch.dev.js' {
   declare module.exports: $Exports<'react-hot-loader/lib/patch.dev'>;
