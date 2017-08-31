@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import {Provider} from 'react-redux'
 import {Router} from 'react-router'
@@ -28,7 +28,8 @@ const setup = () => {
     },
   }
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Root {...props} />
   )

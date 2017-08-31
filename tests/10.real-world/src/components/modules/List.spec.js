@@ -1,7 +1,7 @@
 import React from 'react'
 import sinon from 'sinon'
 import {mount} from 'enzyme'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import List from '../../../../../main/10.real-world/src/components/modules/List'
 
@@ -17,7 +17,8 @@ const setup = propOverrides => {
     nextPageUrl: 'This is nextPageUrl'
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <List {...props} />
   )

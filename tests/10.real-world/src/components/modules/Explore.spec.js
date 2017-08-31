@@ -1,7 +1,7 @@
 import React from 'react'
 import sinon from 'sinon'
 import {mount} from 'enzyme'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import {browserHistory} from 'react-router'
 import Explore from '../../../../../main/10.real-world/src/components/modules/Explore'
@@ -15,7 +15,8 @@ const setup = propOverrides => {
     resetErrorMessage: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Explore {...props} />
   )
