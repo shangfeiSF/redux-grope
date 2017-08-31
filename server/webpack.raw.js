@@ -52,9 +52,9 @@ module.exports = {
 
   resolve: {
     alias: {
-      'react-router': path.join(__dirname, '..', 'node_modules', 'react-router', 'lib')
+      'react-router': path.join(__dirname, '..', 'node_modules', 'react-router')
     },
-    extensions: ['', '.js', '.json']
+    extensions: ['.js', '.json']
   },
 
   context: path.join(__dirname, '../'),
@@ -64,11 +64,11 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.json/,
         include: path.join(__dirname, '../main/06.shopping-cart/src/api'),
-        loaders: ['happypack/loader?id=json']
+        use: ['happypack/loader?id=json']
       },
       {
         test: /\.css$/,
@@ -76,12 +76,12 @@ module.exports = {
           path.join(__dirname, '../main'),
           path.join(__dirname, '../node_modules/todomvc-app-css')
         ],
-        loaders: ['happypack/loader?id=css']
+        use: ['happypack/loader?id=css']
       },
       {
         test: /\.js$/,
         include: path.join(__dirname, '../main'),
-        loaders: ['happypack/loader?id=js']
+        use: ['happypack/loader?id=js']
       }
     ]
   },
@@ -89,20 +89,20 @@ module.exports = {
   plugins: [
     new HappyPack({
       id: 'json',
-      loaders: ['json'],
+      loaders: ['json-loader'],
       threads: 2,
       verbose: verbose
     }),
     new HappyPack({
       id: 'css',
-      loaders: ['style!css'],
+      loaders: ['style-loader', 'css-loader'],
       threads: 2,
       verbose: verbose
     }),
     new HappyPack({
       id: 'js',
       loaders: [{
-        path: 'babel',
+        path: path.join(__dirname, '../node_modules/babel-loader/lib/index.js'),
         query: {
           presets: ['react', 'es2015', 'stage-1']
         }

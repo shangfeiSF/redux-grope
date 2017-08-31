@@ -17,9 +17,9 @@ var html = fs.readFileSync(path.join(__dirname, '../assets', 'indexTemplate.html
 }).replace('{{LINKS}}', LINKS.join('\n'))
 
 var dirConfig = require('./dirConfig')
-var webpackDll = require('../webpack.dll')
+var constants = require('../dll/constants')
 
-var manifestPath = path.join(dirConfig.vendorsPath, webpackDll._manifest)
+var manifestPath = path.join(dirConfig.vendorsPath, constants.manifest)
 var manifestJson = JSON.parse(fs.readFileSync(manifestPath).toString('utf-8'))
 
 module.exports = {
@@ -34,7 +34,7 @@ module.exports = {
   html: html,
 
   vendors: {
-    from: '/' + webpackDll._baseName + '.js',
+    from: '/' + constants.baseName + '.js',
     to: '/' + manifestJson.name + '.js'
   }
 }

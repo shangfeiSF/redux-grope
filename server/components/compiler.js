@@ -20,7 +20,6 @@ if (options.hot) {
   })
 
   webpackConfig.plugins = webpackConfig.plugins.concat([
-    new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ])
 
@@ -28,6 +27,10 @@ if (options.hot) {
     new DashboardPlugin(new Dashboard().setData)
   )
 }
+
+delete webpackConfig._isWin32
+delete webpackConfig._makeEntry
+delete webpackConfig._bundleDirs
 
 var compiler = webpack(webpackConfig)
 var info = '[Server Info]: Server is listening on http://localhost:' + serverConfig.port + '/index.html'

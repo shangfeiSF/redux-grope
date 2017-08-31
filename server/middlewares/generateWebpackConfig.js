@@ -36,16 +36,22 @@ var generate = function (webpackRaw) {
     })
   )
 
-  if (options.compress) {
-    webpackConfig.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false,
-          drop_debugger: true
-        }
-      })
-    )
-  }
+  /*
+  * There is some bug with the 'inspectpack@1.3.2' which required by 'webpack-dashboard@1.0.0-5'
+  * ISSUE: https://github.com/FormidableLabs/webpack-dashboard/issues/182
+  * So do not support compress util 'inspectpack' fix this bug
+  * */
+
+  // if (options.compress) {
+  //   webpackConfig.plugins.push(
+  //     new webpack.optimize.UglifyJsPlugin({
+  //       compress: {
+  //         warnings: false,
+  //         drop_debugger: true
+  //       }
+  //     })
+  //   )
+  // }
 
   if (options.map) {
     webpackConfig.devtool = 'inline-source-map'

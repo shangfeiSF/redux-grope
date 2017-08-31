@@ -23,7 +23,7 @@ var makeEntry = function (dirs) {
 var unhappybuildDirName = '__build_unhappy__'
 
 module.exports = {
-  _makeEntry: makeEntry,
+  // _makeEntry: makeEntry,
 
   devtool: 'inline-source-map',
 
@@ -38,9 +38,9 @@ module.exports = {
 
   resolve: {
     alias: {
-      'react-router': path.join(__dirname, '..', 'node_modules', 'react-router', 'lib')
+      'react-router': path.join(__dirname, '..', 'node_modules', 'react-router')
     },
-    extensions: ['', '.js', '.json']
+    extensions: ['.js', '.json']
   },
 
   context: path.join(__dirname, '../'),
@@ -50,11 +50,11 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.json/,
         include: path.join(__dirname, '../main/06.shopping-cart/src/api'),
-        loader: 'json-loader'
+        use: ['json-loader']
       },
       {
         test: /\.css$/,
@@ -62,14 +62,16 @@ module.exports = {
           path.join(__dirname, '../main'),
           path.join(__dirname, '../node_modules/todomvc-app-css')
         ],
-        loader: "style!css"
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.js$/,
         include: path.join(__dirname, '../main'),
-        loader: "babel-loader",
-        query: {
-          presets: ['react', 'es2015', 'stage-1']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['react', 'es2015', 'stage-1']
+          }
         }
       }
     ]

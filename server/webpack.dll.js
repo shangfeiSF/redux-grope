@@ -4,14 +4,12 @@ var webpack = require('webpack')
 
 var vendors = require('./dll/index')
 var dirConfig = require('./configs/dirConfig')
+var constants = require('./dll/constants')
 
-var baseName = 'vendorsBundle'
-var manifest = 'manifest.json'
+var baseName = constants.baseName
+var manifest = constants.manifest
 
 module.exports = {
-  _baseName: baseName,
-  _manifest: manifest,
-
   output: {
     path: dirConfig.vendorsPath,
     filename: baseName + '_[chunkhash].js',
