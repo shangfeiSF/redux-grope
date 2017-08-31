@@ -23,13 +23,15 @@ module.exports = {
   ],
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
         exclude: /node_modules/,
-        query: {
-          presets: ['react-hmre']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['react-hmre']
+          }
         }
       }
     ]
