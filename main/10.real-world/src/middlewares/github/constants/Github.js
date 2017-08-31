@@ -1,4 +1,4 @@
-const ACCESSTOKEN = '101e350a8b5bd22f0618d50f94f67d8db4b76789'
+const ACCESSTOKEN = '5fb6f72585752519344d82c02a32f5e52185a06b'
 
 export const APIROOT = 'https://api.github.com/'
 export const TOKEN = `?access_token=${ACCESSTOKEN}`

@@ -1,5 +1,6 @@
 import {browserHistory} from 'react-router'
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 class Explore extends Component {
   static propTypes = {

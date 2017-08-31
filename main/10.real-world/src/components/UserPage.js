@@ -1,5 +1,6 @@
 import zip from 'lodash/zip'
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
 import Repo from './modules/Repo'
 import User from './modules/User'

@@ -1,10 +1,10 @@
-import {Schema, arrayOf} from 'normalizr'
+import {schema} from 'normalizr';
 
-const userSchema = new Schema('users', {
+const userSchema = new schema.Entity('users', {}, {
   idAttribute: user => user.login
 })
 
-const repoSchema = new Schema('repos', {
+const repoSchema = new schema.Entity('repos', {}, {
   idAttribute: repo => repo.fullName
 })
 
@@ -14,7 +14,7 @@ repoSchema.define({
 
 export default {
   USER: userSchema,
-  USER_ARRAY: arrayOf(userSchema),
+  USER_ARRAY: new schema.Array(userSchema),
   REPO: repoSchema,
-  REPO_ARRAY: arrayOf(repoSchema)
+  REPO_ARRAY: new schema.Array(repoSchema)
 }
