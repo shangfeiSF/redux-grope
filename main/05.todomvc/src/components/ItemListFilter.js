@@ -1,4 +1,6 @@
-import React, {PropTypes, Component} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+
 import classnames from 'classnames'
 
 import * as FilterTypes from '../constants/FilterTypes'

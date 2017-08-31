@@ -1,6 +1,7 @@
 // @flow
 
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import type {Id, Text, Event} from '../types'
 
 export type Props = {

@@ -1,6 +1,6 @@
 // @flow
 
-import React, {PropTypes}from 'react'
+import React from 'react'
 import * as FilterTypes from '../constants/FilterTypes'
 import FilterContainer from '../containers/FilterContainer'
 
