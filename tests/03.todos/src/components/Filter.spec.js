@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Filter from '../../../../main/03.todos/src/components/Filter'
 
@@ -10,7 +10,8 @@ const setup = propOverrides => {
     onClick: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+
+  const renderer = new ShallowRenderer()
 
   renderer.render(
     <Filter {...props} />

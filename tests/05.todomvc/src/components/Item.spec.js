@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Item from '../../../../main/05.todomvc/src/components/Item'
 import TextInput from '../../../../main/05.todomvc/src/components/TextInput'
@@ -18,7 +18,8 @@ const setup = (editing = false) => {
     }
   }
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Item {...props} />
   )

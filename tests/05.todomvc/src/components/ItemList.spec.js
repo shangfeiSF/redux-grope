@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import ItemList from '../../../../main/05.todomvc/src/components/ItemList'
 import Item from '../../../../main/05.todomvc/src/components/Item'
@@ -30,7 +30,8 @@ const setup = propOverrides => {
     }
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <ItemList {...props} />
   )

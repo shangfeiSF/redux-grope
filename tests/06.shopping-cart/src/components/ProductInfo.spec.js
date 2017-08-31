@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import ProductInfo from '../../../../main/06.shopping-cart/src/components/ProductInfo'
 
@@ -14,7 +14,8 @@ const setup = propOverrides => {
     },
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <ProductInfo {...props} />
   )

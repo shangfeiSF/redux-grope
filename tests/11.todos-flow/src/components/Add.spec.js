@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Add from '../../../../main/11.todos-flow/src/components/Add'
 
@@ -9,7 +9,8 @@ const setup = () => {
     onSubmit: jest.fn()
   }
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Add {...props} />
   )

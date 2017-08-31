@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import ItemListFilter from '../../../../main/05.todomvc/src/components/ItemListFilter'
 
@@ -14,7 +14,8 @@ const setup = propOverrides => {
     onShow: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <ItemListFilter {...props} />
   )

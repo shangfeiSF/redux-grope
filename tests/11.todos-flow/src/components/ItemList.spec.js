@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Item from '../../../../main/11.todos-flow/src/components/Item'
 import ItemList from '../../../../main/11.todos-flow/src/components/ItemList'
@@ -22,7 +22,7 @@ const setup = propOverrides => {
     onItemClick: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
 
   renderer.render(
     <ItemList {...props} />

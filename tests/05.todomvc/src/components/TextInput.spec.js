@@ -1,6 +1,7 @@
 import React from 'react'
 
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
+
 import TodoTextInput from '../../../../main/05.todomvc/src/components/TextInput'
 
 const setup = propOverrides => {
@@ -11,7 +12,7 @@ const setup = propOverrides => {
     text: 'Use Redux'
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
 
   renderer.render(
     <TodoTextInput {...props} />

@@ -1,11 +1,11 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import FilterList from '../../../../main/04.todos-with-undo/src/components/FilterList'
 import FilterContainer from '../../../../main/04.todos-with-undo/src/containers/FilterContainer'
 
 const setup = () => {
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
 
   renderer.render(
     <FilterList />

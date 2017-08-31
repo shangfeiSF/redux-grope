@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Themes from '../../../../main/08.async/src/constants/Themes'
 import Refresh from '../../../../main/08.async/src/components/Refresh'
@@ -26,7 +26,8 @@ const setup = propOverrides => {
     },
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Refresh {...props} />
   )

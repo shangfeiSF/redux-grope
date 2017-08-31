@@ -1,7 +1,7 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import {mount} from 'enzyme'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import generateTree from '../../../../main/07.tree-view/src/utils/generateTree'
 import Node from '../../../../main/07.tree-view/src/components/Node'
@@ -23,7 +23,8 @@ const setup = (id, propOverrides) => {
     }
   }
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Node {...props} />
   )

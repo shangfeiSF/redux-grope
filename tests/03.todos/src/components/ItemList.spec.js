@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Item from '../../../../main/03.todos/src/components/Item'
 import ItemList from '../../../../main/03.todos/src/components/ItemList'
@@ -22,7 +22,8 @@ const setup = propOverrides => {
     onItemClick: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+
+  const renderer = new ShallowRenderer()
 
   renderer.render(
     <ItemList {...props} />
@@ -41,7 +42,7 @@ describe('components', () => {
   describe('ItemList', () => {
     it('should render correctly', () => {
       const {output, props} = setup()
-      const [h3, ul] =  output.props.children
+      const [h3, ul] = output.props.children
 
       expect(output.type).toBe('div')
 

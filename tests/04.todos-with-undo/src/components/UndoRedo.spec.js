@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import UndoRedo from '../../../../main/04.todos-with-undo/src/components/UndoRedo'
 
@@ -11,7 +11,7 @@ const setup = propOverrides => {
     onRedo: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
 
   renderer.render(
     <UndoRedo {...props} />

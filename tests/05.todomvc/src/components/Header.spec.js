@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Header from '../../../../main/05.todomvc/src/components/Header'
 import TextInput from '../../../../main/05.todomvc/src/components/TextInput'
@@ -9,7 +9,8 @@ const setup = () => {
     add: jest.fn()
   }
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Header {...props} />
   )

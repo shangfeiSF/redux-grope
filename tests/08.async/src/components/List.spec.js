@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import {mockData} from '../actions/mocks/utils/index'
 
@@ -14,7 +14,8 @@ const setup = propOverrides => {
     contexts: mockData.contexts
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <List {...props} />
   )

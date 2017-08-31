@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import generateTree from '../../../../main/07.tree-view/src/utils/generateTree'
 import Rebuild from '../../../../main/07.tree-view/src/components/Rebuild'
@@ -15,7 +15,8 @@ const setup = (propOverrides) => {
     }
   }
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Rebuild {...props} />
   )

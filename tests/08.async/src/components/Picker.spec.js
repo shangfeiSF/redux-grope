@@ -1,7 +1,7 @@
 import React from 'react'
 import sinon from 'sinon'
 import {mount} from 'enzyme'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import Themes from '../../../../main/08.async/src/constants/Themes'
 import Picker from '../../../../main/08.async/src/components/Picker'
@@ -25,7 +25,8 @@ const setup = propOverrides => {
     },
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <Picker {...props} />
   )

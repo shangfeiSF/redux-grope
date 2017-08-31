@@ -1,5 +1,5 @@
 import React from 'react'
-import TestUtils from 'react-addons-test-utils'
+import ShallowRenderer from 'react-test-renderer/shallow'
 
 import ProductsList from '../../../../main/06.shopping-cart/src/components/ProductsList'
 import ProductItem from '../../../../main/06.shopping-cart/src/components/ProductItem'
@@ -24,7 +24,8 @@ const setup = propOverrides => {
     addToCart: jest.fn()
   }, propOverrides)
 
-  const renderer = TestUtils.createRenderer()
+  const renderer = new ShallowRenderer()
+
   renderer.render(
     <ProductsList {...props} />
   )
