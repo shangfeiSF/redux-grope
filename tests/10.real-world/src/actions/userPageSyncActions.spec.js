@@ -1,5 +1,5 @@
-import {SPEC} from '../../../../main/10.real-world/src/middleware/symbol'
-import {Schemas} from '../../../../main/10.real-world/src/middleware/schema'
+import actionSpec from '../../../../main/10.real-world/src/middlewares/github/sybmols/actionSpec'
+import Schemas from '../../../../main/10.real-world/src/middlewares/github/schemas'
 
 import * as ActionTypes from '../../../../main/10.real-world/src/constants/ActionTypes'
 import * as userPageSyncActions from '../../../../main/10.real-world/src/actions/userPageSyncActions'
@@ -9,7 +9,9 @@ describe('userPageSynclearcActions', () => {
     let login = 'shangfeiSF'
 
     let expectedValue = {
-      [SPEC]: {
+      login,
+
+      [actionSpec]: {
         types: [
           ActionTypes.USER_REQUEST,
           ActionTypes.USER_SUCCESS,
@@ -32,7 +34,7 @@ describe('userPageSynclearcActions', () => {
     let expectedValue = {
       login,
 
-      [SPEC]: {
+      [actionSpec]: {
         types: [
           ActionTypes.STARRED_REQUEST,
           ActionTypes.STARRED_SUCCESS,

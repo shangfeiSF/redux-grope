@@ -47,8 +47,8 @@ const setup = propOverrides => {
     }],
 
     loadUser: jest.fn(),
-
-    loadStarred: jest.fn()
+    loadStarred: jest.fn(),
+    loadMoreStarred: jest.fn()
   }, propOverrides)
 
   const renderer = new ShallowRenderer()
@@ -85,9 +85,11 @@ describe('UserPage', () => {
 
     expect(output.type).toBe('div')
 
-    const [user, list] = output.props.children
+    const [h4_1, user, h4_2, list] = output.props.children
 
+    expect(h4_1.type).toBe('h4')
     expect(user.type).toBe(User)
+    expect(h4_2.type).toBe('h4')
     expect(list.type).toBe(List)
 
     expect(user.props.user).toEqual(props.user)

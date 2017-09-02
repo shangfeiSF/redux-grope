@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 class Explore extends Component {
   static propTypes = {
     inputValue: PropTypes.string.isRequired,
-    errorMessage: PropTypes.string,
+    errorMessage: PropTypes.object,
     resetErrorMessage: PropTypes.func.isRequired,
   }
 

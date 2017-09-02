@@ -39,7 +39,7 @@ describe('User', () => {
     const link = output.props.children
 
     expect(link.type).toBe(Link)
-    expect(link.props.to).toEqual(`/${login}`)
+    expect(link.props.to).toEqual(`/10.real-world/${login}`)
 
     const [img, h3] = link.props.children
 
@@ -57,6 +57,6 @@ describe('User', () => {
     expect(spaceText).toEqual(' ')
 
     expect(span.type).toBe('span')
-    expect(span.props.children).toEqual(['(', name, ')'])
+    expect(span.props.children).toEqual(`(${name})`)
   })
 })

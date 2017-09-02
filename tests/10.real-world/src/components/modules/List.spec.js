@@ -1,7 +1,8 @@
 import React from 'react'
+import ShallowRenderer from 'react-test-renderer/shallow'
+
 import sinon from 'sinon'
 import {mount} from 'enzyme'
-import ShallowRenderer from 'react-test-renderer/shallow'
 
 import List from '../../../../../main/10.real-world/src/components/modules/List'
 

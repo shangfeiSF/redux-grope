@@ -19,7 +19,7 @@ class User extends Component {
         <Link to={`/10.real-world/${login}`}>
           <img src={avatarUrl} alt={login} width="72" height="72"/>
           <h3>
-            {login} {name && <span>({name})</span>}
+            {login} {name && <span>{`(${name})`}</span>}
           </h3>
         </Link>
       </div>

@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 
-import {SPEC} from '../../../../main/10.real-world/src/middleware/symbol'
-import {Schemas} from '../../../../main/10.real-world/src/middleware/schema'
+import actionSpec from '../../../../main/10.real-world/src/middlewares/github/sybmols/actionSpec'
+import Schemas from '../../../../main/10.real-world/src/middlewares/github/schemas'
 
 import * as ActionTypes from '../../../../main/10.real-world/src/constants/ActionTypes'
 import * as userPageThunkActions from '../../../../main/10.real-world/src/actions/userPageThunkActions'
@@ -12,7 +12,9 @@ describe('userPageThunkActions', () => {
     let requiredFields = ['id', 'login', 'name', 'email']
 
     let expectedValue = {
-      [SPEC]: {
+      login,
+
+      [actionSpec]: {
         types: [
           ActionTypes.USER_REQUEST,
           ActionTypes.USER_SUCCESS,
@@ -46,7 +48,9 @@ describe('userPageThunkActions', () => {
     }
 
     let expectedValue = {
-      [SPEC]: {
+      login,
+
+      [actionSpec]: {
         types: [
           ActionTypes.USER_REQUEST,
           ActionTypes.USER_SUCCESS,
@@ -114,7 +118,7 @@ describe('userPageThunkActions', () => {
     let expectedValue = {
       login,
 
-      [SPEC]: {
+      [actionSpec]: {
         types: [
           ActionTypes.STARRED_REQUEST,
           ActionTypes.STARRED_SUCCESS,
@@ -154,7 +158,7 @@ describe('userPageThunkActions', () => {
     let expectedValue = {
       login,
 
-      [SPEC]: {
+      [actionSpec]: {
         types: [
           ActionTypes.STARRED_REQUEST,
           ActionTypes.STARRED_SUCCESS,

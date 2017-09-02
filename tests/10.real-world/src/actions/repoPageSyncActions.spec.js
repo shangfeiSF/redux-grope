@@ -1,5 +1,5 @@
-import {SPEC} from '../../../../main/10.real-world/src/middleware/symbol'
-import {Schemas} from '../../../../main/10.real-world/src/middleware/schema'
+import actionSpec from '../../../../main/10.real-world/src/middlewares/github/sybmols/actionSpec'
+import Schemas from '../../../../main/10.real-world/src/middlewares/github/schemas'
 
 import * as ActionTypes from '../../../../main/10.real-world/src/constants/ActionTypes'
 import * as repoPageSyncActions from '../../../../main/10.real-world/src/actions/repoPageSyncActions'
@@ -9,7 +9,9 @@ describe('repoPageSyncActions', () => {
     let fullName = 'facebook/react'
 
     let expectedValue = {
-      [SPEC]: {
+      fullName,
+
+      [actionSpec]: {
         types: [
           ActionTypes.REPO_REQUEST,
           ActionTypes.REPO_SUCCESS,
@@ -32,7 +34,7 @@ describe('repoPageSyncActions', () => {
     let expectedValue = {
       fullName,
 
-      [SPEC]: {
+      [actionSpec]: {
         types: [
           ActionTypes.STARGAZERS_REQUEST,
           ActionTypes.STARGAZERS_SUCCESS,

@@ -33,8 +33,8 @@ const setup = propOverrides => {
     stargazers: [],
 
     loadRepo: jest.fn(),
-
-    loadStargazers: jest.fn()
+    loadStargazers: jest.fn(),
+    loadMoreStargazers: jest.fn()
   }, propOverrides)
 
   const renderer = new ShallowRenderer()
@@ -71,9 +71,11 @@ describe('RepoPage', () => {
 
     expect(output.type).toBe('div')
 
-    const [repo, list] = output.props.children
+    const [h4_1, repo, h4_2, list] = output.props.children
 
+    expect(h4_1.type).toBe('h4')
     expect(repo.type).toBe(Repo)
+    expect(h4_2.type).toBe('h4')
     expect(list.type).toBe(List)
 
     expect(repo.props.repo).toEqual(props.repo)

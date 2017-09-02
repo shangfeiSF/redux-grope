@@ -1,6 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
 import ShallowRenderer from 'react-test-renderer/shallow'
+
+import {Link} from 'react-router'
 
 import Repo from '../../../../../main/10.real-world/src/components/modules/Repo'
 
@@ -48,8 +49,8 @@ describe('Repo', () => {
     expect(linkName.type).toBe(Link)
     expect(linkLogin.type).toBe(Link)
 
-    expect(linkName.props.to).toEqual(`/${login}/${name}`)
-    expect(linkLogin.props.to).toEqual(`/${login}`)
+    expect(linkName.props.to).toEqual(`/10.real-world/${login}/${name}`)
+    expect(linkLogin.props.to).toEqual(`/10.real-world/${login}`)
 
     expect(text).toEqual(' by ')
 

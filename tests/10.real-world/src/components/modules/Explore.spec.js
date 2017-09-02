@@ -1,17 +1,19 @@
 import React from 'react'
-import sinon from 'sinon'
-import {mount} from 'enzyme'
 import ShallowRenderer from 'react-test-renderer/shallow'
 
+import sinon from 'sinon'
+import {mount} from 'enzyme'
+
 import {browserHistory} from 'react-router'
+
 import Explore from '../../../../../main/10.real-world/src/components/modules/Explore'
 
 const setup = propOverrides => {
   const props = Object.assign({
     inputValue: 'facebook/react',
-
-    errorMessage: null,
-
+    errorMessage: {
+      spec: null
+    },
     resetErrorMessage: jest.fn()
   }, propOverrides)
 
@@ -41,10 +43,10 @@ describe('Explore', () => {
     expect(exploreArea.type).toBe('div')
     expect(exploreArea.props.className).toBe('exploreArea')
 
-    const [p, input, button] = exploreArea.props.children
+    const [h4, input, button] = exploreArea.props.children
 
-    expect(p.type).toBe('p')
-    expect(p.props.children).toBe("input a username or a repo full name then click 'Go':")
+    expect(h4.type).toBe('h4')
+    expect(h4.props.children).toBe("Please input a username or a full reponame then click 'Go':")
 
     expect(input.type).toBe('input')
     expect(input.props.size).toBe('30')
@@ -56,7 +58,9 @@ describe('Explore', () => {
 
   it('should display correctly with error message', () => {
     const {output, props} = setup({
-      errorMessage: 'This is a error message.'
+      errorMessage: {
+        spec: 'This is a error message.'
+      }
     })
 
     expect(output.type).toBe('div')
@@ -66,10 +70,10 @@ describe('Explore', () => {
     expect(exploreArea.type).toBe('div')
     expect(exploreArea.props.className).toBe('exploreArea')
 
-    const [p, input, button] = exploreArea.props.children
+    const [h4, input, button] = exploreArea.props.children
 
-    expect(p.type).toBe('p')
-    expect(p.props.children).toBe("input a username or a repo full name then click 'Go':")
+    expect(h4.type).toBe('h4')
+    expect(h4.props.children).toBe("Please input a username or a full reponame then click 'Go':")
 
     expect(input.type).toBe('input')
     expect(input.props.size).toBe('30')
@@ -90,14 +94,16 @@ describe('Explore', () => {
 
     const [b, a] = ep.props.children
 
-    expect(b.props.children).toBe(props.errorMessage)
+    expect(b.props.children).toBe(props.errorMessage.spec)
     expect(a.props.href).toBe('#')
     expect(a.props.children).toBe('(Dismiss)')
   })
 
   it('should call resetErrorMessage when click the dismiss link in errorMessage', () => {
     const {props} = setup({
-      errorMessage: 'This is a error message.'
+      errorMessage: {
+        spec: 'This is a error message.'
+      }
     })
 
     const output = mount(<Explore {...props}></Explore>)
@@ -124,7 +130,7 @@ describe('Explore', () => {
     })
 
     expect(spy.calledOnce).toEqual(true)
-    expect(spy.firstCall.calledWith(`/${login}`)).toEqual(true)
+    expect(spy.firstCall.calledWith(`/10.real-world/${login}`)).toEqual(true)
 
     browserHistory.push.restore()
   })
@@ -161,7 +167,7 @@ describe('Explore', () => {
     output.find('button').simulate('click')
 
     expect(spy.calledOnce).toEqual(true)
-    expect(spy.firstCall.calledWith(`/${login}`)).toEqual(true)
+    expect(spy.firstCall.calledWith(`/10.real-world/${login}`)).toEqual(true)
 
     browserHistory.push.restore()
   })
