@@ -1,109 +1,73 @@
-import {createStore} from 'redux'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import '../../global.css'
+import {createStore} from 'redux';
+
+import '../../global.css';
+
+// assistants
+const getById = id => document.getElementById(id);
+const addListener = (node, type, listener) => node.addEventListener(type, listener);
 
 class App {
-  constructor() {
-    this.nodes = {}
-
-    this.types = {
-      in: 'INCREMENT',
-      de: 'DECREMENT'
+    constructor() {
+        this.store = null;
+        this.types = {increment: 'INCREMENT', decrement: 'DECREMENT'};
+        this.nodes = {};
     }
 
-    this.store = null
-  }
-
-  reducers(state, action) {
-    if (typeof state === 'undefined') {
-      console.log(action.type)
-      return 0
+    reducers = (state, action) => {
+        switch (action.type) {
+            case this.types.increment:
+                return state + 1;
+            case this.types.decrement:
+                return state - 1;
+            default:
+                return state;
+        }
     }
 
-    switch (action.type) {
-      case this.types.in:
-        return state + 1
-      case this.types.de:
-        return state - 1
-      default:
-        return state
-    }
-  }
+    boot = () => {
+        this.nodes.times = getById('times');
+        this.nodes.increase = getById('increase');
+        this.nodes.decrease = getById('decrease');
+        this.nodes.increaseIfOdd = getById('increaseIfOdd');
+        this.nodes.increaseAsync = getById('increaseAsync');
 
-  boot() {
-    let self = this
-    let nodes = this.nodes
-
-    let $ = function (id) {
-      return document.getElementById(id)
+        // Redux createStore with reducers and subscribe the dispatch actions
+        this.store = createStore(this.reducers, 0);
+        this.store.subscribe(this.render);
     }
 
-    nodes.times = $('times')
-    nodes.increase = $('increase')
-    nodes.decrease = $('decrease')
-    nodes.increaseIfOdd = $('increaseIfOdd')
-    nodes.increaseAsync = $('increaseAsync')
+    render = () => this.nodes.times.innerHTML = `${this.store.getState()}`
 
-    /*
-     * Redux createStore with reducers
-     * and subscribe the dispatch actions
-     * */
-    this.store = createStore(self.reducers.bind(self))
-    this.store.subscribe(function () {
-      self.render()
-    })
-  }
+    bind = () => {
+        const EVENT = 'click';
 
-  render() {
-    let nodes = this.nodes
-    let store = this.store
+        addListener(this.nodes.increase, EVENT, () => {
+            this.store.dispatch({type: this.types.increment});
+        });
 
-    nodes.times.innerHTML = store.getState().toString()
-  }
+        addListener(this.nodes.decrease, EVENT, () => {
+            this.store.dispatch({type: this.types.decrement});
+        });
 
-  bind() {
-    let self = this
-    let nodes = this.nodes
-    let store = this.store
-
-    let $ = function (node, type, listener) {
-      node.addEventListener(type, listener)
-    }
-
-    $(nodes.increase, 'click', function () {
-      store.dispatch({
-        type: self.types.in
-      })
-    })
-
-    $(nodes.decrease, 'click', function () {
-      store.dispatch({
-        type: self.types.de
-      })
-    })
-
-    $(nodes.increaseIfOdd, 'click', function () {
-      if (store.getState() % 2 !== 0) {
-        store.dispatch({
-          type: self.types.in
+        addListener(this.nodes.increaseIfOdd, EVENT, () => {
+            this.store.getState() % 2 !== 0 && this.store.dispatch({type: this.types.increment});
         })
-      }
-    })
 
-    $(nodes.increaseAsync, 'click', function () {
-      setTimeout(function () {
-        store.dispatch({
-          type: self.types.in
+        addListener(this.nodes.increaseAsync, EVENT, () => {
+            setTimeout(this.store.dispatch({type: this.types.increment}), 1000);
         })
-      }, 1000)
-    })
-  }
+    }
 
-  init() {
-    this.boot()
-    this.render()
-    this.bind()
-  }
+    init = () => {
+        this.boot();
+        this.render();
+        this.bind();
+    }
 }
 
-new App().init()
+new App().init();
