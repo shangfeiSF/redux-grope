@@ -1,36 +1,41 @@
-import React from 'react'
-import {render} from 'react-dom'
-import {createStore} from 'redux'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import Counter from './components/Counter'
-import reducers from './reducers'
+import React from 'react';
+import {render} from 'react-dom';
+import {createStore} from 'redux';
 
-import '../../global.css'
+import Counter from './components/Counter';
+import reducers from './reducers';
+
+import '../../global.css';
+
+// assistants
+const getById = id => document.getElementById(id);
+
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
 
 class App {
-  constructor() {
-    this.root = document.getElementById('example')
+    constructor() {
+        // Redux createStore with reducers and subscribe the dispatch actions
+        this.store = createStore(reducers, 9);
+        this.store.subscribe(this.render);
+    }
 
-    this.store = createStore(reducers)
-    this.store.subscribe(this.render.bind(this))
-  }
+    render = () => {
+        const content = <Counter
+            value={this.store.getState()}
+            handlerOnIncrease={() => this.store.dispatch({type: INCREMENT})}
+            handlerOnDecrease={() => this.store.dispatch({type: DECREMENT})}
+        />;
 
-  render() {
-    let store = this.store
+        render(content, getById('example'));
+    }
 
-    let content =
-      <Counter
-        value={ store.getState() }
-        handlerOnIncrease={ () => store.dispatch({type: 'INCREMENT'}) }
-        handlerOnDecrease={ () => store.dispatch({type: 'DECREMENT'}) }
-      />
-
-    render(content, this.root)
-  }
-
-  init() {
-    this.render()
-  }
+    init = () => this.render()
 }
 
-new App().init()
+new App().init();
