@@ -1,22 +1,22 @@
-import {connect} from 'react-redux'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import Add from '../components/Add'
+import {connect} from 'react-redux';
 
-import {add} from '../actions'
+import Add from '../components/Add';
+
+import {add} from '../actions';
 
 /*
- * 容器组件和展示组件的配合方式-1：
- * 容器组件传递action创建方法，展示组件生成输入，展示组件调用action创建方法
- * 容器组件向展示组件传递了add方法（命名为onSubmit）
- * */
+* The container component and the presentational component cooperate by two steps as follow:
+* 1. The container component passes the action creator named onSubmit.
+* 2. The presentational component calculates the parameters and calls the action creator
+* */
 
-const mapStateToProps = null
+const mapStateToProps = null;
 
-const mapDispatchToProps = ({
-  onSubmit: add
-})
+const mapDispatchToProps = {onSubmit: add};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Add)
+export default connect(mapStateToProps, mapDispatchToProps)(Add);

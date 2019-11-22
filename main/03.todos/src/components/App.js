@@ -1,39 +1,46 @@
-import React from 'react'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-/* 展示组件App中调用展示组件FilterList */
-import FilterList from './FilterList'
-
-/* 展示组件App中调用容器组件ItemListContainer、AddContainer */
-import ItemListContainer from '../containers/ItemListContainer'
-import AddContainer from '../containers/AddContainer'
+import React from 'react';
 
 /*
- * 	容器组件：components/*.js
- * 	位置---最顶层，负责路由处理
- * 	使用Redux---是
- * 	读取数据---	从 Redux 获取 state
- * 	修改数据---向 Redux 发起 actions
- * */
-/*
- *  展示组件：	container/*.js
- *  位置---中间和子组件
- *  使用Redux---否
- * 	读取数据---从 props 获取数据
- * 	修改数据---从 props 调用回调函数
+ *  展示组件: container/*.js
+ *  位置: 中间/子组件
+ *  使用Redux: 否
+ * 	读取数据: 从props获取数据
+ * 	修改数据: 从props调用回调函数
  * */
 
+// 展示组件: App => 展示组件: FilterList
+import FilterList from './FilterList';
+
 /*
- * App要么直接使用展示组件，要么使用容器组件
+ * 	容器组件: components/*.js
+ * 	位置: 最顶层，负责路由处理
+ * 	使用Redux: 是
+ * 	读取数据: 从Redux获取state
+ * 	修改数据: 向Redux发起actions
+ * */
+
+// 展示组件: App => 容器组件： ItemListContainer和AddContainer
+import ItemListContainer from '../containers/ItemListContainer';
+import AddContainer from '../containers/AddContainer';
+
+/*
+ * App或使用展示组件，或使用容器组件
  * App -- FilterList -- FilterContainer(Filter)
- *         -- ItemListContainer(ItemList) -- Item
- *         -- AddContainer(Add)
+ *     -- ItemListContainer(ItemList -- Item)
+ *     -- AddContainer(Add)
  * */
-const App = () => (
-  <div>
-    <FilterList />
-    <ItemListContainer />
-    <AddContainer />
-  </div>
-)
 
-export default App
+const App = () => (
+    <div>
+        <FilterList/>
+        <ItemListContainer/>
+        <AddContainer/>
+    </div>
+);
+
+export default App;

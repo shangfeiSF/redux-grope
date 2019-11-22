@@ -1,10 +1,18 @@
-// ES6参数默认值语法实现的 state.filter初始化'SHOW_ALL'
-export default (state = 'SHOW_ALL', action) => {
-  switch (action.type) {
-    case 'FILTER':
-      return action.filter
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-    default:
-      return state
-  }
+const FILTER = 'FILTER';
+
+const initState = 'SHOW_ALL';
+
+export default (state = initState, action) => {
+    switch (action.type) {
+        case FILTER:
+            return action.filter
+
+        default:
+            return state
+    }
 }

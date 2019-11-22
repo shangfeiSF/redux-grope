@@ -1,23 +1,34 @@
-import {connect} from 'react-redux'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import ItemList from '../components/ItemList'
+import {connect} from 'react-redux';
 
-import {toggle} from '../actions'
+import ItemList from '../components/ItemList';
+
+import {toggle} from '../actions';
+
+const FILTERS = [
+    {FILTER: 'SHOW_ALL'},
+    {FILTER: 'SHOW_ACTIVE'},
+    {FILTER: 'SHOW_COMPLETED'}
+];
 
 const filterHandler = (addAndToggle, filter) => {
-  switch (filter) {
-    case 'SHOW_ALL':
-      return addAndToggle
+    switch (filter) {
+        case FILTERS[0].FILTER:
+            return addAndToggle;
 
-    case 'SHOW_COMPLETED':
-      return addAndToggle.filter(t => t.completed)
+        case FILTERS[1].FILTER:
+            return addAndToggle.filter(item => !item.completed);
 
-    case 'SHOW_ACTIVE':
-      return addAndToggle.filter(t => !t.completed)
+        case FILTERS[2].FILTER:
+            return addAndToggle.filter(item => item.completed);
 
-    default:
-      throw new Error('Unknown filter: ' + filter)
-  }
+        default:
+            throw new Error('Unknown the filter: ' + filter);
+    }
 }
 
 /*
@@ -26,19 +37,12 @@ const filterHandler = (addAndToggle, filter) => {
  * 容器组件向展示组件传递了toggle方法（命名为onItemClick）
  * */
 
-// 纯函数声明哪些全局state字段是组件需要通过props获取的
-// 而且可以综合若干字段进行处理
-const mapStateToProps = (state) => ({
-  items: filterHandler(state.addAndToggle, state.filter)
+// 纯函数声明哪些全局state字段是组件需要通过props获取的, 而且可以综合若干字段进行处理
+const mapStateToProps = state => ({
+    items: filterHandler(state.addAndToggle, state.filter)
 })
 
 // 纯函数声明哪些action创建函数是组件需要通过props获取的，并分配props中指定的key上
-const mapDispatchToProps = ({
-  onItemClick: toggle // toggle创建函数分配到props.onItemClick上
-})
+const mapDispatchToProps = {onItemClick: toggle};
 
-// react-redux的connect()方法将TodoList转换成容器组件
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ItemList)
+export default connect(mapStateToProps, mapDispatchToProps)(ItemList);
