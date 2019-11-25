@@ -30,7 +30,7 @@ const filterHandler = (addAndToggle, filter) => {
         default:
             throw new Error('Unknown the filter: ' + filter);
     }
-}
+};
 
 /*
 * The container component and the presentational component cooperate as follow:

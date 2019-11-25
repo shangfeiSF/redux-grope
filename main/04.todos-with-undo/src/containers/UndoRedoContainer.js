@@ -1,19 +1,21 @@
-import {connect} from 'react-redux'
-import {ActionCreators as UndoActionCreators} from 'redux-undo'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import UndoRedo from '../components/UndoRedo'
+import {connect} from 'react-redux';
+import {ActionCreators} from 'redux-undo';
 
-const mapStateToProps = (state) => ({
-  canUndo: state.addAndToggle.past.length > 0,
-  canRedo: state.addAndToggle.future.length > 0
-})
+import UndoRedo from '../components/UndoRedo';
 
-const mapDispatchToProps = ({
-  onUndo: UndoActionCreators.undo,
-  onRedo: UndoActionCreators.redo
-})
+const mapStateToProps = state => ({
+    canUndo: state.addAndToggle.past.length > 0,
+    canRedo: state.addAndToggle.future.length > 0
+});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UndoRedo)
+const mapDispatchToProps = {
+    onUndo: ActionCreators.undo,
+    onRedo: ActionCreators.redo
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UndoRedo);

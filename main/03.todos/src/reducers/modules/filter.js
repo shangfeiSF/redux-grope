@@ -12,9 +12,9 @@ const initState = 'SHOW_ALL';
 export default (state = initState, action) => {
     switch (action.type) {
         case FILTER:
-            return action.filter
+            return action.filter;
 
         default:
-            return state
+            return state;
     }
-}
+};
