@@ -27,21 +27,19 @@ class ItemList extends Component {
     }
 
     render() {
-        /*
-         * 容器组件和展示组件的配合方式-3：
-         * 展示组件封装了容器组件传递action创建方法，继续传递给其它展示组件
-         * */
         return (
             <div>
                 <h3>ItemsList</h3>
                 <ul>
-                    {this.props.items.map(item =>
-                        <Item
-                            key={item.id}
-                            {...item}
-                            onClick={this.props.onItemClick}
-                        />
-                    )}
+                    {
+                        this.props.items.map(item =>
+                            <Item
+                                key={item.id}
+                                {...item}
+                                onClick={this.props.onItemClick}
+                            />
+                        )
+                    }
                 </ul>
             </div>
         );

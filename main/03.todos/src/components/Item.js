@@ -20,6 +20,7 @@ class Item extends Component {
 
     handlerOnClick = event => {
         event.preventDefault();
+
         this.props.onClick(this.props.id);
     }
 
@@ -30,7 +31,12 @@ class Item extends Component {
         };
 
         return (
-            <li style={style} onClick={this.handlerOnClick}>{this.props.text}</li>
+            <li
+                style={style}
+                onClick={this.handlerOnClick}
+            >
+                {this.props.text}
+            </li>
         );
     }
 }

@@ -11,9 +11,11 @@ class Filter extends Component {
         super(props, context);
     }
 
+    // The active and onClick prop are difined in FilterContainer.
     static propTypes = {
         active: PropTypes.bool.isRequired,
         onClick: PropTypes.func.isRequired,
+
         children: PropTypes.node.isRequired
     }
 

@@ -3,6 +3,7 @@
  * @author shangfei87
  */
 
+// TODO：ADD、FILTER、TOGGLE need defines in one place.
 const ADD = 'ADD';
 const TOGGLE = 'TOGGLE';
 

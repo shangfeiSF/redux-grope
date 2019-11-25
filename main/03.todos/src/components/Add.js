@@ -11,6 +11,7 @@ class Add extends Component {
         super(props, context);
     }
 
+    // The onSubmit prop is defined in AddContainer.
     static propTypes = {
         onSubmit: PropTypes.func.isRequired
     }

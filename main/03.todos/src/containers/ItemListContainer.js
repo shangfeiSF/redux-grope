@@ -9,6 +9,7 @@ import ItemList from '../components/ItemList';
 
 import {toggle} from '../actions';
 
+// TODO：SHOW_ALL、SHOW_ACTIVE、SHOW_COMPLETED need define in one place.
 const FILTERS = [
     {FILTER: 'SHOW_ALL'},
     {FILTER: 'SHOW_ACTIVE'},
@@ -32,17 +33,17 @@ const filterHandler = (addAndToggle, filter) => {
 }
 
 /*
- * 容器组件和展示组件的配合方式-3：
- * 容器组件根据Redux state中的数据为展示组件新添props属性
- * 容器组件向展示组件传递了toggle方法（命名为onItemClick）
- * */
+* The container component and the presentational component cooperate as follow:
+* 1. The container component defines some stateToProps for the presentational component just with state.
+* 2. The container component defines some dispatchToProp for the presentational component.
+* 3. The dispatchToProp is auto-dispath with toggle action creator when called by the presentational component.
+* 4. The presentational component calculates the parameters and calls the dispatchToProp.
+* */
 
-// 纯函数声明哪些全局state字段是组件需要通过props获取的, 而且可以综合若干字段进行处理
 const mapStateToProps = state => ({
     items: filterHandler(state.addAndToggle, state.filter)
 })
 
-// 纯函数声明哪些action创建函数是组件需要通过props获取的，并分配props中指定的key上
 const mapDispatchToProps = {onItemClick: toggle};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemList);

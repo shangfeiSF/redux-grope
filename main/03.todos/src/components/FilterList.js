@@ -7,6 +7,7 @@ import React from 'react';
 
 import FilterContainer from '../containers/FilterContainer';
 
+// TODO：SHOW_ALL、SHOW_ACTIVE、SHOW_COMPLETED need define in one place.
 const FILTERS = [
     {CLASS_NAME: 'all', TEXT: 'All', FILTER: 'SHOW_ALL'},
     {CLASS_NAME: 'active', TEXT: 'Active', FILTER: 'SHOW_ACTIVE'},
