@@ -1,30 +1,19 @@
-import * as ActionTypes from '../constants/ActionTypes'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-export const addActionCreater = text => ({
-  type: ActionTypes.ADD,
-  text
-})
+import {ADD, DELETE, EDIT, COMPLETE, COMPLETE_ALL, CLEAR_COMPLETED} from '../constants/ActionTypes';
 
-export const deleteActionCreater = id => ({
-  type: ActionTypes.DELETE,
-  id
-})
+// The action creators are named with underline both at the begin and the end.
+export const _add_ = text => ({type: ADD, text});
 
-export const editActionCreater = (id, text) => ({
-  type: ActionTypes.EDIT,
-  id,
-  text
-})
+export const _delete_ = id => ({type: DELETE, id});
 
-export const completeActionCreater = id => ({
-  type: ActionTypes.COMPLETE,
-  id
-})
+export const _edit_ = (id, text) => ({type: EDIT, id, text});
 
-export const completeAllActionCreater = () => ({
-  type: ActionTypes.COMPLETE_ALL
-})
+export const _complete_ = id => ({type: COMPLETE, id});
 
-export const clearCompletedActionCreater = () => ({
-  type: ActionTypes.CLEAR_COMPLETED
-})
+export const _completeAll_ = () => ({type: COMPLETE_ALL});
+
+export const _clearCompleted_ = () => ({type: CLEAR_COMPLETED});

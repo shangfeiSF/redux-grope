@@ -1,19 +1,18 @@
-import {bindActionCreators} from 'redux'
-import {connect} from 'react-redux'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import * as actions from '../actions'
+import {bindActionCreators} from 'redux';
 
-import App from '../components/App'
+import {connect} from 'react-redux';
 
-const mapStateToProps = state => ({
-  todos: state.todos
-})
+import App from '../components/App';
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actions, dispatch)
-})
+import * as actions from '../actions';
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+const mapStateToProps = state => ({todos: state.todos});
+
+const mapDispatchToProps = dispatch => ({actions: bindActionCreators(actions, dispatch)});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

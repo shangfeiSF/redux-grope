@@ -15,7 +15,7 @@ import reducers from './reducers';
 import '../../global.css';
 
 const store = createStore(reducers);
-var content = (
+const content = (
     <Provider store={store}>
         <App/>
     </Provider>

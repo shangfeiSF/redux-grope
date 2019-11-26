@@ -3,13 +3,13 @@
  * @author shangfei87
  */
 
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 
-import Add from '../components/Add'
+import Add from '../components/Add';
 
-import {add} from '../actions'
+import {add} from '../actions';
 
-const mapStateToProps = null
+const mapStateToProps = null;
 
 const mapDispatchToProps = {onSubmit: add};
 

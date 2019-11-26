@@ -1,97 +1,88 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import classnames from 'classnames'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-import * as FilterTypes from '../constants/FilterTypes'
+import classnames from 'classnames';
 
-// ES6允许字面量定义对象时，用表达式作为对象的属性名，即把表达式放在方括号内
+import * as FilterTypes from '../constants/FilterTypes';
+
 const FILTER_TITLES = {
-  [FilterTypes.SHOW_ALL]: 'All',
-  [FilterTypes.SHOW_ACTIVE]: 'Active',
-  [FilterTypes.SHOW_COMPLETED]: 'Completed'
-}
+    [FilterTypes.SHOW_ALL]: 'All',
+    [FilterTypes.SHOW_ACTIVE]: 'Active',
+    [FilterTypes.SHOW_COMPLETED]: 'Completed'
+};
 
 class ItemListFilter extends Component {
-  static propTypes = {
-    completedCount: PropTypes.number.isRequired,
-    activeCount: PropTypes.number.isRequired,
-    selectedFilter: PropTypes.string.isRequired,
-    onClearCompleted: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired
-  }
-
-  renderCount() {
-    const {activeCount} = this.props
-
-    return (
-      <span className="todo-count">
-        <strong>{activeCount || 'No'}</strong>
-        {activeCount === 1 ? ' item' : ' items'} left
-      </span>
-    )
-  }
-
-  renderFilterLink(filter) {
-    const title = FILTER_TITLES[filter]
-    const {selectedFilter, onShow} = this.props
-    const style = {cursor: 'pointer'}
-
-    return (
-      <a
-        className={
-          classnames({
-            selected: filter === selectedFilter
-          })
-        }
-        style={style}
-        onClick={() => onShow(filter)}
-      >
-        {title}
-      </a>
-    )
-  }
-
-  renderClearButton() {
-    const {completedCount, onClearCompleted} = this.props
-
-    if (completedCount > 0) {
-      return (
-        <button
-          className="clear-completed"
-          onClick={onClearCompleted}
-        >
-          Clear completed
-        </button>
-      )
+    static propTypes = {
+        completedCount: PropTypes.number.isRequired,
+        activeCount: PropTypes.number.isRequired,
+        selectedFilter: PropTypes.string.isRequired,
+        onClearCompleted: PropTypes.func.isRequired,
+        onShow: PropTypes.func.isRequired
     }
-  }
 
-  render() {
-    let filters = [
-      FilterTypes.SHOW_ALL,
-      FilterTypes.SHOW_ACTIVE,
-      FilterTypes.SHOW_COMPLETED
-    ]
-
-    return (
-      <footer className="footer">
-        {this.renderCount()}
-
-        <ul className="filters">
-          {
-            filters.map(filter =>
-              <li key={filter}>
-                {this.renderFilterLink(filter)}
-              </li>
-            )
-          }
-        </ul>
-
-        {this.renderClearButton()}
-      </footer>
+    renderCount = () => (
+        <span className="todo-count">
+            <strong>{this.props.activeCount || 'No'}</strong>
+            {this.props.activeCount === 1 ? ' item' : ' items'} left
+        </span>
     )
-  }
+
+    renderFilterLink = filter => {
+        const title = FILTER_TITLES[filter];
+        const style = {cursor: 'pointer'};
+
+        return (
+            <a
+                className={
+                    classnames({
+                        selected: filter === this.props.selectedFilter
+                    })
+                }
+                style={style}
+                onClick={() => this.props.onShow(filter)}
+            >
+                {title}
+            </a>
+        )
+    }
+
+    renderClearButton = () => this.props.completedCount > 0
+        ? (
+            <button
+                className="clear-completed"
+                onClick={this.props.onClearCompleted}
+            >
+                Clear completed
+            </button>
+        )
+        : null
+
+    render() {
+        return (
+            <footer className="footer">
+                {this.renderCount()}
+
+                <ul className="filters">
+                    {
+                        [FilterTypes.SHOW_ALL, FilterTypes.SHOW_ACTIVE, FilterTypes.SHOW_COMPLETED].map(
+                            filter => (
+                                <li key={filter}>
+                                    {this.renderFilterLink(filter)}
+                                </li>
+                            )
+                        )
+                    }
+                </ul>
+
+                {this.renderClearButton()}
+            </footer>
+        );
+    }
 }
 
-export default ItemListFilter
+export default ItemListFilter;

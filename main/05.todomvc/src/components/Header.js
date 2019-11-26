@@ -1,30 +1,35 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import TextInput from './TextInput'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import {TEXT_INPUT_MODEL} from '../constants/TextInputModel';
+import TextInput from './TextInput';
 
 class Header extends Component {
-  static propTypes = {
-    add: PropTypes.func.isRequired
-  }
+    static propTypes = {
+        add: PropTypes.func.isRequired
+    }
 
-  handlerOnSave = (text) => {
-    text.length !== 0 && this.props.add(text)
-  }
+    handlerOnSave = text => text.length !== 0 && this.props.add(text)
 
-  render() {
-    let style = {textAlign: 'center'}
-    return (
-      <header className="header">
-        <h1 style={style}>Todos App</h1>
-        <TextInput
-          model="add"
-          placeholder="What needs to be done?"
-          onSave={this.handlerOnSave}
-        />
-      </header>
-    )
-  }
+    render() {
+        const style = {textAlign: 'center'};
+        return (
+            <header className="header">
+                <h1 style={style}>Todos App</h1>
+                <TextInput
+                    text=""
+                    model={TEXT_INPUT_MODEL.ADD}
+                    placeholder="What needs to be done?"
+                    onSave={this.handlerOnSave}
+                />
+            </header>
+        );
+    }
 }
 
-export default Header
+export default Header;

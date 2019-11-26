@@ -1,6 +1,16 @@
-export const ADD = 'add'
-export const DELETE = 'delete'
-export const EDIT = 'edit'
-export const COMPLETE = 'complete'
-export const COMPLETE_ALL = 'complete_all'
-export const CLEAR_COMPLETED = 'clear_completed'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
+
+export const ADD = 'ADD';
+
+export const DELETE = 'DELETE';
+
+export const EDIT = 'EDIT';
+
+export const COMPLETE = 'COMPLETE';
+
+export const COMPLETE_ALL = 'COMPLETE_ALL';
+
+export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';

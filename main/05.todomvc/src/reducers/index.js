@@ -1,6 +1,10 @@
-import {combineReducers} from 'redux'
-import base from './modules/base'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-export default combineReducers({
-  todos: base
-})
+import {combineReducers} from 'redux';
+
+import base from './modules/base';
+
+export default combineReducers({todos: base});

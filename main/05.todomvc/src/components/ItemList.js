@@ -1,97 +1,86 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import Item from './Item'
-import ItemListFilter from './ItemListFilter'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-import * as FilterTypes from '../constants/FilterTypes'
+import Item from './Item';
+import ItemListFilter from './ItemListFilter';
 
-// ES6允许字面量定义对象时，用表达式作为对象的属性名，即把表达式放在方括号内
+import * as FilterTypes from '../constants/FilterTypes';
+
 const FilterHandlers = {
-  [FilterTypes.SHOW_ALL]: () => true,
-  [FilterTypes.SHOW_ACTIVE]: item => !item.completed,
-  [FilterTypes.SHOW_COMPLETED]: item => item.completed
-}
+    [FilterTypes.SHOW_ALL]: () => true,
+    [FilterTypes.SHOW_ACTIVE]: item => !item.completed,
+    [FilterTypes.SHOW_COMPLETED]: item => item.completed
+};
 
 class ItemList extends Component {
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
-  }
-
-  // 维护自身的state，适用于不需要进入store的部分
-  state = {
-    filter: FilterTypes.SHOW_ALL
-  }
-
-  handlerOnClearCompleted = () => {
-    this.props.actions.clearCompletedActionCreater()
-  }
-
-  handleOnShow = filter => {
-    this.setState({filter}, () => {
-      console.log('确定state已经修改', this.state.filter)
-    })
-    console.warn('state还未修改', this.state.filter)
-  }
-
-  renderToggleAll(completedCount) {
-    const {todos, actions} = this.props
-
-    if (todos.length > 0) {
-      return (
-        <input
-          className="toggle-all"
-          type="checkbox"
-          checked={completedCount === todos.length}
-          onChange={actions.completeAllActionCreater}/>
-      )
+    static propTypes = {
+        todos: PropTypes.array.isRequired,
+        actions: PropTypes.object.isRequired
     }
-  }
 
-  renderItemListFilter(completedCount) {
-    const {todos} = this.props
-    const {filter} = this.state
+    // This is a state just maintained by ItemList.
+    state = {filter: FilterTypes.SHOW_ALL}
 
-    const activeCount = todos.length - completedCount
-
-    if (todos.length) {
-      return (
-        <ItemListFilter
-          completedCount={completedCount}
-          activeCount={activeCount}
-          selectedFilter={filter}
-          onClearCompleted={this.handlerOnClearCompleted}
-          onShow={this.handleOnShow}
-        />
-      )
+    handleOnShow = filter => {
+        this.setState({filter}, () => {
+            console.log('state in callback: ', this.state);
+        });
+        console.warn('state: ', this.state);
     }
-  }
 
-  render() {
-    let {todos, actions} = this.props
-    let {filter} = this.state
+    renderToggleAll = completedCount => this.props.todos.length > 0
+        ? (
+            <div>
+                <input
+                    type="checkbox"
+                    checked={completedCount === this.props.todos.length}
+                    onChange={this.props.actions._completeAll_}
+                />
+                <label>Toggle All</label>
+            </div>
+        )
+        : null
 
-    let filteredTodos = todos.filter(FilterHandlers[filter])
-    let completedCount = todos.reduce(
-      (count, item) => item.completed ? count + 1 : count,
-      0
-    )
+    renderItemListFilter = completedCount => this.props.todos.length > 0
+        ? (
+            <ItemListFilter
+                completedCount={completedCount}
+                activeCount={this.props.todos.length - completedCount}
+                selectedFilter={this.state.filter}
+                onClearCompleted={this.props.actions._clearCompleted_}
+                onShow={this.handleOnShow}
+            />
+        )
+        : null
 
-    return (
-      <section className="main">
-        {this.renderToggleAll(completedCount)}
+    render() {
+        const filteredTodos = this.props.todos.filter(FilterHandlers[this.state.filter]);
+        const completedCount = this.props.todos.reduce(
+            (count, item) => item.completed ? count + 1 : count,
+            0
+        );
 
-        <ul className="todo-list">
-          {filteredTodos.map(item =>
-            <Item key={item.id} todo={item} actions={actions}/>
-          )}
-        </ul>
+        return (
+            <section className="main">
+                {this.renderToggleAll(completedCount)}
 
-        {this.renderItemListFilter(completedCount)}
-      </section>
-    )
-  }
-}
+                <ul className="todo-list">
+                    {
+                        filteredTodos.map(
+                            item => <Item key={item.id} todo={item} actions={this.props.actions}/>
+                        )
+                    }
+                </ul>
 
-export default ItemList
+                {this.renderItemListFilter(completedCount)}
+            </section>
+        );
+    }
+};
+
+export default ItemList;

@@ -1,62 +1,66 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+/**
+ * @file Simple Redux Usage
+ * @author shangfei87
+ */
 
-import classnames from 'classnames'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+import classnames from 'classnames';
+
+import {TEXT_INPUT_MODEL} from '../constants/TextInputModel';
+
+const defaultText = '';
 
 class TextInput extends Component {
-  static propTypes = {
-    model: PropTypes.string,
-    onSave: PropTypes.func.isRequired,
-    placeholder: PropTypes.string,
-    text: PropTypes.string,
-  }
-
-  state = {
-    text: this.props.text || ''
-  }
-
-  handlerOnBlur = e => {
-    if (this.props.model !== 'add') {
-      this.props.onSave(e.target.value)
+    static propTypes = {
+        text: PropTypes.string,
+        model: PropTypes.string,
+        placeholder: PropTypes.string,
+        onSave: PropTypes.func.isRequired
     }
-  }
 
-  handlerOnChange = e => {
-    this.setState({
-      text: e.target.value
-    })
-  }
+    state = {text: this.props.text || defaultText}
 
-  handlerOnKeyDown = e => {
-    if (e.which === 13) {
-      this.props.onSave(e.target.value.trim())
+    handlerOnBlur = event => this.props.model !== TEXT_INPUT_MODEL.ADD && this.props.onSave(event.target.value.trim())
 
-      this.props.model === 'add' && this.setState({
-        text: ''
-      })
+    handlerOnChange = event => {
+        this.setState({text: event.target.value.trim()}, () => {
+            console.log('state in callback: ', this.state);
+        });
+        console.warn('state: ', this.state);
     }
-  }
 
-  render() {
-    return (
-      <input
-        className={
-          classnames({
-            'edit': this.props.model !== 'add',
-            'new-todo': this.props.model === 'add'
-          })
+    handlerOnKeyDown = event => {
+        if (event.which === 13) {
+            this.props.onSave(event.target.value.trim());
+            this.props.model === TEXT_INPUT_MODEL.ADD && this.setState({text: defaultText});
         }
-        type="text"
-        autoFocus="true"
+    }
 
-        placeholder={this.props.placeholder}
-        value={this.state.text}
+    render() {
+        const isAdd = this.props.model === TEXT_INPUT_MODEL.ADD;
 
-        onBlur={this.handlerOnBlur}
-        onChange={this.handlerOnChange}
-        onKeyDown={this.handlerOnKeyDown}/>
-    )
-  }
+        return (
+            <input
+                className={
+                    classnames({
+                        'edit': !isAdd,
+                        'new-todo': isAdd
+                    })
+                }
+                type="text"
+                autoFocus="true"
+
+                placeholder={this.props.placeholder}
+                value={this.state.text}
+
+                onBlur={this.handlerOnBlur}
+                onChange={this.handlerOnChange}
+                onKeyDown={this.handlerOnKeyDown}
+            />
+        );
+    }
 }
 
-export default TextInput
+export default TextInput;
